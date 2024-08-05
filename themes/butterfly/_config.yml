@@ -307,7 +307,8 @@ footer:
   owner:
     enable: true
     since: 2019
-  custom_text:
+  custom_text: <a href="https://icp.gov.moe/?keyword=20247012" target="_blank">萌ICP备20247012号</a>
+  # Copyright of theme and framework
   # Copyright of theme and framework
   copyright: true
 
