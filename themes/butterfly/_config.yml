@@ -247,14 +247,14 @@ sharejs:
   sites: facebook,twitter,wechat,weibo,qq #想要顯示的內容
 # Sponsor/reward
 reward:
-  enable: false
-  text:
+  enable: true
+  text: 打赏站长服务器钱吧qwq
   QR_code:
-    # - img: /img/wechat.jpg
-    #   link:
+    # - img: 
+    #   link: https://github.com/luomo66ccff/hexo/blob/main/pic/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20240806072712.jpg?raw=true
     #   text: wechat
-    # - img: /img/alipay.jpg
-    #   link:
+    # - img: 
+    #   link: https://github.com/luomo66ccff/hexo/blob/main/pic/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20240806072716.jpg?raw=true
     #   text: alipay
 
 # Post edit
