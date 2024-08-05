@@ -14,6 +14,9 @@ importers:
       hexo-abbrlink:
         specifier: ^2.2.1
         version: 2.2.1
+      hexo-baidu-url-submit:
+        specifier: ^0.0.6
+        version: 0.0.6
       hexo-butterfly-hpptalk:
         specifier: ^1.0.4
         version: 1.0.4
@@ -841,6 +844,9 @@ packages:
 
   hexo-abbrlink@2.2.1:
     resolution: {integrity: sha512-yvazN7bbrIb7p8QU3nJ/8fbDmir1mFroYvUYcJz5xpc6DtszKggschmqZg6WNUdjhDBFyDwksrIUfwQnw0OOuA==}
+
+  hexo-baidu-url-submit@0.0.6:
+    resolution: {integrity: sha512-0jDyIuw5B2Muqsjcf5Xxo1PNjxClPHP14FpB0amEAIr4wUdxk5zahImvOhkZwR9GrBhWKAPdjzmWS/xIMjzfrw==}
 
   hexo-bunyan@1.0.0:
     resolution: {integrity: sha512-RymT8Ck+K77mLt9BEYNb4uyfC7RIQnU5N3laXowMrS28jj2h89VHJCOnhV00mmta4fHRqNa07kP1Hrn17nvMkQ==}
@@ -2050,6 +2056,10 @@ packages:
   xmlchars@2.2.0:
     resolution: {integrity: sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==}
 
+  xmlhttprequest@1.8.0:
+    resolution: {integrity: sha512-58Im/U0mlVBLM38NdZjHyhuMtCqa61469k2YP/AaPbvCoV9aQGUpbJBj1QRm2ytRiVQBD/fsw7L2bJGDVQswBA==}
+    engines: {node: '>=0.4.0'}
+
   yallist@2.1.2:
     resolution: {integrity: sha512-ncTzHV7NvsQZkYe1DW7cbDLm0YpzHmZF5r/iyP3ZnQtMiJ+pjzisCiMNI+Sj+xQF5pXhSHxSB3uDbsBTzY/c2A==}
 
@@ -2904,6 +2914,10 @@ snapshots:
     dependencies:
       hexo-front-matter: 1.0.0
       hexo-fs: 3.1.0
+
+  hexo-baidu-url-submit@0.0.6:
+    dependencies:
+      xmlhttprequest: 1.8.0
 
   hexo-bunyan@1.0.0:
     optionalDependencies:
@@ -4295,6 +4309,8 @@ snapshots:
   xml-name-validator@4.0.0: {}
 
   xmlchars@2.2.0: {}
+
+  xmlhttprequest@1.8.0: {}
 
   yallist@2.1.2: {}
 
