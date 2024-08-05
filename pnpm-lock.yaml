@@ -20,6 +20,9 @@ importers:
       hexo-butterfly-hpptalk:
         specifier: ^1.0.4
         version: 1.0.4
+      hexo-filter-nofollow:
+        specifier: ^2.0.2
+        version: 2.0.2
       hexo-generator-archive:
         specifier: ^2.0.0
         version: 2.0.0
@@ -866,6 +869,10 @@ packages:
     resolution: {integrity: sha512-druJeBgLpG9ncDS5AhBHdAXk0G4CFj8Qes09pApyZ6bR+nJW1JYiDMuilhudaKDdq+1l49jWXVTidkcb7p0Jbw==}
     engines: {node: '>=14'}
     hasBin: true
+
+  hexo-filter-nofollow@2.0.2:
+    resolution: {integrity: sha512-roIkEIkGOR22EPMoy8iKrufDoAH25LOT5ZeVXVLavEpM757Y96kfUhyathryMLXr326EURffgkZAKsVf3EDl0A==}
+    engines: {node: '>= 8.6.0'}
 
   hexo-front-matter@0.2.3:
     resolution: {integrity: sha512-GL/pGfYqsvjMgxjhOWv1zAc7t4JoGUow+CH9Tes/5N2wKxxTzt2woKEMHz1+c01CmhdVYUR4lO3R1ZAcxc0caA==}
@@ -2957,6 +2964,8 @@ snapshots:
       picocolors: 1.0.1
       resolve: 1.22.8
       tildify: 2.0.0
+
+  hexo-filter-nofollow@2.0.2: {}
 
   hexo-front-matter@0.2.3:
     dependencies:

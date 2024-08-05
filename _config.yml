@@ -101,7 +101,10 @@ theme: butterfly
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  - type: git
+    repository: https://github.com/luomo66ccff/hexo.git
+    branch: main
+  - type: baidu_url_submitter
 markdown:
     plugins:
       - '@renbaoshuo/markdown-it-katex'
@@ -149,5 +152,10 @@ baidusitemap:
 baidu_url_submit:
   count: 10 # 提交最新的10个链接
   host: www.march7th.cn
-  token: # 秘钥，百度站长平台 > 普通收录 > 推送接口 > 接口调用地址中token字段
+  token: cUqAdspW3iiK1low
   path: baidu_urls.txt # 文本文档的地址， 新链接会保存在此文本文档里，不用改
+
+nofollow:
+  enable: true
+  field: site
+  exclude: ''
