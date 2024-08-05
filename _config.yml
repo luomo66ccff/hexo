@@ -5,16 +5,16 @@
 # Site
 title: Luomoの云日常
 #subtitle: '洛墨-天染-依然Blog'
-description: "洛墨-天染-依然的小站，时不时分享教程和资源，欢迎互换友链"
+description: '循此苦旅 直抵群星'
 keywords: starrail,genshin,game,code,luotianyi,vocaloid,china,chinese,zzz,sr,gs,ys,cloud
 author: 洛墨-天染-依然
 language: zh-CN
-timezone: "Asia/Shanghai"
+timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://march7th.cn
-permalink: :year/:month/:day/:title/
+url: http://www.march7th.cn
+permalink: posts/:abbrlink.html
 permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
@@ -37,7 +37,7 @@ titlecase: false # Transform title into titlecase
 external_link:
   enable: true # Open external links in new tab
   field: site # Apply to the whole site
-  exclude: ""
+  exclude: ''
 filename_case: 0
 render_drafts: false
 post_asset_folder: false
@@ -47,20 +47,20 @@ syntax_highlighter: highlight.js
 highlight:
   line_number: true
   auto_detect: false
-  tab_replace: ""
+  tab_replace: ''
   wrap: true
   hljs: false
 prismjs:
   preprocess: true
   line_number: true
-  tab_replace: ""
+  tab_replace: ''
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
-  path: ""
+  path: ''
   per_page: 10
   order_by: -date
 
@@ -80,7 +80,7 @@ meta_generator: true
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
 ## updated_option supports 'mtime', 'date', 'empty'
-updated_option: "mtime"
+updated_option: 'mtime'
 
 # Pagination
 ## Set per_page to 0 to disable pagination
@@ -101,11 +101,11 @@ theme: butterfly
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ""
+  type: ''
 markdown:
-  plugins:
-    - "@renbaoshuo/markdown-it-katex"
-    - markdown-it-ruby
+    plugins:
+      - '@renbaoshuo/markdown-it-katex'
+      - markdown-it-ruby
 
 comments:
   # Up to two comments system, the first will be shown as default
@@ -118,13 +118,29 @@ comments:
   count: true # Display comment count in top_img
   card_post_count: false # Display comment count in Home Page
 
+
+
 bilibili:
   width: 888
   height: 500
 aplayer:
   meting: true
 
+
+  
+
 spoiler:
   style: blur # 或者box
   color: black # 仅当 style 为 box 时起效
   p: false # 没懂啥意思，不管它
+
+# abbrlink config
+abbrlink:
+  alg: crc32      # support crc16(default) and crc32
+  rep: hex        # support dec(default) and hex
+# 不用添加其它代码
+# 站点地图
+sitemap:
+  path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml
