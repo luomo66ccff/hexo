@@ -779,11 +779,11 @@ ad:
 # Verification
 # --------------------------------------
 
-site_verification:
+site_verification: 
   # - name: google-site-verification
   #   content: xxxxxx
-  # - name: baidu-site-verification
-  #   content: xxxxxxx
+  - name: baidu-site-verification
+    content: "codeva-ZC3bYL1LhM" 
 
 # --------------------------------------
 # Beautify / Effect
