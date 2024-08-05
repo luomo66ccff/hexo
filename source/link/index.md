@@ -1,0 +1,45 @@
+---
+title: link
+date: 2024-08-05 15:22:26
+---
+
+
+{% flink %}
+- class_name: 友情链接
+  class_desc: 那些人，那些事
+  link_list:
+    - name: 阳的小站
+      link: https://yang-qwq.top/
+      avatar: https://yang-qwq.top/static/img/head.webp
+      descr: QAQ！
+    - name: Joseph's Blog
+      link: https://josephcz.xyz/
+      avatar: https://josephcz.xyz/icon/icon_120.png?imageMogr2/format/webp/rquality/80/interlace/1
+      descr: 「生如逆旅 · 一苇以航」
+    - name: 晚江右海个人网站
+      link: https://yuxiangwang0525.com/
+      avatar: https://pic.imgdb.cn/item/66b0ba36d9c307b7e96cfeb2.jpg
+      descr: 一个成分复杂的网站,这里是晚江右海的个人网站
+    - name: 1107の个人网站
+      link: https://1107.siwg.top/
+      avatar: https://pic.imgdb.cn/item/66b0b9c8d9c307b7e96ca934.jpg
+      descr: 意随风而起，风止意不停
+
+- class_name: 网站
+  class_desc: 值得推荐的网站
+  link_list:
+    - name: Youtube
+      link: https://www.youtube.com/
+      avatar: https://i.loli.net/2020/05/14/9ZkGg8v3azHJfM1.png
+      descr: 视频网站
+    - name: Weibo
+      link: https://www.weibo.com/
+      avatar: https://i.loli.net/2020/05/14/TLJBum386vcnI1P.png
+      descr: 社交分享平台
+    - name: Twitter
+      link: https://twitter.com/
+      avatar: https://i.loli.net/2020/05/14/5VyHPQqR6LWF39a.png
+      descr: 社交分享平台
+{% endflink %}
+
+
