@@ -712,9 +712,9 @@ chat:
   use: chatra
   # Chat Button [recommend]
   # It will create a button in the bottom right corner of website, and hide the origin button
-  rightside_button: false
+  rightside_button: true
   # The origin chat button is displayed when scrolling up, and the button is hidden when scrolling down
-  button_hide_show: false
+  button_hide_show: true
 
 # https://chatra.io/
 chatra:
