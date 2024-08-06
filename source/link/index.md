@@ -28,18 +28,30 @@ date: 2024-08-05 15:22:26
 - class_name: 网站
   class_desc: 值得推荐的网站
   link_list:
-    - name: Youtube
-      link: https://www.youtube.com/
-      avatar: https://i.loli.net/2020/05/14/9ZkGg8v3azHJfM1.png
-      descr: 视频网站
-    - name: Weibo
-      link: https://www.weibo.com/
-      avatar: https://i.loli.net/2020/05/14/TLJBum386vcnI1P.png
-      descr: 社交分享平台
-    - name: Twitter
-      link: https://twitter.com/
-      avatar: https://i.loli.net/2020/05/14/5VyHPQqR6LWF39a.png
-      descr: 社交分享平台
+    - name: 崩坏：星穹铁道风格短信生成器
+      link: https://msg.march7th.cn/
+      avatar: https://pic.imgdb.cn/item/66b1f904d9c307b7e9c2c4f5.jpg
+      descr: 二创工具
+    - name: 流光忆庭-光锥生成器
+      link: https://light-cone.march7th.cn/
+      avatar: https://pic.imgdb.cn/item/66b1f904d9c307b7e9c2c709.jpg
+      descr: 二创工具
+    - name: 星穹铁道跃迁模拟器
+      link: https://hsrwarp.march7th.cn/
+      avatar: https://pic.imgdb.cn/item/66b0b9c8d9c307b7e96ca934.jpg
+      descr: 抽卡模拟
+    - name: 原神祈愿模拟器
+      link: https://yswish.march7th.cn/
+      avatar: https://pic.imgdb.cn/item/66b1f904d9c307b7e9c2c783.jpg
+      descr: 抽卡模拟
+    - name: 原神音乐演奏
+      link: https://gsmusic.march7th.cn/
+      avatar: https://pic.imgdb.cn/item/66b20689d9c307b7e9e59fd8.jpg
+      descr: 二创工具
+    - name: 原神伤害计算
+      link: https://gsdmg.march7th.cn/
+      avatar: https://pic.imgdb.cn/item/66b20689d9c307b7e9e59f72.jpg
+      descr: 游戏工具
 {% endflink %}
 
 
