@@ -250,12 +250,12 @@ reward:
   enable: true
   text: 打赏站长服务器钱吧qwq
   QR_code:
-    # - img: 
-    #   link: https://github.com/luomo66ccff/hexo/blob/main/pic/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20240806072712.jpg?raw=true
-    #   text: wechat
-    # - img: 
-    #   link: https://github.com/luomo66ccff/hexo/blob/main/pic/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20240806072716.jpg?raw=true
-    #   text: alipay
+    - img: https://github.com/luomo66ccff/hexo/blob/main/pic/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20240806072712.jpg?raw=true
+      link: wxp://f2f0Wx3Y14ADmHBbz09Ji3ybg3ekFztvrJzZVUm8z8EOuvA
+      text: wechat
+    - img: https://github.com/luomo66ccff/hexo/blob/main/pic/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20240806072716.jpg?raw=true
+      link: https://qr.alipay.com/fkx162648j0nzxvefjvpi62
+      text: alipay
 
 # Post edit
 # Easily browse and edit blog source code online.
