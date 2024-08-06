@@ -957,7 +957,7 @@ series:
 # ABCJS - The ABC Music Notation Plugin
 # https://github.com/paulrosen/abcjs
 abcjs:
-  enable: false
+  enable: true
   per_page: true
 
 # Mermaid
