@@ -17,6 +17,9 @@ importers:
       hexo-baidu-url-submit:
         specifier: ^0.0.6
         version: 0.0.6
+      hexo-butterfly-artitalk:
+        specifier: ^1.0.4
+        version: 1.0.4
       hexo-butterfly-hpptalk:
         specifier: ^1.0.4
         version: 1.0.4
@@ -856,6 +859,9 @@ packages:
     engines: {'0': node >=0.10.0}
     deprecated: Please see https://github.com/hexojs/hexo-bunyan/issues/17
     hasBin: true
+
+  hexo-butterfly-artitalk@1.0.4:
+    resolution: {integrity: sha512-/tdSPT3jF6X+ut+WX5teC1iX6MsnWCWJAo/rQTP11wKy7x56X5u34e3RFxQk14dFp2C8AQlaNj0CJHRQo9WQ/w==}
 
   hexo-butterfly-hpptalk@1.0.4:
     resolution: {integrity: sha512-Kbc2EgsIAnBGGL+slcU6lDmTPl8Ubg7PiFOdNmAi81qj4CDQjW/nE44w4cSS2hvdmCUlP2rqrmq+hBu4WHV0og==}
@@ -2931,6 +2937,10 @@ snapshots:
       moment: 2.30.1
       mv: 2.1.1
       safe-json-stringify: 1.2.0
+
+  hexo-butterfly-artitalk@1.0.4:
+    dependencies:
+      pug: 3.0.3
 
   hexo-butterfly-hpptalk@1.0.4:
     dependencies:
