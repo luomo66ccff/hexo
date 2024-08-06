@@ -44,6 +44,14 @@ date: 2024-08-05 15:22:26
       link: https://yswish.march7th.cn/
       avatar: https://pic.imgdb.cn/item/66b1f904d9c307b7e9c2c783.jpg
       descr: 抽卡模拟
+    - name: 原神音乐演奏
+      link: https://gsmusic.march7th.cn/
+      avatar: https://pic.imgdb.cn/item/66b20689d9c307b7e9e59fd8.jpg
+      descr: 二创工具
+    - name: 原神伤害计算
+      link: https://gsdmg.march7th.cn/
+      avatar: https://pic.imgdb.cn/item/66b20689d9c307b7e9e59f72.jpg
+      descr: 抽卡模拟
 {% endflink %}
 
 
