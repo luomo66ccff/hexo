@@ -28,18 +28,22 @@ date: 2024-08-05 15:22:26
 - class_name: 网站
   class_desc: 值得推荐的网站
   link_list:
-    - name: Youtube
-      link: https://www.youtube.com/
-      avatar: https://i.loli.net/2020/05/14/9ZkGg8v3azHJfM1.png
-      descr: 视频网站
-    - name: Weibo
-      link: https://www.weibo.com/
+    - name: 崩坏：星穹铁道风格短信生成器
+      link: https://msg.march7th.cn/
+      avatar: 
+      descr: 二创工具
+    - name: 流光忆庭-光锥生成器
+      link: https://light-cone.march7th.cn/
       avatar: https://i.loli.net/2020/05/14/TLJBum386vcnI1P.png
-      descr: 社交分享平台
-    - name: Twitter
-      link: https://twitter.com/
-      avatar: https://i.loli.net/2020/05/14/5VyHPQqR6LWF39a.png
-      descr: 社交分享平台
+      descr: 二创工具
+    - name: 星穹铁道跃迁模拟器
+      link: https://hsrwarp.march7th.cn/
+      avatar: 
+      descr: 抽卡模拟
+    - name: 原神祈愿模拟器
+      link: https://yswish.march7th.cn/
+      avatar: 
+      descr: 抽卡模拟
 {% endflink %}
 
 
