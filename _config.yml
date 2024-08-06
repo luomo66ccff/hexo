@@ -106,9 +106,9 @@ deploy:
     branch: main
   - type: baidu_url_submitter
 markdown:
-    plugins:
-      - '@renbaoshuo/markdown-it-katex'
-      - markdown-it-ruby
+  plugins:
+    - '@renbaoshuo/markdown-it-katex'
+    - markdown-it-ruby
 
 comments:
   # Up to two comments system, the first will be shown as default
