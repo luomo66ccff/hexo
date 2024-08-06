@@ -637,7 +637,7 @@ valine:
 # Waline - A simple comment system with backend support fork from Valine
 # https://waline.js.org/
 waline:
-  serverURL: waline-henna-delta.vercel.app/
+  serverURL: waline.march7th.cn/
   bg:
   # Use Waline pageview count as the page view count
   pageview: false
