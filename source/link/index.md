@@ -30,19 +30,19 @@ date: 2024-08-05 15:22:26
   link_list:
     - name: 崩坏：星穹铁道风格短信生成器
       link: https://msg.march7th.cn/
-      avatar: 
+      avatar: https://i.pximg.net/img-master/img/2022/05/03/03/41/42/98061275_p0_master1200.jpg
       descr: 二创工具
     - name: 流光忆庭-光锥生成器
       link: https://light-cone.march7th.cn/
-      avatar: https://i.loli.net/2020/05/14/TLJBum386vcnI1P.png
+      avatar: https://i.pximg.net/img-master/img/2024/07/24/02/52/29/120830197_p0_master1200.jpg
       descr: 二创工具
     - name: 星穹铁道跃迁模拟器
       link: https://hsrwarp.march7th.cn/
-      avatar: 
+      avatar: https://i.pximg.net/img-master/img/2022/05/28/03/13/20/98650216_p0_master1200.jpg
       descr: 抽卡模拟
     - name: 原神祈愿模拟器
       link: https://yswish.march7th.cn/
-      avatar: 
+      avatar: https://i.pximg.net/img-master/img/2023/11/22/04/14/31/113605257_p1_master1200.jpg
       descr: 抽卡模拟
 {% endflink %}
 
