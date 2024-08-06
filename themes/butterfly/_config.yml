@@ -709,7 +709,7 @@ artalk:
 chat:
   # Choose: chatra/tidio/daovoice/crisp/messenger
   # Leave it empty if you don't need chat
-  use:
+  use: chatra
   # Chat Button [recommend]
   # It will create a button in the bottom right corner of website, and hide the origin button
   rightside_button: false
@@ -718,7 +718,7 @@ chat:
 
 # https://chatra.io/
 chatra:
-  id:
+  id: nzXcFgGwBLRe9mBaZ
 
 # https://www.tidio.com/
 tidio:
