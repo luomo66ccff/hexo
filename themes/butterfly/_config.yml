@@ -112,7 +112,7 @@ subtitle:
 
 avatar:
   img: https://pic.imgdb.cn/item/66af707bd9c307b7e9b98d57.jpg
-  effect: true
+  effect: false
 
 # Disable all banner images
 disable_top_img: false
@@ -887,14 +887,14 @@ activate_power_mode:
 # canvas_ribbon
 # See: https://github.com/hustcc/ribbon.js
 canvas_ribbon:
-  enable: false
+  enable: true
   # The size of ribbon
   size: 150
   # The opacity of ribbon (0 ~ 1)
   alpha: 0.6
   zIndex: -1
-  click_to_change: false
-  mobile: false
+  click_to_change: true
+  mobile: true
 
 # Fluttering Ribbon
 canvas_fluttering_ribbon:
@@ -1005,7 +1005,7 @@ aplayerInject:
 # https://github.com/polonel/SnackBar
 # position: top-left / top-center / top-right / bottom-left / bottom-center / bottom-right
 snackbar:
-  enable: false
+  enable: true
   position: bottom-left
   # The background color of Toast Notification in light mode and dark mode
   bg_light: "#49b1f5"
@@ -1140,15 +1140,12 @@ CDN:
     # waline_css:
     # waline_js:
 
-  # HexoPlusPlus Talk
-  # see https://hexoplusplus.js.org
-  hpptalk:
+  
+  artitalk:
     enable: true
-    domain: www.march7th.cn
-    path:
-    limit:
-    start:
+    appId: aEErFnpNBIeUvQqtEM1f6DVX-MdYXbMMI
+    appKey: 6g2YDOs3LwCgz6CxUmBfi5cJ
+    path: 
     js:
-    css:
     option:
     front_matter:
