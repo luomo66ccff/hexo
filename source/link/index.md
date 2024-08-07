@@ -51,7 +51,7 @@ date: 2024-08-05 15:22:26
     - name: 原神伤害计算
       link: https://gsdmg.march7th.cn/
       avatar: https://pic.imgdb.cn/item/66b20689d9c307b7e9e59f72.jpg
-      descr: 抽卡模拟
+      descr: 游戏工具
 {% endflink %}
 
 
