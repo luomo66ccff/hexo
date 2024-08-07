@@ -281,7 +281,7 @@ post_pagination: 1
 
 # Chat Button [recommend]
 # It will create a button in the bottom right corner of website, and hide the origin button
-chat_btn: true
+chat_btn: false
 
 fireworks:
   enable: true
@@ -405,10 +405,10 @@ aside:
     # Time difference between publish date and now
     # Formal: Month/Day/Year Time or Year/Month/Day Time
     # Leave it empty if you don't enable this feature
-    runtime_date: 7/12/2020 00:00:00  
+    runtime_date: 7/12/2020 00:00:00
   runtimeshow:
     enable: true
-    publish_date: 7/12/2020 00:00:00  
+    publish_date: 7/12/2020 00:00:00
     ##網頁開通時間
     #格式: 月/日/年 時間
     #也可以寫成 年/月/日 時間
@@ -784,11 +784,11 @@ ad:
 # Verification
 # --------------------------------------
 
-site_verification: 
+site_verification:
   # - name: google-site-verification
   #   content: xxxxxx
   - name: baidu-site-verification
-    content: "codeva-ZC3bYL1LhM" 
+    content: "codeva-ZC3bYL1LhM"
 
 # --------------------------------------
 # Beautify / Effect
@@ -1145,12 +1145,11 @@ CDN:
     # waline_css:
     # waline_js:
 
-  
   artitalk:
     enable: true
     appId: aEErFnpNBIeUvQqtEM1f6DVX-MdYXbMMI
     appKey: 6g2YDOs3LwCgz6CxUmBfi5cJ
-    path: 
+    path:
     js:
     option:
     front_matter:
