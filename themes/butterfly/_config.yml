@@ -405,8 +405,13 @@ aside:
     # Time difference between publish date and now
     # Formal: Month/Day/Year Time or Year/Month/Day Time
     # Leave it empty if you don't enable this feature
-    runtime_date: 7/12/2018 00:00:00  
-
+    runtime_date: 7/12/2020 00:00:00  
+  runtimeshow:
+    enable: true
+    publish_date: 7/12/2020 00:00:00  
+    ##網頁開通時間
+    #格式: 月/日/年 時間
+    #也可以寫成 年/月/日 時間
 # --------------------------------------
 # Bottom right button
 # --------------------------------------
