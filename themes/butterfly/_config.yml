@@ -118,16 +118,16 @@ avatar:
 disable_top_img: false
 
 # If the banner of page not setting, it will show the default_top_img
-default_top_img: /images/E70CC1397D84C1F257558FC7DCE32862B11DD83892D00AB4B7C45DBBD77C5816.webp
+default_top_img: https://pic.imgdb.cn/item/66c9b225d9c307b7e93a91fb.webp
 
 # The banner image of index page
-index_img: /images/594ADF569C1AE2F8D1ABD385BEA5E402FB4CCCE918EFDB12903320A271347B7D.webp
+index_img: https://pic.imgdb.cn/item/66c9b240d9c307b7e93aaa96.webp
 
 # The banner image of archive page
-archive_img: /images/639DF7DE6B7CA75641BC66A44AB01C1619C14718A462D47CD2DA863BE68710F5.webp
+archive_img: https://pic.imgdb.cn/item/66c9b26cd9c307b7e93ad888.webp
 
 # Note: tag page, not tags page
-tag_img: /images/6326F1F69C13914EA90FFD4067CC89FF6B39BBE352D369A7696254BB83C3AAF5.webp
+tag_img: https://pic.imgdb.cn/item/66c9b290d9c307b7e93af72e.webp
 
 # The banner image of tag page, you can set the banner image for each tag
 # Format:
