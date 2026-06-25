@@ -5,7 +5,17 @@
    "framework": "hexo",
    "headers": [
      {
-       "source": "/sw.js",
+     {
+       "source": "/(css/luomo-theme.css|js/luomo-theme.js)",
+       "headers": [
+         {
+           "key": "Cache-Control",
+           "value": "public, max-age=0, s-maxage=300, must-revalidate"
+         }
+       ]
+     },
+     {
+      "source": "/sw.js",
        "headers": [
          {
            "key": "Cache-Control",

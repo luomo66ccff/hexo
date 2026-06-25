@@ -1070,9 +1070,9 @@ css_prefix: true
 # Insert the code to head (before '</head>' tag) and the bottom (before '</body>' tag)
 inject:
   head:
-     - <link rel="stylesheet" href="/css/luomo-theme.css">
+     - <link rel="stylesheet" href="/css/luomo-theme.css?v=20260625-2">
   bottom:
-     - <script src="/js/luomo-theme.js"></script>
+     - <script src="/js/luomo-theme.js?v=20260625-2"></script>
 
 # CDN Settings
 # Don't modify the following settings unless you know how they work

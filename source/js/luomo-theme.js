@@ -5,7 +5,7 @@
     if (document.getElementById('canvas-starfield')) return;
     const canvas = document.createElement('canvas');
     canvas.id = 'canvas-starfield';
-    canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;';
+    canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;';
     document.body.prepend(canvas);
     const ctx = canvas.getContext('2d');
     let stars = [], w, h;
@@ -68,11 +68,38 @@
     const now = new Date();
     timeEls.forEach(el => { el.textContent = now.toLocaleString('zh-CN', { hour12: false, timeZone: 'Asia/Shanghai' }); });
   }
-  function init() {
-    initStarfield();
+  
+  // --- Home Entry Cards ---
+  function initHomeEntryCards() {
+    // Only on homepage
+    if (!document.querySelector('#page-header.full_page')) return;
+    const container = document.querySelector('.recent-posts') || document.querySelector('#content-inner .layout');
+    if (!container) return;
+    // Check if already inserted
+    if (document.getElementById('home-entry-cards')) return;
+    const cards = document.createElement('div');
+    cards.id = 'home-entry-cards';
+    cards.className = 'home-entry-cards';
+    cards.innerHTML = [
+      { icon: '🚀', title: '项目档案馆', desc: '每一个服务，都是洛墨云世界中的一枚星标。', link: '/projects/' },
+      { icon: '🛸', title: '洛墨云舰桥', desc: '所有星港服务的航行状态，都汇集于此。', link: '/cloud/' },
+      { icon: '📡', title: '航行日志', desc: '把每一次构建、修复与重启，记录成通往群星的轨迹。', link: '/build-log/' },
+    ].map(function(c) {
+      return '<a class="home-entry-card" href="' + c.link + '">' +
+        '<span class="entry-icon">' + c.icon + '</span>' +
+        '<span class="entry-title">' + c.title + '</span>' +
+        '<span class="entry-desc">' + c.desc + '</span></a>';
+    }).join('');
+    container.parentNode.insertBefore(cards, container);
+  }
+function init() {
+    initStarfield();`n    initHomeEntryCards();
     initProjectsFilter();
     initCloudTimestamps();
   }
   document.addEventListener('DOMContentLoaded', init);
   document.addEventListener('pjax:complete', init);
 })();
+
+
+
