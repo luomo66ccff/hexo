@@ -271,3 +271,21 @@ a.article-more-btn:hover {
     line-height: 1.75 !important;
   }
 }
+
+/* ---------- Footer Beian (ICP) ---------- */
+.footer-beian {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.footer-beian a {
+  text-decoration: none;
+}
+
+.beian-separator {
+  opacity: 0.75;
+}

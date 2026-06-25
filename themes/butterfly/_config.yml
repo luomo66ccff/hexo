@@ -308,7 +308,7 @@ footer:
   owner:
     enable: true
     since: 2019
-  custom_text: <a href="https://icp.gov.moe/?keyword=20247012" target="_blank">萌ICP备20247012号</a><img src="https://static.dy208.cn/o_1dfilp8ruo521thr1hvf18ji17soa.png"><a href="http://beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">辽ICP备2025053568号-2</a>
+  custom_text: <div class="footer-beian"><a href="https://icp.gov.moe/?keyword=20247012" target="_blank" rel="noopener">萌ICP备20247012号</a><span class="beian-separator"> | </span><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener" style="color:#f72b07">辽ICP备2025053568号-2</a></div>
   # Copyright of theme and framework
   # Copyright of theme and framework
   copyright: true
