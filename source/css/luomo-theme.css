@@ -421,7 +421,7 @@ a.article-more-btn:hover {
 
 /* #site-info 玻璃拟态卡片 */
 #site-info {
-  padding: 32px 40px !important;
+  padding: 32px 40px !important !important;
   border-radius: 28px !important;
   background: rgba(8, 12, 32, 0.48) !important;
   border: 1px solid rgba(0, 212, 255, 0.22) !important;
@@ -540,3 +540,5 @@ a.article-more-btn:hover {
     grid-template-columns: 1fr;
   }
 }
+
+
