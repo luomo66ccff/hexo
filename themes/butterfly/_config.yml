@@ -1,4 +1,4 @@
-# --------------------------------------
+﻿# --------------------------------------
 # Hexo Butterfly Theme Configuration
 # If you have any questions, please refer to the documentation
 # Chinese: https://butterfly.js.org/
@@ -532,7 +532,7 @@ math:
 search:
   # Choose: algolia_search / local_search / docsearch
   # leave it empty if you don't need search
-  use:
+  use: local_search
   placeholder:
 
   # Algolia Search
@@ -642,7 +642,7 @@ valine:
 # Waline - A simple comment system with backend support fork from Valine
 # https://waline.js.org/
 waline:
-  serverURL: waline.march7th.cn/
+  serverURL: https://waline.march7th.cn
   bg:
   # Use Waline pageview count as the page view count
   pageview: false
@@ -884,7 +884,7 @@ activate_power_mode:
   enable: true
   colorful: true
   shake: true
-  mobile: true
+  mobile: false
 
 # Background effects
 # --------------------------------------
@@ -899,7 +899,7 @@ canvas_ribbon:
   alpha: 0.6
   zIndex: -1
   click_to_change: true
-  mobile: true
+  mobile: false
 
 # Fluttering Ribbon
 canvas_fluttering_ribbon:
@@ -1030,7 +1030,7 @@ pangu:
 # Lazyload
 # https://github.com/verlok/vanilla-lazyload
 lazyload:
-  enable: false
+  enable: true
   # Specify the field to use lazyload (site or post)
   field: site
   placeholder:
@@ -1148,8 +1148,8 @@ CDN:
   
   artitalk:
     enable: true
-    appId: aEErFnpNBIeUvQqtEM1f6DVX-MdYXbMMI
-    appKey: 6g2YDOs3LwCgz6CxUmBfi5cJ
+    # appId: 请通过私有配置设置，勿硬编码在公开仓库
+    # appKey: 请通过私有配置设置，勿硬编码在公开仓库
     path: 
     js:
     option:
