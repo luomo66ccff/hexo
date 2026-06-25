@@ -289,3 +289,103 @@ a.article-more-btn:hover {
 .beian-separator {
   opacity: 0.75;
 }
+
+
+/* ===== 洛墨云上星港 · 新页面样式 ===== */
+
+.luomo-hero { text-align: center; padding: 40px 20px 24px; }
+
+.luomo-hero-title { font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.luomo-hero-sub { color: var(--text-secondary); font-size: 1.05rem; margin-top: 8px; }
+
+.luomo-section-footer { text-align: center; color: var(--text-secondary); padding: 40px 20px; font-style: italic; opacity: 0.8; }
+
+.projects-filter { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+
+.filter-btn { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-secondary); padding: 6px 16px; border-radius: 20px; cursor: pointer; font-size: 0.9rem; transition: all var(--transition-speed) ease; }
+
+.filter-btn:hover { border-color: var(--neon-purple); color: var(--text-primary); }
+
+.filter-btn.active { background: linear-gradient(135deg, rgba(168,85,247,0.3), rgba(0,212,255,0.2)); border-color: var(--neon-purple); color: var(--neon-blue); }
+
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; padding: 0 4px; }
+
+.project-card { background: var(--glass-bg); backdrop-filter: blur(14px); border: 1px solid var(--glass-border); border-radius: var(--card-radius); padding: 20px 22px; transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; gap: 10px; }
+
+.project-card:hover { transform: translateY(-4px); border-color: rgba(168,85,247,0.4); box-shadow: 0 8px 32px rgba(0,212,255,0.12), 0 0 20px rgba(168,85,247,0.08); }
+
+.project-card-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+
+.project-name { font-size: 1.15rem; color: var(--neon-cyan); margin: 0; }
+
+.project-desc { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6; margin: 0; }
+
+.project-status { font-size: 0.82rem; font-weight: 600; padding: 2px 10px; border-radius: 10px; }
+
+.status-online { color: #22c55e; background: rgba(34,197,94,0.12); }
+
+.status-building { color: #eab308; background: rgba(234,179,8,0.12); }
+
+.status-debug { color: #f97316; background: rgba(249,115,22,0.12); }
+
+.project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.tech-tag { font-size: 0.78rem; padding: 2px 10px; border-radius: 8px; background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.2); color: var(--neon-blue); }
+
+.project-link { display: inline-block; margin-top: auto; color: var(--neon-purple); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: all var(--transition-speed) ease; }
+
+.project-link:hover { color: var(--neon-blue); text-shadow: 0 0 10px rgba(0,212,255,0.5); }
+
+.cloud-dashboard { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; padding: 0 4px; }
+
+.cloud-card { background: var(--glass-bg); backdrop-filter: blur(14px); border: 1px solid var(--glass-border); border-radius: var(--card-radius); padding: 18px 20px; transition: all var(--transition-speed) ease; display: flex; flex-direction: column; gap: 8px; }
+
+.cloud-card:hover { transform: translateY(-3px); border-color: rgba(168,85,247,0.4); }
+
+.status-indicator { display: flex; align-items: center; gap: 5px; font-size: 0.82rem; font-weight: 600; }
+
+.status-indicator.status-online { color: #22c55e; }
+
+.status-indicator.status-building { color: #eab308; }
+
+.status-indicator.status-debug { color: #f97316; }
+
+.status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; animation: pulse 2s ease-in-out infinite; }
+
+.status-online .status-dot { background: #22c55e; box-shadow: 0 0 6px #22c55e; }
+
+.status-building .status-dot { background: #eab308; box-shadow: 0 0 6px #eab308; }
+
+.status-debug .status-dot { background: #f97316; box-shadow: 0 0 6px #f97316; }
+
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+.cloud-meta { margin-top: 4px; }
+
+.cloud-url a { color: var(--text-secondary); font-size: 0.82rem; text-decoration: none; }
+
+.cloud-url a:hover { color: var(--neon-blue); }
+
+.cloud-footer { margin-top: auto; }
+
+.check-time { color: var(--text-secondary); font-size: 0.78rem; opacity: 0.7; }
+
+.timeline { position: relative; padding: 20px 0; margin: 0 auto; max-width: 720px; }
+
+.timeline::before { content: ''; position: absolute; left: 120px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--neon-purple), var(--neon-blue)); opacity: 0.4; }
+
+.timeline-item { position: relative; display: flex; align-items: flex-start; gap: 20px; padding: 16px 0; }
+
+.timeline-dot { position: absolute; left: 115px; top: 22px; width: 12px; height: 12px; border-radius: 50%; background: var(--neon-purple); border: 2px solid var(--star-bg); box-shadow: 0 0 8px rgba(168,85,247,0.5); z-index: 1; }
+
+.timeline-date { width: 100px; text-align: right; flex-shrink: 0; color: var(--neon-blue); font-weight: 600; font-size: 0.92rem; padding-top: 2px; }
+
+.timeline-content { flex: 1; background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: var(--card-radius); padding: 14px 18px; margin-left: 20px; transition: all var(--transition-speed) ease; }
+
+.timeline-content:hover { border-color: rgba(168,85,247,0.35); transform: translateX(3px); }
+
+.timeline-content h3 { color: var(--neon-cyan); font-size: 1rem; margin: 0 0 6px; border: none; }
+
+.timeline-content p { color: var(--text-secondary); font-size: 0.88rem; margin: 0; line-height: 1.6; }
+@media (max-width: 640px) { .timeline::before { left: 20px; } .timeline-dot { left: 14px; } .timeline-date { width: auto; text-align: left; font-size: 0.82rem; padding-left: 40px; } .timeline-item { flex-direction: column; gap: 6px; } .timeline-content { margin-left: 0; } .projects-grid { grid-template-columns: 1fr; } .cloud-dashboard { grid-template-columns: 1fr; } .project-card-header { flex-direction: column; align-items: flex-start; } }

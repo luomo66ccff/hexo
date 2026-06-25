@@ -26,6 +26,8 @@ menu:
     Movie: /movies/ || fas fa-video
   Link: /link/ || fas fa-link
   Projects: /projects/ || fas fa-rocket
+  Cloud: /cloud/ || fas fa-satellite-dish
+  Build Log: /build-log/ || fas fa-book-open
   About: /about/ || fas fa-heart
 
 # --------------------------------------
@@ -221,7 +223,7 @@ index_layout: 3
 index_post_content:
   method: 2
   # If you set method to 2 or 3, the length need to config
-  length: 500
+  length: 180
 
 # --------------------------------------
 # Post Settings
