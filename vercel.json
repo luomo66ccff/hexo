@@ -1,4 +1,8 @@
  {
+   "buildCommand": "pnpm run build",
+   "installCommand": "pnpm install",
+   "outputDirectory": "public",
+   "framework": "hexo",
    "headers": [
      {
        "source": "/sw.js",
