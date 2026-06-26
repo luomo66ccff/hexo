@@ -24,10 +24,11 @@ menu:
   List||fas fa-list:
     Music: /music/ || fas fa-music
     Movie: /movies/ || fas fa-video
+  Luomo||fas fa-star:
+    Projects: /projects/ || fas fa-rocket
+    Cloud: /cloud/ || fas fa-cloud
+    Build Log: /build-log/ || fas fa-stream
   Link: /link/ || fas fa-link
-  Projects: /projects/ || fas fa-rocket
-  Cloud: /cloud/ || fas fa-satellite-dish
-  Build Log: /build-log/ || fas fa-book-open
   About: /about/ || fas fa-heart
 
 # --------------------------------------
@@ -1070,9 +1071,9 @@ css_prefix: true
 # Insert the code to head (before '</head>' tag) and the bottom (before '</body>' tag)
 inject:
   head:
-     - <link rel="stylesheet" href="/css/luomo-theme.css?v=20260625-3">
+     - <link rel="stylesheet" href="/css/luomo-theme.css?v=20260626-butterfly">
   bottom:
-     - <script src="/js/luomo-theme.js?v=20260625-3"></script>
+     - <script src="/js/luomo-theme.js?v=20260626-butterfly"></script>
 
 # CDN Settings
 # Don't modify the following settings unless you know how they work
@@ -1157,4 +1158,6 @@ CDN:
     js:
     option:
     front_matter:
+
+
 
