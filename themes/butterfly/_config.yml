@@ -442,9 +442,9 @@ readmode: true
 
 # Dark Mode
 darkmode:
-  enable: true
+  enable: false
   # Toggle Button to switch dark/light mode
-  button: true
+  button: false
   # Switch dark/light mode automatically
   # autoChangeMode: 1  Following System Settings, if the system doesn't support dark mode, it will switch dark mode between 6 pm to 6 am
   # autoChangeMode: 2  Switch dark mode between 6 pm to 6 am
@@ -850,7 +850,7 @@ preloader:
 enter_transitions: true
 
 # Default display mode - light (default) / dark
-display_mode: dark
+display_mode: light
 
 # Configuration for beautifying the content of the article
 beautify:
@@ -1071,7 +1071,7 @@ css_prefix: true
 # Insert the code to head (before '</head>' tag) and the bottom (before '</body>' tag)
 inject:
   head:
-     - <link rel="stylesheet" href="/css/luomo-theme.css?v=20260626-butterfly">
+     - <link rel="stylesheet" href="/css/luomo-theme.css?v=20260804-white">
   bottom:
      - <script src="/js/luomo-theme.js?v=20260626-butterfly"></script>
 
