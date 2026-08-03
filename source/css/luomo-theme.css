@@ -61,7 +61,7 @@ body {
 }
 
 /* ---------- Post/Page ---------- */
-#post .article-container {
+#post #article-container {
   background: var(--glass-bg) !important;
   backdrop-filter: blur(8px) !important;
   border: 1px solid var(--glass-border) !important;
@@ -69,20 +69,20 @@ body {
   padding: 24px 32px !important;
 }
 
-.article-container {
+#article-container {
   font-size: 16px !important;
   line-height: 1.8 !important;
 }
 
 /* ---------- Code Blocks ---------- */
-.article-container code {
+#article-container :not(pre) > code {
   background: rgba(168, 85, 247, 0.12) !important;
   color: #22d3ee !important;
   border-radius: 4px !important;
   padding: 2px 6px !important;
 }
 
-.article-container pre {
+#article-container pre {
   background: rgba(10, 14, 39, 0.75) !important;
   border: 1px solid rgba(168, 85, 247, 0.12) !important;
   border-radius: 10px !important;
@@ -193,8 +193,16 @@ body {
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
   .recent-post-item:hover { transform: none !important; }
-  #post .article-container { padding: 16px 18px !important; }
-  .article-container { font-size: 15px !important; }
+  #post #article-container { padding: 16px 18px !important; }
+  #article-container { font-size: 15px !important; }
+  #article-container table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  #article-container table th,
+  #article-container table td { min-width: 120px; }
   .projects-grid { grid-template-columns: 1fr; }
   .cloud-dashboard { grid-template-columns: 1fr; }
   .timeline::before { left: 16px; }

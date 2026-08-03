@@ -25,7 +25,7 @@ abbrlink: 7c2a4f61
 {% btn https://fog-harbor-archive.luomo.moe,进入雾港调查室,fas fa-play,blue larger %}
 {% btn https://github.com/luomo66ccff/fog-harbor-archive,查看 GitHub 源码,fab fa-github,purple larger %}
 
-{% note info fas fa-user-secret %}
+{% note info %}
 本文只谈工程，不剧透案件答案。核心真相会继续躺在雾里，绝不被教程一铲子挖出来。
 {% endnote %}
 
@@ -54,7 +54,7 @@ abbrlink: 7c2a4f61
 | 会话状态 | 彩蛋触发、临时提示 | `sessionStorage` | 关闭标签页后自然重置 |
 | 界面状态 | 窗口位置、层级、最小化、待处理意图 | Zustand 内存状态 | 快速响应，不污染案件数据 |
 
-{% note warning fas fa-triangle-exclamation %}
+{% note warning %}
 最重要的边界是：窗口开没开，不等于证据解没解锁；动画播没播，也不等于剧情已经推进。把 UI 状态和领域状态混在一起，后面一定会出现“关个窗口把结局关没了”的赛博灵异事件。
 {% endnote %}
 
@@ -154,7 +154,7 @@ type PersistedCaseState = {
 6. Playwright 安装 Chromium，跑桌面、移动端、二周目和彩蛋旅程；
 7. 失败时上传截图、视频、trace 和报告，避免只留一句“元素不存在”让人对着空气破案。
 
-{% note success fas fa-shield-halved %}
+{% note success %}
 测试分层的收益是定位速度：纯规则错了看单元测试，交互旅程断了看 Playwright，部署运行时错了看容器健康检查。三类问题不会在同一个红灯里抱团取暖。
 {% endnote %}
 
