@@ -42,7 +42,7 @@
  |------|------|
  | https://blog.luomo.moe | 博客正式主域名 |
  | https://luomo.march7th.cn | 旧入口（历史兼容） |
- | https://hexo-omega-drab.vercel.app | Vercel 默认域名 |
+ | https://hexo-nqq9.vercel.app | Vercel 默认域名 |
 
  > 注意：luomo.moe 不用于本博客跳转，未来可用于个人主页或导航站。
  > 修改域名后需要在 Vercel Domains 页面添加域名并等待 SSL 证书签发完成。
