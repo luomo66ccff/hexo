@@ -1003,7 +1003,8 @@ pjax:
   enable: true
   # Exclude the specified pages from pjax, such as '/music/'
   exclude:
-    # - /xxxxxx/
+    # 首页入口使用原生导航，避免文章页返回首页时 PJAX 卡在半完成状态
+    - /
 
 # Inject the css and script (aplayer/meting)
 aplayerInject:
