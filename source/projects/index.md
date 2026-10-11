@@ -1,5 +1,6 @@
 ﻿---
 title: 项目档案馆 · Project Archive
+description: 洛墨的云服务、AI 智能体与开发项目档案，查看项目介绍、技术栈和公开入口。
 date: 2026-06-25 00:00:00
 type: projects
 comments: false
@@ -8,7 +9,6 @@ top_img: false
 ---
 
 <div class="luomo-hero">
-  <h1 class="luomo-hero-title">✦ 项目档案馆 · Project Archive</h1>
   <p class="luomo-hero-sub">每一个服务，都是洛墨云世界中的一枚星标。</p>
 </div>
 

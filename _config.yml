@@ -5,7 +5,7 @@
 # Site
 title: Luomoの云日常
 #subtitle: '洛墨-天染-依然Blog'
-description: '循此苦旅 直抵群星'
+description: '洛墨的个人博客，记录 AI 智能体、开发实践、服务器运维与云上项目。循此苦旅，直抵群星。'
 keywords: starrail,genshin,game,code,luotianyi,vocaloid,china,chinese,zzz,sr,gs,ys,cloud
 author: 洛墨-天染-依然
 language: zh-CN
@@ -17,7 +17,7 @@ url: https://blog.luomo.moe
 permalink: posts/:abbrlink.html
 permalink_defaults:
 pretty_urls:
-  trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
+  trailing_index: false # Canonical directory URLs match the sitemap
   trailing_html: true # Set to false to remove trailing '.html' from permalinks
 
 # Directory
@@ -29,7 +29,6 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
-    - "status/*"
     - "downloads/luomo-vpn-guide-t001/**"
 
 # Writing
@@ -150,3 +149,9 @@ feed:
   path: atom.xml
   limit: 20
   hub:
+
+# Match the search UI to the generated JSON index.
+search:
+  path: search.json
+  field: post
+  content: true
