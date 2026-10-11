@@ -132,6 +132,30 @@
   // Capture group clicks before the legacy sidebar delegate, which also
   // toggles .hide. Native buttons provide Enter and Space activation.
   document.addEventListener('click', function (event) {
+    // Leaving the legacy player through PJAX can run stale audio callbacks.
+    // Keep native navigation for ordinary links to this site on its music page.
+    if (location.pathname === '/music/') {
+      var link = event.target.closest('a[href]');
+      var href = link && link.getAttribute('href').trim();
+      if (link && href && !link.closest('.aplayer') &&
+          !href.startsWith('#') && !/^javascript:/i.test(href) &&
+          !event.defaultPrevented && event.button === 0 &&
+          !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey &&
+          (!link.target || link.target === '_self') && !link.hasAttribute('download')) {
+        try {
+          var destination = new URL(href, location.href);
+          var isPageAnchor = destination.pathname === location.pathname &&
+            destination.search === location.search && destination.hash;
+          if (destination.origin === location.origin &&
+              /^https?:$/.test(destination.protocol) && !isPageAnchor) {
+            event.stopPropagation();
+            return;
+          }
+        } catch (error) {
+          // Invalid links keep their existing browser behavior.
+        }
+      }
+    }
     var toggle = event.target.closest('[data-nav-toggle]');
     if (toggle) {
       event.preventDefault();

@@ -965,6 +965,7 @@ pjax:
   exclude:
     # 首页入口使用原生导航，避免文章页返回首页时 PJAX 卡在半完成状态
     - /
+    - /music/
 
 # Inject the css and script (aplayer/meting)
 aplayerInject:
