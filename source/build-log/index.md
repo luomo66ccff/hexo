@@ -1,5 +1,6 @@
 ﻿---
 title: 航行日志 · Build Log
+description: 洛墨云上项目的构建与维护记录，记录博客、云服务和开发项目的更新。
 date: 2026-06-25 00:00:00
 type: build-log
 comments: false
@@ -8,7 +9,6 @@ top_img: false
 ---
 
 <div class="luomo-hero">
-  <h1 class="luomo-hero-title">✦ 航行日志 · Build Log</h1>
   <p class="luomo-hero-sub">把每一次构建、修复与重启，记录成通往群星的轨迹。</p>
 </div>
 

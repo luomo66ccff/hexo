@@ -1,4 +1,5 @@
 if theme.menu
+  - let groupIndex = 0
   .menus_items
     each value, label in theme.menu
       if typeof value !== 'object'
@@ -9,15 +10,16 @@ if theme.menu
               i.fa-fw(class=trim(valueArray[1]))
             span=' '+label
       else
-        .menus_item
+        .menus_item(data-nav-menu)
           - const labelArray = label.split('||')
           - const hideClass = labelArray[2] && trim(labelArray[2]) === 'hide' ? 'hide' : ''
-          a.site-page.group(class=`${hideClass}` href='javascript:void(0);')
+          - const menuId = `${menuScope}-menu-${groupIndex++}`
+          button.site-page.group(type='button' class=hideClass data-nav-toggle aria-expanded=(menuScope === 'sidebar' && !hideClass ? 'true' : 'false') aria-controls=menuId)
             if labelArray[1]
               i.fa-fw(class=trim(labelArray[1]))
             span=' '+ trim(labelArray[0])
             i.fas.fa-chevron-down
-          ul.menus_item_child
+          ul.menus_item_child(id=menuId)
             each val,lab in value 
               - const valArray = val.split('||')
               li
