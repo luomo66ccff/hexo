@@ -1,7 +1,7 @@
 ---
 title: '从「奶龙大学.com」到自己的小网站：零基础域名购买与建站教程'
 date: 2026-10-14 12:00:00
-updated: 2026-10-14 12:00:00
+updated: 2026-10-14 20:40:09
 categories:
   - 技术实践
 tags:
@@ -11,44 +11,42 @@ tags:
   - DNS
   - Cloudflare
   - 建站
-description: 从上海、苏州、甘肃奶龙大学的真实案例出发，手把手买域名、上传网页、设置 DNS、绑定 HTTPS，附可下载模板、跳转示例和排障清单。奶娃负责整活，你负责拥有自己的互联网门牌。
+description: 从上海、苏州、甘肃奶龙大学的真实案例出发，手把手买域名、上传网页、设置 DNS、绑定 HTTPS，附可下载模板、跳转示例和排障清单。奶蛙负责整活，你负责拥有自己的互联网门牌。
 abbrlink: 7a1d0a11
 cover: /images/domain-beginner/naiwa-launch.png
 ---
 
 刷到「XX奶龙大学.com」，随手一输，居然真能打开，有的还把你送到学校官网。
 
-第一反应：**学校终于被奶娃接管了？**
+第一反应：**学校终于被奶蛙接管了？**
 
 实际操作：有人注册了一个有梗的域名，再给它配上网页或者跳转。互联网门牌还能这么起，属实是把招生简章玩成了精神状态检测。(¬‿¬)
 
 这篇就从这个梗出发，带你完成一条实用路线：**买一个自己的域名 → 做一个简单网页 → 上传上线 → 绑定域名与 HTTPS。** 不需要先学编程，也不用先买一台服务器。你最后得到的，可以是个人主页、作品集、社团导航，或者一张朋友点进去就绷不住的整活页面。
 
-> 本文资料和案例核查日期：**2026 年 10 月 14 日**。费用以购买页和续费页为准，平台按钮名称可能调整。文中的 `example.com` 是保留的演示域名，不能拿去注册；配置时一律换成你实际购买的域名。
-
 <!-- more -->
 
 ## 1. 先吃个瓜：这些「奶龙大学」到底在干什么
 
-近期能定位的讨论包括 [YourTJ 论坛的《上海奶龙大学.com》](https://f.yourtj.de/p/post/572)，以及 B站的[《重要通知：中国奶龙大学域名已被购》](https://www.bilibili.com/video/BV1xypd6FEvw/)。后者的公开投稿信息显示发布于 10 月 12 日。这里用来说明近期确有相关讨论，**不据此断言谁是首创，也不编一个“全网多少亿播放”。**
+这波梗已经玩到了高校论坛：[YourTJ 上有人分享了《上海奶龙大学.com》](https://f.yourtj.de/p/post/572)，B站也有[《重要通知：中国奶龙大学域名已被购》](https://www.bilibili.com/video/BV1xypd6FEvw/)这样的投稿。
 
-我还直接检查了三个实际入口，结果挺有教学价值：
+挑三个网址点开看看，玩法还不太一样：
 
-| 案例 | 本次检查到的行为 | 对应的建站思路 |
+| 网址 | 打开后会发生什么 | 你可以怎么做 |
 | --- | --- | --- |
 | [上海奶龙大学.com](https://xn--fhqu4y0gz4ew51bfy2e.com/) | 返回 HTTP 302，地址指向同济大学官网 `www.tongji.edu.cn` | 域名收到访问后，直接让浏览器去另一个网址 |
 | [苏州奶龙大学.com](https://xn--psszg58cf1d8u4erdxb.com/) | 页面写着“非官方跳转页”，HTML 设置 5 秒后前往西交利物浦大学官网 | 先显示趣味页面，再倒计时跳转 |
 | [甘肃奶龙大学.com](https://xn--psszg58cy52cu6lj57b.com/) | 自己的页面里有 GO 按钮，链接到兰州理工大学官网；还有[公开源码仓库](https://github.com/TomyJan/gansunailongdaxue.com) | 域名绑定自己的页面，由读者选择是否点击 |
 
-上海的结论来自 HTTP 响应；苏州、甘肃的结论来自当前网页内容与链接配置。域名之后可能改指向，今天的结果不是永远的承诺。甘肃对应的是**兰州理工大学**，别和兰州大学混了，奶娃整活，校名还是要写对。
-
-**跳转到学校官网，不等于学校官方注册、授权或改名。** 这些入口只是我们观察到的域名使用案例。做同类页面时，写清“个人／非官方”，按钮点向真正官网；别让别人误把你的玩梗页当成招生入口，更别收学号密码。
+自己做这类页面，记得写上“个人／非官方”，学校链接也要填对。玩梗归玩梗，别让朋友把你的页面当成招生入口。
 
 你完全可以把同一套方法用到正常项目上：一个短域名指向作品集，一个社团域名展示活动，一个个人域名连接自己的博客。
 
-## 2. 域名、网站、DNS：三位各干各的，别让奶娃一个龙背锅
+## 2. 域名、网站、DNS：三位各干各的，别让奶蛙独自背锅
 
 把网站想成一间店：
+
+下面用 `example.com` 举例，这是保留的演示域名；操作时换成自己买到的域名。
 
 | 名词 | 好理解的比喻 | 实际负责什么 |
 | --- | --- | --- |
@@ -60,7 +58,7 @@ cover: /images/domain-beginner/naiwa-launch.png
 
 **域名购买成功，只代表门牌到手。网页还要制作和托管，门牌还要连到服务。**
 
-<img src="/images/domain-beginner/naiwa-dns.png" alt="奶娃举着域名门牌：域名买了，网站呢？你给我变出来啊" width="560" loading="lazy" style="display:block;margin:24px auto;max-width:100%;height:auto">
+<img src="/images/domain-beginner/naiwa-dns.png" alt="奶蛙举着域名门牌：域名买了，网站呢？你给我变出来啊" width="560" loading="lazy" style="display:block;margin:24px auto;max-width:100%;height:auto">
 
 再拆一个常见网址：
 
@@ -71,9 +69,9 @@ https://blog.example.com/about
 
 你购买 `example.com` 后，通常可以自行设置 `www.example.com`、`blog.example.com` 等子域名，无需把每个都另买一遍。`/about` 则是网站里面的路径，不是另一个域名。
 
-### 中文域名是真的，不是浏览器被奶娃夺舍
+### 中文域名是真的，不是浏览器被奶蛙夺舍
 
-域名可以包含中文，这类叫 **IDN（国际化域名）**。系统会把中文部分转换成以 `xn--` 开头的 ASCII 形式，也叫 Punycode。中文显示和转换后的形式可以代表同一个域名；某些浏览器或后台显示长串编码是正常现象。[ICANN 的 IDN 说明](https://www.icann.org/resources/idn)和 [A-label 定义](https://www.icann.org/en/icann-acronyms-and-terms/a-label-en)解释了这一点。
+域名可以包含中文，这类叫 **IDN（国际化域名）**。系统会把中文部分转换成以 `xn--` 开头的 ASCII 形式，也叫 Punycode。中文显示和转换后的形式可以代表同一个域名；某些浏览器或后台显示长串编码是正常现象。想了解这串编码，可以看 [ICANN 的 IDN 介绍](https://www.icann.org/resources/idn)和 [A-label 定义](https://www.icann.org/en/icann-acronyms-and-terms/a-label-en)。
 
 `.com` 的注册局支持包括中文在内的多语言 IDN，但**具体注册商是否提供、如何查询，以其当前支持范围为准**。可以通过 [Verisign 的 IDN 页面](https://www.verisign.com/resources/internationalized-domain-names/)了解注册渠道。
 
@@ -85,7 +83,7 @@ https://blog.example.com/about
 
 下面用**阿里云的普通域名注册流程**举例，其他注册商也有类似步骤。本教程的主线先用英文域名完成；中文梗域名需要额外确认商家支持和完整报价。
 
-### 第一步：想三个候选，别和全网奶娃抢同一个门牌
+### 第一步：想三个候选，别和全网奶蛙抢同一个门牌
 
 用自己的网名、项目名、社团名组合，准备几个备选。起名尽量短、好念、好打；完整的后缀也是名字的一部分，`.com`、`.net` 和 `.cn` 是不同的地址。
 
@@ -93,7 +91,7 @@ https://blog.example.com/about
 
 先确定能接受的**每年续费成本**。首年便宜，第二年未必还是这个价；中文域名也不一定和英文同后缀同价。
 
-<img src="/images/domain-beginner/naiwa-renewal.png" alt="奶娃看续费单：首年真香，续费你怎么不去抢" width="560" loading="lazy" style="display:block;margin:24px auto;max-width:100%;height:auto">
+<img src="/images/domain-beginner/naiwa-renewal.png" alt="奶蛙看续费单：首年真香，续费你怎么不去抢" width="560" loading="lazy" style="display:block;margin:24px auto;max-width:100%;height:auto">
 
 ### 第二步：在注册商官网查询完整域名
 
@@ -114,7 +112,7 @@ https://blog.example.com/about
 
 愿意长期持有就开启自动续费，确认付款方式可用；同时给自己留一个到期提醒。启用账号的双重验证，保管好登录方式。
 
-这里的“购买”更像按期限注册使用权。到期后未续费，域名可能停止工作甚至被别人重新注册。奶娃可以装作无事发生，网站访客不会。
+这里的“购买”更像按期限注册使用权。到期后未续费，域名可能停止工作甚至被别人重新注册。奶蛙可以装作无事发生，网站访客不会。
 
 ## 4. 先做网页：复制一个文件，你就有内容了
 
@@ -169,7 +167,7 @@ https://blog.example.com/about
 </html>
 ```
 
-上传前记得把演示按钮的 `https://example.com/` 换掉。别做完自己的主页，按钮却把朋友送进“Example Domain”：那是演示保留域名，奶娃也不会替你写自我介绍。
+上传前记得把演示按钮的 `https://example.com/` 换掉。别做完自己的主页，按钮却把朋友送进“Example Domain”：那是演示保留域名，奶蛙也不会替你写自我介绍。
 
 ## 5. 上传上线：用 Cloudflare Pages 拖进去
 
@@ -181,9 +179,9 @@ https://blog.example.com/about
 4. 拖入包含**修改后的 `index.html`** 的网页文件夹。如果使用 ZIP，先把修改后的文件重新打包；原下载 ZIP 不会随解压文件的编辑而变化。**打开 ZIP 或上传的文件夹，就应直接看到 `index.html`**，别多套一层 `网页模板/网页模板/`。
 5. 点击部署，记录平台给你的实际地址，例如 `你的项目名.pages.dev`。这里的示例项目名不保证可用，以你的后台为准。
 
-打开 `https://你的项目名.pages.dev`，看到正确页面，再用手机打开一次，点一下按钮。**这一步成功，才说明网页已经在网上；它和买域名是两件事。** 上传方式与入口依据 [Direct Upload 官方文档](https://developers.cloudflare.com/pages/get-started/direct-upload/)。
+打开 `https://你的项目名.pages.dev`，再用手机试一次，点点按钮。能正常打开，你的小网站就上线了，接下来给它挂上自己的域名。[直接上传操作说明](https://developers.cloudflare.com/pages/get-started/direct-upload/)
 
-> 这条流程的网页文件可以直接上传，无需“编译”或安装 Node.js。将来想通过 Git 自动发布，Direct Upload 项目不能直接切换成 Git 集成，需要另建项目。本文模板已做本地浏览器检查；你的 Pages 部署与购买需要你在自己的账号完成。
+这个模板直接上传就能用，不用装 Node.js。以后想改成 Git 自动发布，需要另建一个 Git 集成项目，Direct Upload 项目不能直接切换过去。
 
 如果平台原生地址在你的网络打不开，先解决这个问题再绑域名。换一个门牌不能保证托管线路立刻变快；国内访问体验请用自己的网络和手机流量实测。
 
@@ -293,15 +291,13 @@ nslookup www.example.com
 curl.exe -I https://www.example.com/
 ```
 
-前者看有没有 DNS 应答，后者查看 HTTP 状态与响应头。`200` 表示请求成功；做了跳转则通常会看到 `301` 或 `302` 和 `Location` 目标。**解析成功不等于网页正常，网页正常也不保证每个网络都一样快。**
+前者看有没有 DNS 应答，后者查看 HTTP 状态与响应头。`200` 表示请求成功；做了跳转则通常会看到 `301` 或 `302` 和 `Location` 目标。
 
 ## 9. 实名和备案，别一股脑全叫“认证”
 
 **域名实名认证**回答“谁持有这个域名”，是注册商的域名管理流程。
 
 **ICP备案**则与中国内地接入的网站服务有关。使用中国内地服务器等相关资源对外提供网站服务，需要按接入商要求完成备案；一般非中国内地节点不通过这套内地服务器流程申请 ICP 备案。具体部署地域、CDN 与业务要求应向接入商确认，不能仅凭域名后缀或买域名的位置判断。[阿里云备案流程](https://help.aliyun.com/zh/icp-filing/basic-icp-service/user-guide/icp-filing-application-overview)、[服务器与接入检查](https://help.aliyun.com/zh/icp-filing/basic-icp-service/user-guide/icp-filing-server-access-information-check)
-
-本教程的 Pages 路线不能承诺中国内地访问速度，也不等于替你完成所有上线手续。后续要用内地资源、正式经营或增加特定业务功能，再核对对应的接入与资质要求。
 
 论坛里的“萌备案”是社区玩法，**不是工信部 ICP 备案的替代品**。萌可以萌，概念别混。
 
@@ -320,12 +316,12 @@ curl.exe -I https://www.example.com/
 
 以后改内容：在电脑里编辑 `index.html` → 本地刷新检查 → 打开同一个 Pages 项目创建新部署 → 选择生产环境 → 上传完整文件 → 检查域名页面。项目和域名保持原样，一般不需要每次重设 DNS。
 
-这次你学到的，其实是一套能反复使用的方法：**起名、准备内容、托管、连接、验证。** 今天门牌上写着奶娃，明天也可以是你的个人主页、毕业作品或认真做起来的小项目。
+网站搭好以后，慢慢把自己的介绍、作品和喜欢的链接放进去就行。今天先整点奶蛙，哪天有了新想法，再回来改这一页。
 
-<img src="/images/domain-beginner/naiwa-launch.png" alt="恶搞奶娃竖起大拇指：网站上线了，现在我也是有站之人了" width="640" loading="lazy" style="display:block;margin:24px auto;max-width:100%;height:auto">
+<img src="/images/domain-beginner/naiwa-launch.png" alt="恶搞奶蛙竖起大拇指：网站上线了，现在我也是有站之人了" width="640" loading="lazy" style="display:block;margin:24px auto;max-width:100%;height:auto">
 
-奶娃：你现在也算是有站之人了。至于有人访问没——先把链接发给朋友，别让网站和你的早八出勤率一样安静。(¬‿¬)
+奶蛙：你现在也算是有站之人了。至于有人访问没——先把链接发给朋友，别让网站和你的早八出勤率一样安静。(¬‿¬)
 
 想继续做可长期更新的博客，可以接着看本站的[《Hexo 博客 GitHub + Vercel 部署全流程》](/posts/3d61fa8b.html)。先把这一页跑通，再升级装备，互联网小窝就从这里开始。
 
-> 配图为参考恶搞“奶娃”形象生成的教程表情包，用于本文讲解，不是任何注册商、学校或角色方的官方宣传。资料链接随对应步骤列出；案例的实时行为可能变化。
+*配图：参考奶蛙表情包，用 AI 生成。*
