@@ -24,6 +24,10 @@ date: 2024-08-05 15:22:26
       link: https://1107.siwg.top/
       avatar: https://pic.imgdb.cn/item/66b0b9c8d9c307b7e96ca934.jpg
       descr: 意随风而起，风止意不停
+    - name: 云师阳
+      link: https://profile.yunshiyang.cn/
+      avatar: /img/friends/yunshiyang-avatar.jpg
+      descr: 学生 / 音乐制作人
 
 - class_name: 网站
   class_desc: 值得推荐的网站
