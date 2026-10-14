@@ -1,7 +1,7 @@
 ---
 title: '从「奶龙大学.com」到自己的小网站：零基础域名购买与建站教程'
 date: 2026-10-14 12:00:00
-updated: 2026-10-14 12:00:00
+updated: 2026-10-14 20:36:11
 categories:
   - 技术实践
 tags:
@@ -11,14 +11,14 @@ tags:
   - DNS
   - Cloudflare
   - 建站
-description: 从上海、苏州、甘肃奶龙大学的真实案例出发，手把手买域名、上传网页、设置 DNS、绑定 HTTPS，附可下载模板、跳转示例和排障清单。奶娃负责整活，你负责拥有自己的互联网门牌。
+description: 从上海、苏州、甘肃奶龙大学的真实案例出发，手把手买域名、上传网页、设置 DNS、绑定 HTTPS，附可下载模板、跳转示例和排障清单。奶蛙负责整活，你负责拥有自己的互联网门牌。
 abbrlink: 7a1d0a11
 cover: /images/domain-beginner/naiwa-launch.png
 ---
 
 刷到「XX奶龙大学.com」，随手一输，居然真能打开，有的还把你送到学校官网。
 
-第一反应：**学校终于被奶娃接管了？**
+第一反应：**学校终于被奶蛙接管了？**
 
 实际操作：有人注册了一个有梗的域名，再给它配上网页或者跳转。互联网门牌还能这么起，属实是把招生简章玩成了精神状态检测。(¬‿¬)
 
@@ -40,13 +40,13 @@ cover: /images/domain-beginner/naiwa-launch.png
 | [苏州奶龙大学.com](https://xn--psszg58cf1d8u4erdxb.com/) | 页面写着“非官方跳转页”，HTML 设置 5 秒后前往西交利物浦大学官网 | 先显示趣味页面，再倒计时跳转 |
 | [甘肃奶龙大学.com](https://xn--psszg58cy52cu6lj57b.com/) | 自己的页面里有 GO 按钮，链接到兰州理工大学官网；还有[公开源码仓库](https://github.com/TomyJan/gansunailongdaxue.com) | 域名绑定自己的页面，由读者选择是否点击 |
 
-上海的结论来自 HTTP 响应；苏州、甘肃的结论来自当前网页内容与链接配置。域名之后可能改指向，今天的结果不是永远的承诺。甘肃对应的是**兰州理工大学**，别和兰州大学混了，奶娃整活，校名还是要写对。
+上海的结论来自 HTTP 响应；苏州、甘肃的结论来自当前网页内容与链接配置。域名之后可能改指向，今天的结果不是永远的承诺。甘肃对应的是**兰州理工大学**，别和兰州大学混了，奶蛙整活，校名还是要写对。
 
 **跳转到学校官网，不等于学校官方注册、授权或改名。** 这些入口只是我们观察到的域名使用案例。做同类页面时，写清“个人／非官方”，按钮点向真正官网；别让别人误把你的玩梗页当成招生入口，更别收学号密码。
 
 你完全可以把同一套方法用到正常项目上：一个短域名指向作品集，一个社团域名展示活动，一个个人域名连接自己的博客。
 
-## 2. 域名、网站、DNS：三位各干各的，别让奶娃一个龙背锅
+## 2. 域名、网站、DNS：三位各干各的，别让奶蛙独自背锅
 
 把网站想成一间店：
 
@@ -60,7 +60,7 @@ cover: /images/domain-beginner/naiwa-launch.png
 
 **域名购买成功，只代表门牌到手。网页还要制作和托管，门牌还要连到服务。**
 
-<img src="/images/domain-beginner/naiwa-dns.png" alt="奶娃举着域名门牌：域名买了，网站呢？你给我变出来啊" width="560" loading="lazy" style="display:block;margin:24px auto;max-width:100%;height:auto">
+<img src="/images/domain-beginner/naiwa-dns.png" alt="奶蛙举着域名门牌：域名买了，网站呢？你给我变出来啊" width="560" loading="lazy" style="display:block;margin:24px auto;max-width:100%;height:auto">
 
 再拆一个常见网址：
 
@@ -71,7 +71,7 @@ https://blog.example.com/about
 
 你购买 `example.com` 后，通常可以自行设置 `www.example.com`、`blog.example.com` 等子域名，无需把每个都另买一遍。`/about` 则是网站里面的路径，不是另一个域名。
 
-### 中文域名是真的，不是浏览器被奶娃夺舍
+### 中文域名是真的，不是浏览器被奶蛙夺舍
 
 域名可以包含中文，这类叫 **IDN（国际化域名）**。系统会把中文部分转换成以 `xn--` 开头的 ASCII 形式，也叫 Punycode。中文显示和转换后的形式可以代表同一个域名；某些浏览器或后台显示长串编码是正常现象。[ICANN 的 IDN 说明](https://www.icann.org/resources/idn)和 [A-label 定义](https://www.icann.org/en/icann-acronyms-and-terms/a-label-en)解释了这一点。
 
@@ -85,7 +85,7 @@ https://blog.example.com/about
 
 下面用**阿里云的普通域名注册流程**举例，其他注册商也有类似步骤。本教程的主线先用英文域名完成；中文梗域名需要额外确认商家支持和完整报价。
 
-### 第一步：想三个候选，别和全网奶娃抢同一个门牌
+### 第一步：想三个候选，别和全网奶蛙抢同一个门牌
 
 用自己的网名、项目名、社团名组合，准备几个备选。起名尽量短、好念、好打；完整的后缀也是名字的一部分，`.com`、`.net` 和 `.cn` 是不同的地址。
 
@@ -93,7 +93,7 @@ https://blog.example.com/about
 
 先确定能接受的**每年续费成本**。首年便宜，第二年未必还是这个价；中文域名也不一定和英文同后缀同价。
 
-<img src="/images/domain-beginner/naiwa-renewal.png" alt="奶娃看续费单：首年真香，续费你怎么不去抢" width="560" loading="lazy" style="display:block;margin:24px auto;max-width:100%;height:auto">
+<img src="/images/domain-beginner/naiwa-renewal.png" alt="奶蛙看续费单：首年真香，续费你怎么不去抢" width="560" loading="lazy" style="display:block;margin:24px auto;max-width:100%;height:auto">
 
 ### 第二步：在注册商官网查询完整域名
 
@@ -114,7 +114,7 @@ https://blog.example.com/about
 
 愿意长期持有就开启自动续费，确认付款方式可用；同时给自己留一个到期提醒。启用账号的双重验证，保管好登录方式。
 
-这里的“购买”更像按期限注册使用权。到期后未续费，域名可能停止工作甚至被别人重新注册。奶娃可以装作无事发生，网站访客不会。
+这里的“购买”更像按期限注册使用权。到期后未续费，域名可能停止工作甚至被别人重新注册。奶蛙可以装作无事发生，网站访客不会。
 
 ## 4. 先做网页：复制一个文件，你就有内容了
 
@@ -169,7 +169,7 @@ https://blog.example.com/about
 </html>
 ```
 
-上传前记得把演示按钮的 `https://example.com/` 换掉。别做完自己的主页，按钮却把朋友送进“Example Domain”：那是演示保留域名，奶娃也不会替你写自我介绍。
+上传前记得把演示按钮的 `https://example.com/` 换掉。别做完自己的主页，按钮却把朋友送进“Example Domain”：那是演示保留域名，奶蛙也不会替你写自我介绍。
 
 ## 5. 上传上线：用 Cloudflare Pages 拖进去
 
@@ -320,12 +320,12 @@ curl.exe -I https://www.example.com/
 
 以后改内容：在电脑里编辑 `index.html` → 本地刷新检查 → 打开同一个 Pages 项目创建新部署 → 选择生产环境 → 上传完整文件 → 检查域名页面。项目和域名保持原样，一般不需要每次重设 DNS。
 
-这次你学到的，其实是一套能反复使用的方法：**起名、准备内容、托管、连接、验证。** 今天门牌上写着奶娃，明天也可以是你的个人主页、毕业作品或认真做起来的小项目。
+这次你学到的，其实是一套能反复使用的方法：**起名、准备内容、托管、连接、验证。** 今天门牌上写着奶蛙，明天也可以是你的个人主页、毕业作品或认真做起来的小项目。
 
-<img src="/images/domain-beginner/naiwa-launch.png" alt="恶搞奶娃竖起大拇指：网站上线了，现在我也是有站之人了" width="640" loading="lazy" style="display:block;margin:24px auto;max-width:100%;height:auto">
+<img src="/images/domain-beginner/naiwa-launch.png" alt="恶搞奶蛙竖起大拇指：网站上线了，现在我也是有站之人了" width="640" loading="lazy" style="display:block;margin:24px auto;max-width:100%;height:auto">
 
-奶娃：你现在也算是有站之人了。至于有人访问没——先把链接发给朋友，别让网站和你的早八出勤率一样安静。(¬‿¬)
+奶蛙：你现在也算是有站之人了。至于有人访问没——先把链接发给朋友，别让网站和你的早八出勤率一样安静。(¬‿¬)
 
 想继续做可长期更新的博客，可以接着看本站的[《Hexo 博客 GitHub + Vercel 部署全流程》](/posts/3d61fa8b.html)。先把这一页跑通，再升级装备，互联网小窝就从这里开始。
 
-> 配图为参考恶搞“奶娃”形象生成的教程表情包，用于本文讲解，不是任何注册商、学校或角色方的官方宣传。资料链接随对应步骤列出；案例的实时行为可能变化。
+> 配图为参考恶搞“奶蛙”形象生成的教程表情包，用于本文讲解，不是任何注册商、学校或角色方的官方宣传。资料链接随对应步骤列出；案例的实时行为可能变化。
