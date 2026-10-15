@@ -27,7 +27,7 @@ date: 2024-08-05 15:22:26
     - name: 云师阳
       link: https://profile.yunshiyang.cn/
       avatar: /img/friends/yunshiyang-avatar.jpg
-      descr: 学生 / 音乐制作人
+      descr: 喵喵喵
 
 - class_name: 网站
   class_desc: 值得推荐的网站
