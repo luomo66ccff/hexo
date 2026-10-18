@@ -160,3 +160,18 @@
   background: var(--lm-violet-soft);
   color: var(--lm-violet);
 }
+
+/* ---------- Visitor globe (ClustrMaps, defined in source/_data/widget.yml) ---------- */
+#aside-content #user-map .item-content {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  min-height: 120px;
+}
+
+#aside-content #user-map .item-content canvas,
+#aside-content #user-map .item-content img,
+#aside-content #user-map .item-content iframe {
+  max-width: 100%;
+  height: auto;
+}
