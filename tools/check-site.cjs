@@ -25,6 +25,9 @@ assert.equal(fs.existsSync(path.join(root, '_luomo')), false, 'style partials mu
 assert.ok(read('index.html').includes('/js/luomo-ui.js'), 'interaction layer must be injected');
 // Sidebar widgets from source/_data/widget.yml render as-is (the visitor globe lives there).
 assert.ok(/id="user-map"[\s\S]*id="mmvst_globe"/.test(read('index.html')), 'visitor globe widget must render in the sidebar');
+// Home sections from source/_data/home.yml render once, on the first home page only.
+assert.equal((read('index.html').match(/class="lm-gates"/g) || []).length, 1, 'home must render the starport gates once');
+assert.equal(read('archives/index.html').includes('class="lm-gates"'), false, 'gates belong to the home page only');
 assert.equal(fs.existsSync(path.join(root, 'status/config.js')), false, 'legacy public configuration must not be deployed');
 assert.equal(fs.existsSync(path.join(root, 'status/static')), false, 'legacy status bundles must not be deployed');
 // Every rendered banner must carry the credit for the image actually selected

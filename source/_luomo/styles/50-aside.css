@@ -168,3 +168,40 @@
   min-height: 120px;
   padding: 6px 7% 2px;
 }
+
+/* ---------- Announcement ---------- */
+#aside-content .card-announcement .announcement_content {
+  color: var(--lm-ink-2);
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+#aside-content .card-announcement .announcement_content a {
+  color: var(--lm-violet);
+  text-decoration: underline;
+  text-decoration-color: var(--lm-violet-soft);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+#aside-content .card-announcement .announcement_content a:hover {
+  color: var(--lm-coral);
+}
+
+#aside-content .card-announcement .item-headline i {
+  color: var(--lm-coral);
+}
+
+/* ---------- Newest comments (Waline) ---------- */
+#aside-content #card-newest-comments .aside-list-item .thumbnail {
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--lm-surface), 0 0 0 3px var(--lm-violet-soft);
+}
+
+#aside-content #card-newest-comments .aside-list-item .content > .comment {
+  color: var(--lm-ink);
+}
+
+#aside-content #card-newest-comments .aside-list-item .content > .name {
+  color: var(--lm-ink-3);
+}
