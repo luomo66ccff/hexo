@@ -1,0 +1,393 @@
+/* Site chrome: navigation, banners, footer, floating buttons, search. */
+
+/* ---------- Navigation ---------- */
+#nav {
+  transition: background-color var(--lm-dur) var(--lm-ease), box-shadow var(--lm-dur) var(--lm-ease), transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+/* Over a banner: transparent with a soft top scrim for legibility. */
+#page-header:not(.not-top-img):not(.nav-fixed) #nav {
+  background: linear-gradient(180deg, rgba(10, 12, 28, 0.42), rgba(10, 12, 28, 0));
+}
+
+#page-header:not(.not-top-img):not(.nav-fixed) #nav a,
+#page-header:not(.not-top-img):not(.nav-fixed) #nav .site-name,
+#page-header:not(.not-top-img):not(.nav-fixed) #nav button.site-page {
+  color: #fff;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
+}
+
+/* Scrolled, or on pages without a banner: frosted paper. */
+#page-header.nav-fixed #nav,
+#page-header.not-top-img #nav {
+  background: var(--lm-glass);
+  -webkit-backdrop-filter: saturate(1.5) blur(16px);
+  backdrop-filter: saturate(1.5) blur(16px);
+  box-shadow: 0 1px 0 var(--lm-line), 0 12px 30px -24px rgba(31, 36, 64, 0.5);
+}
+
+#page-header.nav-fixed #nav a,
+#page-header.nav-fixed #nav .site-name,
+#page-header.nav-fixed #nav #toggle-menu,
+#page-header.nav-fixed #nav button.site-page,
+#page-header.not-top-img #nav a,
+#page-header.not-top-img #nav .site-name,
+#page-header.not-top-img #nav button.site-page {
+  color: var(--lm-ink);
+  text-shadow: none;
+}
+
+#page-header.nav-fixed #nav a:hover,
+#page-header.not-top-img #nav a:hover,
+#page-header.nav-fixed #nav button.site-page:hover,
+#page-header.not-top-img #nav button.site-page:hover {
+  color: var(--lm-violet);
+}
+
+#nav .site-name {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+#nav #blog-info img,
+#nav .site-icon {
+  border-radius: 50%;
+}
+
+/* Menu underline drawn with the accent gradient. */
+#nav .menus_items .menus_item > .site-page:not(.child)::after {
+  height: 2px;
+  border-radius: 2px;
+  background: var(--lm-grad);
+}
+
+/* Dropdown menus as small paper cards. */
+#nav .menus_items .menus_item .menus_item_child {
+  overflow: hidden;
+  border: 1px solid var(--lm-line);
+  border-radius: 14px;
+  background: var(--lm-surface);
+  box-shadow: var(--lm-shadow-2);
+}
+
+#nav .menus_items .menus_item .menus_item_child li a {
+  color: var(--lm-ink-2) !important;
+  text-shadow: none !important;
+}
+
+#nav .menus_items .menus_item .menus_item_child li:hover {
+  background: var(--lm-violet-soft);
+}
+
+#nav .menus_items .menus_item .menus_item_child li:hover a {
+  color: var(--lm-violet) !important;
+}
+
+/* Native <button> menu triggers (see luomo-navigation.js). */
+#nav button.site-page,
+#sidebar-menus button.site-page {
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  line-height: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+#nav button.site-page { font-size: 0.78em; }
+#sidebar-menus button.site-page { width: 100%; font-size: 1.15em; }
+
+/* Disclosure state drives visibility for pointer and keyboard users. */
+#nav .menus_items .menus_item[data-nav-menu] > .menus_item_child { display: none; }
+#nav .menus_items .menus_item[data-nav-menu].is-open > .menus_item_child { display: block; }
+#nav .menus_items .menus_item > button.group > i:last-child { padding: 4px; transition: transform 0.3s; }
+#nav .menus_items .menus_item > button.group[aria-expanded="true"] > i:last-child { transform: rotate(180deg); }
+
+#nav.hide-menu #search-button button,
+#nav.hide-menu #toggle-menu button { min-width: 36px; min-height: 40px; }
+
+/* Mobile drawer */
+#sidebar #sidebar-menus {
+  background: var(--lm-surface);
+}
+
+#sidebar #sidebar-menus .menus_items .site-page:hover {
+  background: var(--lm-violet-soft);
+  color: var(--lm-violet);
+}
+
+/* ---------- Banners ---------- */
+#page-header:not(.not-top-img)::before {
+  background: var(--lm-hero-scrim);
+}
+
+/* The banner melts into the paper instead of ending on a hard edge. */
+#page-header.full_page::after,
+#page-header.not-home-page::after,
+#page-header.post-bg::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 30%;
+  background: linear-gradient(180deg, transparent, var(--lm-paper));
+  content: "";
+  pointer-events: none;
+}
+
+#page-header.full_page::after { height: 34%; }
+
+/* Post banners carry the title and meta at the bottom, so they darken there
+   for contrast and keep only a thin paper edge. */
+#page-header.post-bg::before {
+  background: var(--lm-post-scrim);
+}
+
+#page-header.post-bg::after { height: 40px; }
+
+#page-header.post-bg #post-info { bottom: 58px; }
+
+#page-header.full_page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 64vh;
+  min-height: 380px;
+  padding: 76px 24px 72px;
+  background-attachment: scroll;
+}
+
+#page-header.full_page #site-info {
+  position: relative;
+  top: auto;
+  z-index: 1;
+  width: 100%;
+  max-width: 960px;
+  padding: 0;
+}
+
+#page-header.full_page::before { inset: 0; }
+
+/* Eyebrow above the site title. */
+#page-header.full_page #site-info::before {
+  display: block;
+  margin-bottom: 14px;
+  color: #fff;
+  font-family: var(--lm-font-serif);
+  font-size: 1rem;
+  font-style: italic;
+  letter-spacing: 0.3em;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 0 18px rgba(20, 16, 60, 0.6);
+  content: "— Star Harbor Journal —";
+}
+
+#page-header #site-title {
+  font-size: clamp(2rem, 4.2vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-shadow: 0 2px 30px rgba(20, 16, 60, 0.45), 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+#page-header.full_page #site-subtitle {
+  margin: 14px auto 0;
+  max-width: 40em;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(0.98rem, 1.6vw, 1.25rem);
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.4);
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+#page-header.full_page #subtitle { white-space: normal; }
+
+/* Scroll cue as a small glass pill. */
+#page-header #scroll-down {
+  right: 0;
+  bottom: 22px;
+  left: 0;
+  z-index: 2;
+  text-align: center;
+}
+
+#page-header #scroll-down .scroll-down-effects {
+  display: inline-flex;
+  width: 38px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--lm-ink-2);
+  text-shadow: none;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* Page and post titles over banners. */
+#page-header #page-site-info #site-title,
+#page-header .page-title {
+  font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+}
+
+/* Keep titles above the paper fade drawn by ::after. */
+#page-header #page-site-info,
+#page-header #post-info {
+  z-index: 1;
+}
+
+#page-header #post-info .post-title {
+  font-size: clamp(1.6rem, 3.2vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+  /* The theme clamps this title with overflow:hidden, so a wide glow would be
+     clipped into a visible box; keep the shadow tight. */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(20, 16, 60, 0.35);
+}
+
+#page-header #post-info #post-meta {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+#page-header #post-info #post-meta > div {
+  display: inline-block;
+}
+
+#page-header #post-info #post-meta a {
+  color: inherit;
+}
+
+#page-header.full_page + #content-inner { padding-top: 8px; }
+
+/* ---------- Footer ---------- */
+#footer {
+  background: transparent !important;
+}
+
+#footer::before {
+  display: none;
+}
+
+#footer-wrap {
+  padding: 48px 20px 40px;
+  color: var(--lm-ink-3);
+  font-size: 0.9rem;
+}
+
+#footer-wrap::before {
+  display: block;
+  width: min(420px, 70%);
+  height: 1px;
+  margin: 0 auto 26px;
+  background: linear-gradient(90deg, transparent, var(--lm-line-strong), transparent);
+  content: "";
+}
+
+#footer-wrap a {
+  color: var(--lm-ink-2);
+}
+
+#footer-wrap a:hover {
+  color: var(--lm-violet);
+}
+
+#footer-wrap .copyright {
+  color: var(--lm-ink-2);
+  font-weight: 600;
+}
+
+.footer-beian {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.footer-beian a { text-decoration: none; }
+.beian-separator { opacity: 0.6; }
+
+/* ---------- Floating buttons ---------- */
+#rightside > div > button,
+#rightside > div > a {
+  border: 1px solid var(--lm-line);
+  border-radius: 12px;
+  background: var(--lm-glass);
+  color: var(--lm-ink-2);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--lm-shadow-1);
+  transition: color 0.2s, background-color 0.2s, transform 0.2s var(--lm-ease);
+}
+
+#rightside > div > button:hover,
+#rightside > div > a:hover {
+  background: var(--lm-violet);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ---------- Search ---------- */
+#local-search .search-dialog {
+  border: 1px solid var(--lm-line);
+  border-radius: var(--lm-radius);
+  box-shadow: var(--lm-shadow-2);
+}
+
+#local-search .search-dialog hr {
+  border-color: var(--lm-line);
+}
+
+#local-search .search-dialog .local-search-box input {
+  border: 1px solid var(--lm-line-strong);
+  border-radius: 12px;
+  background: var(--lm-surface-2);
+  color: var(--lm-ink);
+}
+
+#local-search .search-dialog .local-search-box input:focus {
+  border-color: var(--lm-violet);
+}
+
+#local-search .search-dialog .search-result-title {
+  color: var(--lm-ink);
+  font-weight: 600;
+}
+
+#local-search mark,
+#local-search .search-keyword {
+  border-radius: 3px;
+  background: var(--lm-coral-soft);
+  color: var(--lm-coral);
+}
+
+#search-mask {
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  #page-header.full_page {
+    height: 54vh;
+    height: 54svh;
+    min-height: 340px;
+    padding: 70px 20px 60px;
+  }
+
+  #page-header.full_page #site-info::before {
+    margin-bottom: 10px;
+    font-size: 0.7rem;
+    letter-spacing: 0.26em;
+  }
+
+  #page-header.full_page #site-subtitle { margin-top: 10px; }
+}

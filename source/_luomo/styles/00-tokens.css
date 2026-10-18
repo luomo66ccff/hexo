@@ -1,0 +1,134 @@
+/*
+ * 星港手帐 · Design tokens
+ * Every colour, shadow, radius and font used by the visual layer is defined
+ * here once. Change the palette in this file only; components read the
+ * --lm-* tokens, and Butterfly's own variables are mapped onto them below.
+ */
+
+:root {
+  /* Paper & ink */
+  --lm-paper: #f6f4ef;
+  --lm-paper-grid: rgba(31, 36, 64, 0.045);
+  --lm-surface: #ffffff;
+  --lm-surface-2: #faf8f4;
+  --lm-glass: rgba(250, 248, 244, 0.78);
+  --lm-ink: #1f2440;
+  --lm-ink-2: #4a5170;
+  --lm-ink-3: #7c8199;
+  --lm-line: rgba(31, 36, 64, 0.1);
+  --lm-line-strong: rgba(31, 36, 64, 0.18);
+
+  /* Accents taken from the banners: lantern coral, dusk violet, sky cyan */
+  --lm-coral: #e8665b;
+  --lm-violet: #6656d8;
+  --lm-sky: #2f97c1;
+  --lm-violet-soft: rgba(102, 86, 216, 0.1);
+  --lm-coral-soft: rgba(232, 102, 91, 0.1);
+  --lm-grad: linear-gradient(90deg, var(--lm-coral), var(--lm-violet) 55%, var(--lm-sky));
+
+  /* Depth */
+  --lm-shadow-1: 0 1px 2px rgba(31, 36, 64, 0.05), 0 10px 28px -16px rgba(31, 36, 64, 0.22);
+  --lm-shadow-2: 0 2px 6px rgba(31, 36, 64, 0.06), 0 22px 44px -20px rgba(70, 56, 160, 0.38);
+  --lm-hero-scrim: linear-gradient(180deg, rgba(14, 16, 34, 0.5) 0%, rgba(14, 16, 34, 0.16) 34%, rgba(14, 16, 34, 0.12) 62%, rgba(14, 16, 34, 0) 100%);
+  --lm-post-scrim: linear-gradient(180deg, rgba(14, 16, 34, 0.48) 0%, rgba(14, 16, 34, 0.14) 32%, rgba(14, 16, 34, 0.3) 62%, rgba(14, 16, 34, 0.72) 100%);
+
+  /* Shape & motion */
+  --lm-radius: 18px;
+  --lm-radius-sm: 10px;
+  --lm-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --lm-dur: 0.45s;
+
+  /* Type. CJK falls back to the system sans; the serif is for Latin accents. */
+  --lm-font-sans: "HarmonyOS Sans SC", "PingFang SC", "Microsoft YaHei UI", "Microsoft YaHei", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --lm-font-serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+  --lm-font-mono: "JetBrains Mono", "Cascadia Code", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+[data-theme="dark"] {
+  --lm-paper: #11121a;
+  --lm-paper-grid: rgba(255, 255, 255, 0.035);
+  --lm-surface: #191b26;
+  --lm-surface-2: #1f2231;
+  --lm-glass: rgba(20, 22, 32, 0.78);
+  --lm-ink: #e8e9f3;
+  --lm-ink-2: #b7bad0;
+  --lm-ink-3: #8a8ea8;
+  --lm-line: rgba(255, 255, 255, 0.08);
+  --lm-line-strong: rgba(255, 255, 255, 0.16);
+
+  --lm-coral: #ff8d7e;
+  --lm-violet: #a596ff;
+  --lm-sky: #6ccbec;
+  --lm-violet-soft: rgba(165, 150, 255, 0.14);
+  --lm-coral-soft: rgba(255, 141, 126, 0.12);
+
+  --lm-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 30px -18px rgba(0, 0, 0, 0.7);
+  --lm-shadow-2: 0 2px 8px rgba(0, 0, 0, 0.45), 0 24px 48px -22px rgba(120, 100, 255, 0.35);
+  --lm-hero-scrim: linear-gradient(180deg, rgba(6, 7, 14, 0.62) 0%, rgba(6, 7, 14, 0.32) 40%, rgba(6, 7, 14, 0.3) 70%, rgba(6, 7, 14, 0) 100%);
+  --lm-post-scrim: linear-gradient(180deg, rgba(6, 7, 14, 0.62) 0%, rgba(6, 7, 14, 0.3) 35%, rgba(6, 7, 14, 0.45) 62%, rgba(6, 7, 14, 0.82) 100%);
+}
+
+/* Butterfly variables mapped onto the tokens, so theme widgets follow along. */
+:root,
+[data-theme="dark"] {
+  --global-bg: var(--lm-paper);
+  --font-color: var(--lm-ink);
+  --card-bg: var(--lm-surface);
+  --sidebar-bg: var(--lm-surface);
+  --search-bg: var(--lm-surface);
+  --search-input-color: var(--lm-ink);
+  --search-a-color: var(--lm-ink-2);
+  --preloader-bg: var(--lm-paper);
+  --preloader-color: var(--lm-ink);
+  --btn-bg: var(--lm-violet);
+  --btn-color: #fff;
+  --btn-hover-color: var(--lm-coral);
+  --text-bg-hover: var(--lm-violet-soft);
+  /* --light-grey / --white stay theme defaults: they colour text over images. */
+  --text-highlight-color: var(--lm-ink);
+  --blockquote-color: var(--lm-ink-2);
+  --blockquote-bg: var(--lm-surface-2);
+  --reward-pop: var(--lm-surface);
+  --toc-link-color: var(--lm-ink-2);
+  --card-box-shadow: var(--lm-shadow-1);
+  --card-hover-box-shadow: var(--lm-shadow-2);
+  --pseudo-hover: var(--lm-violet);
+  --headline-presudo: var(--lm-ink-3);
+  --hr-border: var(--lm-line-strong);
+  --hr-before-color: var(--lm-violet);
+  --scrollbar-color: var(--lm-line-strong);
+  --default-bg-color: var(--lm-violet);
+  --tab-border-color: var(--lm-line);
+  --tab-botton-bg: var(--lm-surface-2);
+  --tab-botton-color: var(--lm-ink-2);
+  --tab-button-hover-bg: var(--lm-violet-soft);
+  --tab-button-active-bg: var(--lm-surface);
+  --timeline-bg: var(--lm-surface-2);
+  --zoom-bg: var(--lm-paper);
+
+  /* Code highlight (highlight_theme: light) */
+  --hl-color: var(--lm-ink);
+  --hl-bg: var(--lm-surface-2);
+  --hltools-bg: var(--lm-surface);
+  --hltools-color: var(--lm-ink-3);
+  --hlnumber-bg: var(--lm-surface-2);
+  --hlnumber-color: var(--lm-ink-3);
+  --hlscrollbar-bg: var(--lm-line-strong);
+  --hlexpand-bg: linear-gradient(180deg, transparent, var(--lm-surface-2));
+}
+
+/* Legacy aliases still used by the project / cloud / build-log page styles. */
+:root,
+[data-theme="dark"] {
+  --neon-blue: var(--lm-violet);
+  --neon-purple: var(--lm-violet);
+  --glass-bg: var(--lm-surface);
+  --glass-border: var(--lm-line);
+  --text-primary: var(--lm-ink);
+  --text-secondary: var(--lm-ink-3);
+  --surface-soft: var(--lm-surface-2);
+  --surface-tint: var(--lm-violet-soft);
+  --shadow-soft: var(--lm-shadow-1);
+  --card-radius: var(--lm-radius-sm);
+  --transition-speed: 0.3s;
+}

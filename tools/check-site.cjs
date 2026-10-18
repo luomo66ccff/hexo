@@ -17,6 +17,12 @@ for (const route of ['projects', 'cloud', 'build-log', 'status']) {
   assert.ok(html.includes('name="description"'), `${route} needs a search description`);
 }
 assert.ok(/<link\b[^>]*rel="canonical"[^>]*href="https:\/\/blog\.luomo\.moe\/"/.test(read('index.html')), 'canonical homepage should use the directory URL');
+// Visual layer: every partial is bundled, none is published on its own.
+const theme = read('css/luomo-theme.css');
+const partials = fs.readdirSync(path.resolve(__dirname, '../source/_luomo/styles')).filter(name => name.endsWith('.css'));
+for (const name of partials) assert.ok(theme.includes(`==== ${name} ====`), `style partial ${name} missing from css/luomo-theme.css`);
+assert.equal(fs.existsSync(path.join(root, '_luomo')), false, 'style partials must not be published');
+assert.ok(read('index.html').includes('/js/luomo-ui.js'), 'interaction layer must be injected');
 assert.equal(fs.existsSync(path.join(root, 'status/config.js')), false, 'legacy public configuration must not be deployed');
 assert.equal(fs.existsSync(path.join(root, 'status/static')), false, 'legacy status bundles must not be deployed');
 let checked = 0;
@@ -34,4 +40,4 @@ function inspect(directory) {
   }
 }
 inspect(root);
-console.log(`Build checks passed: ${index.length} articles, four page headings, legacy status cleanup, ${checked} text assets.`);
+console.log(`Build checks passed: ${index.length} articles, four page headings, ${partials.length} style partials, legacy status cleanup, ${checked} text assets.`);

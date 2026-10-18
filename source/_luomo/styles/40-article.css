@@ -1,0 +1,365 @@
+/* Reading surfaces: posts, pages, archives, and article typography. */
+
+/* ---------- Paper containers ---------- */
+#post,
+#page,
+#archive,
+#tag,
+#category {
+  border: 1px solid var(--lm-line);
+  border-radius: var(--lm-radius);
+  background: var(--lm-surface);
+  box-shadow: var(--lm-shadow-1);
+}
+
+#page .page-title,
+#archive .article-sort-title,
+#tag .article-sort-title,
+#category .article-sort-title {
+  color: var(--lm-ink);
+  font-weight: 750;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- Article typography ---------- */
+#article-container {
+  color: var(--lm-ink);
+  font-size: 16.5px;
+  line-height: 1.9;
+}
+
+#article-container p {
+  margin: 0 0 1.05em;
+}
+
+#article-container h1,
+#article-container h2,
+#article-container h3,
+#article-container h4,
+#article-container h5,
+#article-container h6 {
+  position: relative;
+  color: var(--lm-ink);
+  font-weight: 750;
+  letter-spacing: 0.01em;
+  line-height: 1.45;
+}
+
+#article-container > h2 {
+  margin: 2.1em 0 0.9em;
+  padding-bottom: 0.45em;
+  font-size: 1.5em;
+}
+
+#article-container > h2::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 2.6em;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--lm-grad);
+  content: "";
+}
+
+#article-container > h3 {
+  margin: 1.7em 0 0.7em;
+  padding-left: 0.95em;
+  font-size: 1.24em;
+}
+
+#article-container > h3::before {
+  position: absolute;
+  top: 0.62em;
+  left: 0.05em;
+  width: 0.42em;
+  height: 0.42em;
+  border-radius: 2px;
+  background: var(--lm-violet);
+  content: "";
+  transform: rotate(45deg);
+}
+
+/* Links inside running text */
+#article-container p a:not(.fancybox),
+#article-container li a:not(.fancybox),
+#article-container td a {
+  color: var(--lm-violet);
+  text-decoration: underline;
+  text-decoration-color: var(--lm-violet-soft);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  transition: color 0.2s, text-decoration-color 0.2s;
+}
+
+#article-container p a:not(.fancybox):hover,
+#article-container li a:not(.fancybox):hover,
+#article-container td a:hover {
+  color: var(--lm-coral);
+  text-decoration-color: currentColor;
+}
+
+#article-container strong {
+  color: var(--lm-ink);
+  font-weight: 700;
+}
+
+#article-container ul > li::marker,
+#article-container ol > li::marker {
+  color: var(--lm-violet);
+}
+
+/* Images */
+#article-container img {
+  border-radius: 12px;
+}
+
+/* Quotes */
+#article-container blockquote {
+  margin: 1.4em 0;
+  padding: 0.9em 1.2em;
+  border: 0;
+  border-left: 3px solid var(--lm-violet);
+  border-radius: 0 14px 14px 0;
+  background: var(--lm-surface-2);
+  color: var(--lm-ink-2);
+}
+
+#article-container blockquote p:last-child { margin-bottom: 0; }
+
+/* Divider: a hairline with a small star instead of the dashed scissors. */
+#content-inner hr {
+  width: 100%;
+  height: 1px;
+  margin: 2.6em auto;
+  border: 0;
+  background: linear-gradient(90deg, transparent, var(--lm-line-strong) 20%, var(--lm-line-strong) 80%, transparent);
+}
+
+#content-inner hr::before {
+  top: 50%;
+  left: 50%;
+  padding: 0 0.7em;
+  background: var(--lm-surface);
+  color: var(--lm-violet);
+  font-family: var(--lm-font-serif);
+  font-size: 14px;
+  font-weight: 400;
+  content: "✦";
+  transform: translate(-50%, -50%);
+  transition: none;
+}
+
+#content-inner hr:hover::before {
+  left: 50%;
+}
+
+/* Inline code & blocks */
+#article-container :not(pre) > code {
+  padding: 0.15em 0.45em;
+  border-radius: 6px;
+  background: var(--lm-violet-soft);
+  color: var(--lm-violet);
+  font-size: 0.88em;
+}
+
+#article-container figure.highlight,
+#article-container > pre {
+  overflow: hidden;
+  border: 1px solid var(--lm-line);
+  border-radius: 14px;
+  background: var(--lm-surface-2);
+  box-shadow: none;
+}
+
+#article-container figure.highlight pre {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+#article-container figure.highlight .highlight-tools {
+  border-bottom: 1px solid var(--lm-line);
+}
+
+/* Tables */
+#article-container table {
+  overflow: hidden;
+  border: 1px solid var(--lm-line);
+  border-radius: 12px;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--lm-surface);
+}
+
+#article-container table th,
+#article-container table td {
+  border: 0;
+  border-bottom: 1px solid var(--lm-line);
+  color: var(--lm-ink-2);
+}
+
+#article-container table th {
+  background: var(--lm-violet-soft);
+  color: var(--lm-ink);
+  font-weight: 650;
+}
+
+#article-container table tr:last-child td { border-bottom: 0; }
+#article-container table tr:nth-child(even) td { background: var(--lm-surface-2); }
+
+/* ---------- Post footer blocks ---------- */
+#post .tag_share .post-meta__tag-list a,
+#post .post-meta__tags {
+  border: 1px solid var(--lm-line);
+  border-radius: 999px;
+  color: var(--lm-ink-2);
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+#post .post-meta__tags:hover {
+  border-color: var(--lm-violet);
+  background: var(--lm-violet);
+  color: #fff;
+}
+
+#post .post-copyright {
+  border: 1px dashed var(--lm-line-strong);
+  border-radius: 14px;
+  background: var(--lm-surface-2);
+  box-shadow: none;
+}
+
+#post .post-copyright:hover {
+  box-shadow: none;
+}
+
+#post .post-copyright::before {
+  color: var(--lm-violet);
+}
+
+#post .post-copyright .post-copyright-meta {
+  color: var(--lm-violet);
+}
+
+#post .post-reward .reward-button {
+  border-radius: 999px;
+  background: var(--lm-grad);
+  box-shadow: 0 8px 20px -10px rgba(102, 86, 216, 0.7);
+}
+
+#post .post-reward .reward-main .reward-all {
+  border: 1px solid var(--lm-line);
+  border-radius: 14px;
+  box-shadow: var(--lm-shadow-2);
+}
+
+/* Prev / next and related posts */
+#pagination.pagination-post,
+.relatedPosts > .relatedPosts-list > div,
+.relatedPosts .pagination-related {
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+#pagination.pagination-post {
+  border: 1px solid var(--lm-line);
+  box-shadow: var(--lm-shadow-1);
+}
+
+/* Posts without a cover: the theme paints div.cover with --default-bg-color
+   at low opacity over black; use the palette gradient and let it show. */
+#pagination.pagination-post,
+.relatedPosts {
+  --default-bg-color: linear-gradient(120deg, #3a2d78, #6656d8 55%, #2f97c1);
+}
+
+#pagination.pagination-post .prev-post div.cover,
+#pagination.pagination-post .next-post div.cover,
+.relatedPosts .relatedPosts-list > div > a > div.cover {
+  opacity: 0.88;
+}
+
+#pagination .pagination-related .label,
+.relatedPosts .pagination-related .label {
+  letter-spacing: 0.08em;
+}
+
+.relatedPosts > .headline,
+#post-comment .comment-head .comment-headline {
+  color: var(--lm-ink);
+  font-weight: 700;
+}
+
+/* ---------- Read-only buttons from theme tags ---------- */
+#post .post-button a.btn,
+#article-container .btn-beautify {
+  border-radius: 10px;
+}
+
+/* ---------- Archives / tag / category lists ---------- */
+.article-sort-item::before {
+  border-color: var(--lm-violet);
+}
+
+.article-sort-item .article-sort-item-title {
+  color: var(--lm-ink);
+}
+
+.article-sort-item .article-sort-item-title:hover {
+  color: var(--lm-violet);
+}
+
+.article-sort::before {
+  border-left-color: var(--lm-line-strong);
+}
+
+.article-sort-item.year {
+  color: var(--lm-ink);
+  font-family: var(--lm-font-serif);
+  font-style: italic;
+}
+
+.article-sort-item-img {
+  border-radius: 10px;
+}
+
+/* Tag cloud & category list pages */
+.tag-cloud-list a {
+  margin: 4px 6px;
+  padding: 2px 6px;
+  border-radius: 8px;
+  transition: background-color 0.2s, transform 0.2s var(--lm-ease);
+}
+
+.tag-cloud-list a:hover {
+  background: var(--lm-violet-soft);
+  transform: translateY(-2px);
+}
+
+.category-lists .category-list a {
+  color: var(--lm-ink);
+}
+
+.category-lists .category-list a:hover {
+  color: var(--lm-violet);
+}
+
+.category-lists .category-list .category-list-count {
+  color: var(--lm-ink-3);
+}
+
+@media (max-width: 768px) {
+  #article-container { font-size: 15.5px; line-height: 1.85; }
+  #article-container > h2 { font-size: 1.32em; }
+
+  #article-container table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #article-container table th,
+  #article-container table td { min-width: 120px; }
+}

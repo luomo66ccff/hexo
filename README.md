@@ -61,16 +61,8 @@
 
 ## 美化说明
 
-当前使用「洛墨云上星港」自定义样式，主要文件：
+当前视觉层是「星港手帐」：暖白纸面配淡方格纹，珊瑚红、暮紫、天青三色点缀，横幅底部渐隐融进纸面，支持深色模式和"减少动态效果"。
 
-- source/css/luomo-theme.css — 玻璃拟态、霓虹边框、星海渐变
-- source/js/luomo-theme.js — 星空粒子引擎、Pjax 兼容
-
-### 视觉风格
-
-- 深蓝 / 紫色 / 黑色星空渐变背景
-- 半透明玻璃拟态卡片（backdrop-filter）
-- 蓝紫霓虹边框与 hover 上浮效果
-- 站点标题柔和发光动画
-- 导航栏毛玻璃模糊
-- 自定义滚动条
+- 样式分模块写在 `source/_luomo/styles/`，构建时由 `scripts/luomo-styles.js` 合并成 `/css/luomo-theme.css`
+- 交互脚本：`source/js/luomo-ui.js`（阅读进度条）、`luomo-navigation.js`（菜单与搜索的无障碍操作）、`luomo-theme.js`（项目筛选与状态页）
+- 设计说明、文件分工和常见修改方法见 [docs/FRONTEND.md](docs/FRONTEND.md)

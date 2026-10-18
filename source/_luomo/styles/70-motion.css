@@ -1,0 +1,83 @@
+/*
+ * Motion. Content is always visible without JavaScript:
+ * - every browser gets a short fade-up when content is inserted (page load
+ *   or a Pjax swap);
+ * - browsers with scroll-driven animations reveal cards as they scroll in.
+ * Fill mode is "backwards" so no transform lingers afterwards (a leftover
+ * transform would break fixed/sticky children such as the mobile TOC).
+ */
+
+@keyframes lm-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+#recent-posts > .recent-post-item,
+#aside-content .card-widget,
+#post,
+#page,
+#archive,
+#tag,
+#category,
+.project-card,
+.cloud-card,
+.timeline-item,
+.flink .flink-list > .flink-list-item {
+  animation: lm-rise 0.7s var(--lm-ease) backwards;
+}
+
+#recent-posts > .recent-post-item:nth-child(2) { animation-delay: 0.06s; }
+#recent-posts > .recent-post-item:nth-child(3) { animation-delay: 0.12s; }
+#recent-posts > .recent-post-item:nth-child(4) { animation-delay: 0.18s; }
+#recent-posts > .recent-post-item:nth-child(n + 5) { animation-delay: 0.24s; }
+#aside-content .card-widget { animation-delay: 0.1s; }
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    #recent-posts > .recent-post-item,
+    #aside-content .sticky_layout > .card-widget:not(#card-toc),
+    .project-card,
+    .cloud-card,
+    .timeline-item,
+    .flink .flink-list > .flink-list-item {
+      animation: lm-rise linear backwards;
+      animation-delay: 0s;
+      animation-range: entry 0% entry 40%;
+      animation-timeline: view();
+    }
+  }
+}
+
+/* Reading progress (element added by luomo-ui.js on posts). */
+#lm-progress {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 102;
+  height: 3px;
+  background: var(--lm-grad);
+  box-shadow: 0 0 12px rgba(102, 86, 216, 0.45);
+  pointer-events: none;
+  transform: scaleX(var(--lm-progress, 0));
+  transform-origin: 0 50%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

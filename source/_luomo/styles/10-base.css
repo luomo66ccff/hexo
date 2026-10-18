@@ -1,0 +1,54 @@
+/* Paper, type and global affordances. */
+
+body {
+  background-color: var(--lm-paper);
+  background-image:
+    radial-gradient(1200px 600px at 85% -10%, var(--lm-violet-soft), transparent 70%),
+    radial-gradient(900px 500px at -10% 30%, var(--lm-coral-soft), transparent 70%),
+    linear-gradient(var(--lm-paper-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--lm-paper-grid) 1px, transparent 1px);
+  background-size: auto, auto, 28px 28px, 28px 28px;
+  color: var(--lm-ink);
+  font-family: var(--lm-font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--lm-violet-soft);
+  color: var(--lm-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--lm-violet);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: var(--lm-font-mono);
+}
+
+/* Slim, quiet scrollbar */
+* {
+  scrollbar-color: var(--lm-line-strong) transparent;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: var(--lm-line-strong) padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--lm-violet) padding-box;
+}
