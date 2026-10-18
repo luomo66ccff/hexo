@@ -1,0 +1,161 @@
+/*
+ * Custom pages: projects, cloud dashboard / status, build-log timeline,
+ * friend links, 404. Class names are used by the Markdown in source/*,
+ * so rename them only together with those pages.
+ */
+
+/* ---------- Shared page hero ---------- */
+.luomo-hero { padding: 32px 16px 20px; text-align: center; }
+.luomo-hero-title { margin-bottom: 6px; color: var(--lm-ink); font-size: 1.7rem; font-weight: 750; letter-spacing: 0.03em; }
+.luomo-hero-sub { color: var(--lm-ink-3); font-size: 0.95rem; }
+.luomo-section-footer { padding: 32px 16px; color: var(--lm-ink-3); font-family: var(--lm-font-serif); font-style: italic; text-align: center; opacity: 0.85; }
+
+/* Shared card recipe */
+.project-card,
+.cloud-card,
+.timeline-content {
+  border: 1px solid var(--lm-line);
+  border-radius: 14px;
+  background: var(--lm-surface);
+  box-shadow: var(--lm-shadow-1);
+  transition: transform var(--lm-dur) var(--lm-ease), box-shadow var(--lm-dur), border-color var(--lm-dur);
+}
+
+.project-card:hover,
+.cloud-card:hover,
+.timeline-content:hover {
+  border-color: var(--lm-line-strong);
+  box-shadow: var(--lm-shadow-2);
+  transform: translateY(-3px);
+}
+
+/* ---------- Project archive ---------- */
+.projects-filter { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 24px; }
+.filter-btn { padding: 6px 16px; border: 1px solid var(--lm-line-strong); border-radius: 999px; background: var(--lm-surface); color: var(--lm-ink-2); font-size: 0.88rem; cursor: pointer; transition: all 0.25s var(--lm-ease); }
+.filter-btn:hover { border-color: var(--lm-violet); color: var(--lm-violet); }
+.filter-btn.active { border-color: var(--lm-violet); background: var(--lm-violet); color: #fff; }
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.project-card { display: flex; flex-direction: column; gap: 8px; padding: 18px 20px; }
+.project-card-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+.project-name { margin: 0; color: var(--lm-ink); font-size: 1.05rem; font-weight: 700; }
+.project-desc { margin: 0; color: var(--lm-ink-3); font-size: 0.88rem; line-height: 1.6; }
+.project-status { padding: 2px 10px; border-radius: 999px; font-size: 0.78rem; font-weight: 600; }
+.status-online { background: rgba(34, 197, 94, 0.12); color: #16a34a; }
+.status-building { background: rgba(234, 179, 8, 0.12); color: #ca8a04; }
+.status-debug { background: rgba(249, 115, 22, 0.12); color: #ea580c; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.tech-tag { padding: 2px 8px; border: 1px solid var(--lm-line); border-radius: 6px; background: var(--lm-violet-soft); color: var(--lm-violet); font-size: 0.75rem; }
+.project-link { display: inline-block; margin-top: auto; color: var(--lm-violet); font-size: 0.88rem; text-decoration: none; transition: color 0.2s; }
+.project-link:hover { color: var(--lm-coral); }
+
+/* ---------- Cloud dashboard / status ---------- */
+.cloud-dashboard { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.cloud-card { display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; }
+.cloud-card-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px; }
+.cloud-name { margin: 0; color: var(--lm-ink); font-size: 1.02rem; font-weight: 700; }
+.cloud-desc { margin: 0; color: var(--lm-ink-3); font-size: 0.85rem; }
+.status-indicator { display: flex; align-items: center; gap: 5px; font-size: 0.8rem; font-weight: 600; }
+.status-indicator.status-online { color: #15803d; }
+.status-indicator.status-building { color: #ca8a04; }
+.status-indicator.status-debug { color: #ea580c; }
+.status-unknown { background: rgba(100, 116, 139, 0.1); color: var(--lm-ink-3); }
+.status-degraded { background: rgba(245, 158, 11, 0.12); color: #b45309; }
+.status-indicator.status-unknown,
+.status-indicator.status-degraded { padding: 2px 9px; border-radius: 999px; }
+.status-label { line-height: 1.45; }
+.status-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; }
+.status-online .status-dot { background: #22c55e; box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.18); }
+.status-building .status-dot { background: #eab308; }
+.status-debug .status-dot { background: #f97316; }
+.status-unknown .status-dot { background: #94a3b8; }
+.status-degraded .status-dot { background: #f59e0b; }
+.status-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 16px; }
+#status-summary { flex: 1 1 240px; margin: 0; color: var(--lm-ink-3); font-size: 0.88rem; line-height: 1.6; }
+.status-refresh { padding: 7px 16px; border: 1px solid var(--lm-violet); border-radius: 999px; background: var(--lm-violet-soft); color: var(--lm-violet); font: inherit; font-size: 0.88rem; cursor: pointer; transition: background-color 0.2s, color 0.2s; }
+.status-refresh:hover { background: var(--lm-violet); color: #fff; }
+.status-refresh:disabled { cursor: wait; opacity: 0.65; }
+.status-scope { margin: 0 0 18px; padding: 10px 14px; border-left: 3px solid var(--lm-violet); border-radius: 0 10px 10px 0; background: var(--lm-surface-2); color: var(--lm-ink-3); font-size: 0.85rem; line-height: 1.65; }
+.cloud-url a { color: var(--lm-ink-3); font-size: 0.8rem; text-decoration: none; }
+.cloud-url a:hover { color: var(--lm-violet); }
+.check-time { color: var(--lm-ink-3); font-size: 0.75rem; }
+.cloud-card[data-service-id] .time-value { font: inherit; font-variant-numeric: tabular-nums; }
+
+/* ---------- Build-log timeline ---------- */
+/* Shares the .timeline class with Butterfly's {% timeline %} tag; reset the
+   tag's border and spacing only for this page's dotted variant. */
+#article-container .timeline:has(.timeline-dot) { margin: 0 auto; padding: 16px 0; border-left: 0; }
+#article-container .timeline:has(.timeline-dot) .timeline-item { margin: 0; }
+.timeline { position: relative; max-width: 680px; margin: 0 auto; padding: 16px 0; }
+.timeline::before { position: absolute; top: 0; bottom: 0; left: 100px; width: 2px; background: linear-gradient(180deg, var(--lm-coral), var(--lm-violet), var(--lm-sky)); content: ""; opacity: 0.45; }
+.timeline-item { position: relative; display: flex; align-items: flex-start; gap: 16px; padding: 14px 0; }
+.timeline-dot { position: absolute; top: 20px; left: 94px; z-index: 1; width: 10px; height: 10px; border: 2px solid var(--lm-surface); border-radius: 50%; background: var(--lm-violet); box-shadow: 0 0 0 3px var(--lm-violet-soft); }
+.timeline-date { flex-shrink: 0; width: 80px; padding-top: 2px; color: var(--lm-violet); font-family: var(--lm-font-serif); font-size: 0.9rem; font-style: italic; font-weight: 600; text-align: right; }
+.timeline-content { flex: 1; margin-left: 16px; padding: 12px 16px; }
+.timeline-content h3 { margin: 0 0 4px; border: none; color: var(--lm-ink); font-size: 0.98rem; }
+.timeline-content p { margin: 0; color: var(--lm-ink-3); font-size: 0.86rem; line-height: 1.6; }
+
+/* ---------- Friend links ---------- */
+.flink .flink-list > .flink-list-item {
+  border: 1px solid var(--lm-line);
+  border-radius: 14px;
+  background: var(--lm-surface);
+  box-shadow: var(--lm-shadow-1);
+  transition: transform var(--lm-dur) var(--lm-ease), box-shadow var(--lm-dur), border-color var(--lm-dur);
+}
+
+.flink .flink-list > .flink-list-item:hover {
+  border-color: var(--lm-line-strong);
+  background: var(--lm-surface);
+  box-shadow: var(--lm-shadow-2);
+  transform: translateY(-3px);
+}
+
+.flink .flink-list > .flink-list-item:hover .flink-item-name,
+.flink .flink-list > .flink-list-item:hover .flink-item-desc {
+  color: var(--lm-violet);
+}
+
+.flink .flink-list > .flink-list-item a img {
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--lm-surface), 0 0 0 4px var(--lm-violet-soft);
+}
+
+.flink .flink-list > .flink-list-item .flink-item-name { color: var(--lm-ink); font-weight: 650; }
+.flink .flink-list > .flink-list-item .flink-item-desc { color: var(--lm-ink-3); }
+
+/* ---------- 404 ---------- */
+.error404 #error-wrap .error-content {
+  overflow: hidden;
+  border: 1px solid var(--lm-line);
+  border-radius: var(--lm-radius);
+  box-shadow: var(--lm-shadow-2);
+}
+
+.error404 #error-wrap .error-content .error-img img {
+  background: #fff;
+  object-fit: contain;
+}
+
+.error404 #error-wrap .error-content .error-info .error_title {
+  background: var(--lm-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-family: var(--lm-font-serif);
+}
+
+@media (max-width: 768px) {
+  .projects-grid,
+  .cloud-dashboard { grid-template-columns: 1fr; }
+
+  .project-card:hover,
+  .cloud-card:hover,
+  .timeline-content:hover,
+  .flink .flink-list > .flink-list-item:hover { transform: none; }
+
+  .timeline::before { left: 16px; }
+  .timeline-dot { left: 10px; }
+  .timeline-date { width: auto; padding-left: 32px; font-size: 0.82rem; text-align: left; }
+  .timeline-item { flex-direction: column; gap: 4px; }
+  .timeline-content { margin-left: 0; }
+}

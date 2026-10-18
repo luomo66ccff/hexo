@@ -1,0 +1,11 @@
+/*
+ * Banner focal points. Butterfly writes the banner as an inline
+ * background-image, so each image is matched by its file name.
+ * When adding a banner: put the WebP in source/img/banner/, point the theme
+ * config at it, and add one line here (x% y% of the subject's face).
+ */
+
+#page-header[style*="home-lantern"] { background-position: 56% 10%; }
+#page-header[style*="default-sky"] { background-position: 50% 15%; }
+#page-header[style*="archive-quartet"] { background-position: 53% 28%; }
+#page-header[style*="tags-elaina"] { background-position: 53% 33%; }

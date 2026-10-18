@@ -1,0 +1,162 @@
+/* Sidebar widgets. */
+
+#aside-content .card-widget {
+  border: 1px solid var(--lm-line);
+  border-radius: var(--lm-radius);
+  background: var(--lm-surface);
+  box-shadow: var(--lm-shadow-1);
+  transition: box-shadow var(--lm-dur) var(--lm-ease), border-color var(--lm-dur);
+}
+
+#aside-content .card-widget:hover {
+  border-color: var(--lm-line-strong);
+  box-shadow: var(--lm-shadow-2);
+}
+
+/* Widget headings with a short gradient stroke. */
+#aside-content .item-headline {
+  position: relative;
+  padding-bottom: 8px;
+  color: var(--lm-ink);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+#aside-content .item-headline::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 1.8em;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--lm-grad);
+  content: "";
+}
+
+#aside-content .item-headline i {
+  color: var(--lm-violet);
+}
+
+/* ---------- Author card ---------- */
+#aside-content .card-info {
+  position: relative;
+  overflow: hidden;
+}
+
+#aside-content .card-info::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 72px;
+  background: linear-gradient(120deg, var(--lm-coral-soft), var(--lm-violet-soft) 55%, rgba(47, 151, 193, 0.12));
+  content: "";
+}
+
+#aside-content .card-info > * {
+  position: relative;
+}
+
+#aside-content .card-info .avatar-img {
+  padding: 3px;
+  border-radius: 50%;
+  background: var(--lm-grad);
+  box-shadow: 0 10px 24px -12px rgba(102, 86, 216, 0.7);
+}
+
+#aside-content .card-info .avatar-img img {
+  border: 3px solid var(--lm-surface);
+  border-radius: 50%;
+}
+
+#aside-content .card-info .author-info__name {
+  color: var(--lm-ink);
+  font-weight: 750;
+  letter-spacing: 0.03em;
+}
+
+#aside-content .card-info .author-info__description {
+  color: var(--lm-ink-2);
+  line-height: 1.7;
+}
+
+#aside-content .card-info .site-data a .headline {
+  color: var(--lm-ink-3);
+}
+
+#aside-content .card-info .site-data a .length-num {
+  color: var(--lm-ink);
+  font-family: var(--lm-font-serif);
+  font-weight: 700;
+}
+
+#aside-content .card-info #card-info-btn {
+  border-radius: 999px;
+  background: var(--lm-grad);
+  box-shadow: 0 10px 22px -12px rgba(102, 86, 216, 0.8);
+  transition: transform 0.25s var(--lm-ease), box-shadow 0.25s;
+}
+
+#aside-content .card-info #card-info-btn:hover {
+  box-shadow: 0 14px 26px -12px rgba(232, 102, 91, 0.7);
+  transform: translateY(-2px);
+}
+
+/* ---------- Lists ---------- */
+#aside-content .aside-list > .aside-list-item .thumbnail {
+  border-radius: 10px;
+}
+
+#aside-content .aside-list > .aside-list-item .content > .title {
+  color: var(--lm-ink);
+}
+
+#aside-content .aside-list > .aside-list-item .content > .title:hover {
+  color: var(--lm-violet);
+}
+
+#aside-content .aside-list > .aside-list-item .content > time {
+  color: var(--lm-ink-3);
+}
+
+#aside-content .card-archives ul.card-archive-list > .card-archive-list-item a,
+#aside-content .card-categories ul.card-category-list > .card-category-list-item a {
+  border-radius: 10px;
+  color: var(--lm-ink-2);
+}
+
+#aside-content .card-archives ul.card-archive-list > .card-archive-list-item a:hover,
+#aside-content .card-categories ul.card-category-list > .card-category-list-item a:hover {
+  background: var(--lm-violet-soft);
+  color: var(--lm-violet);
+}
+
+#aside-content .card-tag-cloud a {
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+#aside-content .card-tag-cloud a:hover {
+  background: var(--lm-violet-soft);
+}
+
+#aside-content .card-webinfo .webinfo .webinfo-item {
+  color: var(--lm-ink-2);
+}
+
+/* ---------- Table of contents ---------- */
+#aside-content #card-toc .toc-percentage {
+  color: var(--lm-violet);
+  font-family: var(--lm-font-serif);
+  font-style: italic;
+}
+
+#aside-content #card-toc .toc-content .toc-link {
+  border-radius: 0 8px 8px 0;
+}
+
+#aside-content #card-toc .toc-content .toc-link.active {
+  border-left: 2px solid var(--lm-violet);
+  background: var(--lm-violet-soft);
+  color: var(--lm-violet);
+}
