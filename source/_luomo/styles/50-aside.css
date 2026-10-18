@@ -69,13 +69,13 @@
   border-radius: 50%;
 }
 
-#aside-content .card-info .author-info__name {
+#aside-content .card-info :is(.author-info__name, .author-info-name) {
   color: var(--lm-ink);
   font-weight: 750;
   letter-spacing: 0.03em;
 }
 
-#aside-content .card-info .author-info__description {
+#aside-content .card-info :is(.author-info__description, .author-info-description) {
   color: var(--lm-ink-2);
   line-height: 1.7;
 }

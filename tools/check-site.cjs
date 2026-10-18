@@ -28,6 +28,13 @@ assert.ok(/id="user-map"[\s\S]*id="mmvst_globe"/.test(read('index.html')), 'visi
 // Home sections from source/_data/home.yml render once, on the first home page only.
 assert.equal((read('index.html').match(/class="lm-gates"/g) || []).length, 1, 'home must render the starport gates once');
 assert.equal(read('archives/index.html').includes('class="lm-gates"'), false, 'gates belong to the home page only');
+// 夜航书 home composition (scripts/luomo-home.js): cover story, issue strip, star index.
+const home = read('index.html');
+for (const marker of ['class="lm-feature"', 'class="lm-issue"', 'class="lm-starmap"']) {
+  assert.equal(home.split(marker).length - 1, 1, `home must render ${marker} once`);
+}
+assert.ok(home.indexOf('class="lm-starmap"') < home.indexOf('id="aside-content"'), 'star index must close the post column, before the aside');
+assert.equal(/class="lm-(feature|starmap|issue)"/.test(read('archives/index.html')), false, 'home sections belong to the home page only');
 assert.equal(fs.existsSync(path.join(root, 'status/config.js')), false, 'legacy public configuration must not be deployed');
 assert.equal(fs.existsSync(path.join(root, 'status/static')), false, 'legacy status bundles must not be deployed');
 // Third-party banners carry a credit; the owner's own images stay unlabelled.
@@ -65,6 +72,11 @@ function inspect(directory) {
       assert.equal(text.includes('cors.status.org.cn'), false, 'legacy third-party credential forwarding must not ship');
       assert.equal(/yourname\.(?:js|css)/.test(text), false, 'placeholder status assets must not ship');
       if (entry.name.endsWith('.html')) {
+        // Third-party assets are served locally (hexo-butterfly-extjs + luomo-local-assets.js).
+        assert.equal(text.includes('cdn.jsdelivr.net'), false, `jsDelivr reference in ${filename}`);
+        for (const [, asset] of text.matchAll(/["'(](\/pluginsSrc\/[^"'?)\s]+)/g)) {
+          assert.ok(fs.existsSync(path.join(root, asset)), `missing local asset ${asset} (${filename})`);
+        }
         const header = text.match(/<header\b[^>]*\bid="page-header"[^>]*>[\s\S]*?<\/header>/);
         if (header) {
           // Butterfly 4.13 quotes the url ('...'); 5.x writes it bare.

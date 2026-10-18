@@ -12,7 +12,9 @@ if nav
                 if subitem.html
                   div!= subitem.html
                 else if subitem.url
-                  a(href=url_for(subitem.url), target='_blank' title=subitem.title)= subitem.title
+                  //- luomo: only external links open a new tab
+                  - const external = /^https?:\/\//.test(subitem.url)
+                  a(href=url_for(subitem.url), target=external ? '_blank' : undefined title=subitem.title)= subitem.title
                 else if subitem.title
                   div!= subitem.title
 .footer-other

@@ -1,4 +1,4 @@
-# 首页「星港入口」与文章列表标题，由 scripts/luomo-home.js 渲染到首页第一页的文章列表上方。
+# 首页「夜航书」版式的文案与数据，由 scripts/luomo-home.js 渲染到首页第一页。
 # 增删入口只改 gates；把 gates 清空即可隐藏整块入口区。icon 使用 Font Awesome 6 类名。
 
 gates_eyebrow: Starport Gates
@@ -23,3 +23,26 @@ gates:
 
 list_eyebrow: Latest Entries
 list_title: 最新手帐
+
+# 封面故事：自动取最新发布的一篇文章
+feature_eyebrow: Cover Story
+feature_title: 封面故事
+feature_cta: 展开阅读
+
+# 星港索引：首页文章列表下方的标签星云、航线归档与分类
+index_eyebrow: Star Index
+index_title: 星港索引
+# 标签颜色轮换（与 source/tags/index.md 的 custom_colors 一致）
+palette:
+  - "#6656D8"
+  - "#E8665B"
+  - "#2F97C1"
+  - "#8B5CF6"
+  - "#D9577A"
+  - "#3B7DD8"
+  - "#4F46A8"
+  - "#C2603E"
+  - "#22809E"
+
+# 页头刊号条里的「航行天数」从这一天算起（与 aside.card_webinfo.runtime_date 一致）
+voyage_since: "2020-07-12"
