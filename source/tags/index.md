@@ -1,5 +1,8 @@
 ---
-title: tags
+title: 标签
 date: 2024-08-05 15:24:31
-top_img: /img/banner/tags-angel.webp
+type: tags
+top_img: /img/banner/tags-elaina.webp
+comments: false
+aside: true
 ---
