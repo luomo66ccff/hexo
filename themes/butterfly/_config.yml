@@ -611,6 +611,9 @@ waline:
   # Use Waline pageview count as the page view count
   pageview: false
   option:
+    # Cloudflare Turnstile site key (public). The secret lives only in the
+    # Waline Vercel project as TURNSTILE_SECRET.
+    turnstileKey: 0x4AAAAAAA6IzfN7NEaL4a18
 
 # Utterances
 # https://utteranc.es/
