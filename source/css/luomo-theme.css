@@ -427,3 +427,8 @@ body {
   object-fit: contain;
   background: #fff;
 }
+
+/* Banner focal points: keep the characters centred when the header band crops the art. */
+#page-header[style*="home-lantern"] { background-position: 66% 10%; }
+#page-header[style*="default-sky"] { background-position: 50% 15%; }
+#page-header[style*="archive-quartet"] { background-position: 53% 28%; }

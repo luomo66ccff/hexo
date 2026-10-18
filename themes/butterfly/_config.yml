@@ -112,16 +112,16 @@ avatar:
 disable_top_img: false
 
 # If the banner of page not setting, it will show the default_top_img
-default_top_img: /images/E70CC1397D84C1F257558FC7DCE32862B11DD83892D00AB4B7C45DBBD77C5816.webp
+default_top_img: /img/banner/default-sky.webp
 
 # The banner image of index page
-index_img: /images/594ADF569C1AE2F8D1ABD385BEA5E402FB4CCCE918EFDB12903320A271347B7D.webp
+index_img: /img/banner/home-lantern.webp
 
 # The banner image of archive page
-archive_img: /images/639DF7DE6B7CA75641BC66A44AB01C1619C14718A462D47CD2DA863BE68710F5.webp
+archive_img: /img/banner/archive-quartet.webp
 
 # Note: tag page, not tags page
-tag_img: /images/6326F1F69C13914EA90FFD4067CC89FF6B39BBE352D369A7696254BB83C3AAF5.webp
+tag_img: /img/banner/archive-quartet.webp
 
 # The banner image of tag page, you can set the banner image for each tag
 # Format:
@@ -129,7 +129,7 @@ tag_img: /images/6326F1F69C13914EA90FFD4067CC89FF6B39BBE352D369A7696254BB83C3AAF
 tag_per_img:
 
 # Note: category page, not categories page
-category_img: /images/C779465F79224437FAE148D6A253CCBEBFC1A48F0238DC1F33E0F5894BF50DAE.webp
+category_img: /img/banner/archive-quartet.webp
 
 # The banner image of category page, you can set the banner image for each category
 # Format:
