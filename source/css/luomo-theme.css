@@ -421,3 +421,9 @@ body {
   .timeline-item { flex-direction: column; gap: 4px; }
   .timeline-content { margin-left: 0; }
 }
+
+/* 404 page: show the whole illustration instead of cropping it. */
+.error404 #error-wrap .error-content .error-img img {
+  object-fit: contain;
+  background: #fff;
+}

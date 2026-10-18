@@ -56,7 +56,7 @@ Windows 电脑和安卓手机都使用 **FlClash**。先安装客户端，再导
 | 开始前 | 下载文件并保留原配置；切换连接时避免代理冲突 | 下载文件并保留原配置；切换前停止其他 VPN |
 | 首次成功标准 | 已选配置 + 规则模式 + 有效节点 + 实际网页可用 | 已选配置 + 规则模式 + VPN 权限 + 实际网页可用 |
 
-![官方 v0.8.99 标签下的 preview.png：桌面示例为 macOS，手机是布局展示；用于认识 FlClash，不是本次 Windows 或手机实拍。](/images/tutorials/flclash-vpn-t001/official-preview-v0.8.99.png)
+![官方 v0.8.99 标签下的 preview.png：桌面示例为 macOS，手机是布局展示；用于认识 FlClash，不是本次 Windows 或手机实拍。](/images/tutorials/flclash-vpn-t001/official-preview-v0.8.99.webp)
 
 官方 v0.8.99 标签下的 preview.png：桌面示例为 macOS，手机是布局展示；用于认识 FlClash，不是本次 Windows 或手机实拍。
 
