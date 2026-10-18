@@ -1,4 +1,4 @@
-/* 星港手帐 · small interaction layer (reading progress, Waline captcha fix). Pjax-safe, no dependencies. */
+/* 星港手帐 · interaction layer: reading progress, card spotlight, "/" search, voyage days, Pjax fade, Waline captcha fix. Pjax-safe, no dependencies. */
 (function () {
   'use strict';
 
@@ -86,14 +86,70 @@
     if (src && src.indexOf('challenges.cloudflare.com/turnstile') !== -1) patchTurnstile();
   }, true);
 
+  /*
+   * Spotlight: cards carry a soft light that follows the pointer
+   * (--lm-mx / --lm-my, drawn in 70-motion.css). Fine pointers only, and
+   * skipped when the reader prefers reduced motion.
+   */
+  var SPOTLIT = '.lm-feature, .lm-gate, .lm-starmap-panel, #recent-posts .recent-post-item, #aside-content .card-widget';
+  var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var lit = null;
+
+  document.addEventListener('pointermove', function (event) {
+    if (!finePointer.matches || calm.matches) return;
+    var card = event.target.closest && event.target.closest(SPOTLIT);
+    if (lit && lit !== card) lit.classList.remove('lm-lit');
+    lit = card;
+    if (!card) return;
+    var rect = card.getBoundingClientRect();
+    card.style.setProperty('--lm-mx', (event.clientX - rect.left) + 'px');
+    card.style.setProperty('--lm-my', (event.clientY - rect.top) + 'px');
+    card.classList.add('lm-lit');
+  }, { passive: true });
+
+  document.addEventListener('pointerleave', function () {
+    if (lit) lit.classList.remove('lm-lit');
+    lit = null;
+  });
+
+  // "/" opens search from anywhere outside a text field.
+  document.addEventListener('keydown', function (event) {
+    if (event.key !== '/' || event.ctrlKey || event.metaKey || event.altKey) return;
+    var field = event.target;
+    if (field && (field.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(field.tagName))) return;
+    var button = document.querySelector('#search-button .search');
+    if (!button) return;
+    event.preventDefault();
+    button.click();
+  });
+
+  // Keep the hero's "days afloat" current between deploys.
+  function updateVoyageDays() {
+    document.querySelectorAll('[data-lm-days-since]').forEach(function (node) {
+      var since = Date.parse(node.getAttribute('data-lm-days-since'));
+      if (Number.isFinite(since)) node.textContent = String(Math.floor((Date.now() - since) / 86400000));
+    });
+  }
+
+  // Soft fade of the content while Pjax swaps pages.
+  document.addEventListener('pjax:send', function () {
+    document.documentElement.classList.add('lm-swapping');
+  });
+
   function init() {
+    document.documentElement.classList.remove('lm-swapping');
     initProgress();
     patchTurnstile();
+    updateVoyageDays();
   }
 
   window.addEventListener('scroll', schedule, { passive: true });
   window.addEventListener('resize', schedule, { passive: true });
   document.addEventListener('pjax:complete', init);
+  document.addEventListener('pjax:error', function () {
+    document.documentElement.classList.remove('lm-swapping');
+  });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 

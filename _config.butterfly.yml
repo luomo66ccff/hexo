@@ -82,6 +82,28 @@ reward:
       link: https://qr.alipay.com/fkx162648j0nzxvefjvpi62
       text: 支付宝
 footer:
+  # Butterfly 5.x footer columns (styled as the journal colophon in 20-chrome.css).
+  nav:
+    - content:
+        - title: 星港
+          item:
+            - { title: 项目档案, url: /projects/ }
+            - { title: 云舰桥, url: /cloud/ }
+            - { title: 服务状态, url: /status/ }
+            - { title: 航行日志, url: /build-log/ }
+    - content:
+        - title: 阅读
+          item:
+            - { title: 归档, url: /archives/ }
+            - { title: 标签, url: /tags/ }
+            - { title: 分类, url: /categories/ }
+            - { title: RSS 订阅, url: /atom.xml }
+    - content:
+        - title: 友邻
+          item:
+            - { title: 友情链接, url: /link/ }
+            - { title: 关于洛墨, url: /about/ }
+            - { title: GitHub, url: "https://github.com/luomo66ccff" }
   owner:
     since: 2019
   custom_text: >-
@@ -178,11 +200,11 @@ lazyload:
   enable: true
 inject:
   head:
-    - <link rel="stylesheet" href="/css/luomo-theme.css?v=20261018-layout">
+    - <link rel="stylesheet" href="/css/luomo-theme.css?v=20261019-artwork">
   bottom:
     - <script src="/js/luomo-theme.js?v=20261011-status"></script>
     - <script src="/js/luomo-navigation.js?v=20261011"></script>
-    - <script src="/js/luomo-ui.js?v=20261018-captcha"></script>
+    - <script src="/js/luomo-ui.js?v=20261019-artwork"></script>
 math:
   use: katex
   per_page: true
@@ -191,6 +213,9 @@ math:
 search:
   use: local_search
 CDN:
+  # Third-party scripts are served from this site by hexo-butterfly-extjs
+  # (/pluginsSrc/...), so pages do not depend on jsDelivr.
+  third_party_provider: local
   version: true
 darkmode:
   enable: true

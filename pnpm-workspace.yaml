@@ -2,6 +2,7 @@ packages:
   - .
 
 allowBuilds:
+  '@parcel/watcher': false
   core-js: true
   ejs: true
   hexo-util: true

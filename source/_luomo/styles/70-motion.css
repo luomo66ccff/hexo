@@ -20,7 +20,9 @@
 }
 
 #recent-posts .recent-post-item,
+#recent-posts .lm-feature,
 #recent-posts > .lm-gates,
+.lm-starmap-panel,
 #aside-content .card-widget,
 #post,
 #page,
@@ -44,6 +46,7 @@
   @supports (animation-timeline: view()) {
     #recent-posts .recent-post-item,
     #aside-content .sticky_layout > .card-widget:not(#card-toc),
+    .lm-starmap-panel,
     .project-card,
     .cloud-card,
     .timeline-item,
@@ -80,5 +83,88 @@
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Spotlight: a soft light that follows the pointer ----------
+   luomo-ui.js sets --lm-mx / --lm-my and .lm-lit (fine pointers only). */
+.lm-feature,
+.lm-gate,
+.lm-starmap-panel,
+#recent-posts .recent-post-item,
+#aside-content .card-widget {
+  position: relative;
+}
+
+.lm-feature::after,
+.lm-gate::after,
+.lm-starmap-panel::after,
+#recent-posts .recent-post-item::after,
+#aside-content .card-widget::after {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  background: radial-gradient(360px circle at var(--lm-mx, 50%) var(--lm-my, 50%), rgba(102, 86, 216, 0.1), rgba(232, 102, 91, 0.05) 40%, transparent 70%);
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s var(--lm-ease);
+}
+
+[data-theme="dark"] .lm-feature::after,
+[data-theme="dark"] .lm-gate::after,
+[data-theme="dark"] .lm-starmap-panel::after,
+[data-theme="dark"] #recent-posts .recent-post-item::after,
+[data-theme="dark"] #aside-content .card-widget::after {
+  background: radial-gradient(360px circle at var(--lm-mx, 50%) var(--lm-my, 50%), rgba(165, 150, 255, 0.14), rgba(255, 141, 126, 0.06) 40%, transparent 70%);
+}
+
+.lm-lit::after { opacity: 1 !important; }
+
+/* ---------- Pjax: content breathes out while the next page loads ---------- */
+#content-inner,
+#page-header #site-info,
+#page-header #page-site-info,
+#page-header #post-info {
+  transition: opacity 0.28s var(--lm-ease), filter 0.28s var(--lm-ease);
+}
+
+.lm-swapping #content-inner,
+.lm-swapping #page-header #site-info,
+.lm-swapping #page-header #page-site-info,
+.lm-swapping #page-header #post-info {
+  filter: blur(2px);
+  opacity: 0.35;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    /* The cover title drifts up and fades as the reader scrolls into the journal. */
+    @keyframes lm-hero-drift {
+      to {
+        opacity: 0;
+        transform: translateY(-46px) scale(0.98);
+      }
+    }
+
+    #page-header.full_page #site-info {
+      animation: lm-hero-drift linear both;
+      animation-range: 0 62vh;
+      animation-timeline: scroll(root);
+    }
+
+    /* Section rules draw in from the title as they enter the view. */
+    @keyframes lm-rule-draw {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    .lm-section-head::after {
+      animation: lm-rule-draw linear both;
+      animation-range: entry 10% cover 30%;
+      animation-timeline: view();
+      transform-origin: left;
+    }
   }
 }
