@@ -1,0 +1,80 @@
+{
+  "images": [
+    {
+      "id": "home-lantern",
+      "image": "/img/banner/home-lantern.webp",
+      "title": "新年快乐",
+      "creator": "柠檬静静静静",
+      "creator_short": "柠檬静静静静",
+      "creator_url": "https://www.pixiv.net/users/66477791",
+      "source_url": "https://www.pixiv.net/artworks/141256714",
+      "source_label": "Pixiv 原作 · 141256714",
+      "usage": "首页横幅",
+      "note": "《绝区零》铃、叶瞬光同人插画。",
+      "status": "confirmed"
+    },
+    {
+      "id": "default-sky",
+      "image": "/img/banner/default-sky.webp",
+      "title": "Choice",
+      "creator": "T0nyS",
+      "creator_short": "T0nyS",
+      "creator_url": "https://www.pixiv.net/users/65407506",
+      "source_url": "https://www.pixiv.net/artworks/150868112",
+      "source_label": "Pixiv 原作 · 150868112",
+      "social_url": "https://x.com/imT0nyS",
+      "social_label": "X · @imT0nyS",
+      "usage": "关于、友链、音乐、追番及部分文章横幅",
+      "note": "《超かぐや姫！》同人插画。",
+      "status": "confirmed"
+    },
+    {
+      "id": "archive-quartet",
+      "image": "/img/banner/archive-quartet.webp",
+      "title": "四人插画（原作标题待确认）",
+      "creator": "作者待确认",
+      "creator_short": "作者待确认",
+      "usage": "归档、分类页横幅",
+      "note": "画面标有 Istaroth、Ronova、Asmoday、Rhinedottir。目前还没找到能核对上这张图的作者原帖，找到后会补上。",
+      "status": "unresolved"
+    },
+    {
+      "id": "tags-elaina",
+      "image": "/img/banner/tags-elaina.webp",
+      "title": "《魔女之旅》伊蕾娜动画画面",
+      "creator": "《魔女之旅》动画制作团队（动画制作：C2C）",
+      "creator_short": "《魔女之旅》／C2C",
+      "creator_url": "https://majotabi.jp/",
+      "source_url": "https://majotabi.jp/",
+      "source_label": "动画官方网站 · 作品与制作人员",
+      "usage": "标签索引与各标签页横幅",
+      "note": "这是动画画面，未找到这一帧的单独原画署名；所用截图的最初上传页尚未确认。",
+      "rights": "© 白石定規・SBクリエイティブ／魔女の旅々製作委員会",
+      "status": "source_identified"
+    },
+    {
+      "id": "naiwa-launch",
+      "image": "/images/domain-beginner/naiwa-launch.webp",
+      "title": "网站上线了，现在我也是有站之人了",
+      "creator": "本站制作 · AI 生成（OpenAI image_gen）",
+      "creator_short": "本站制作 · AI 生成",
+      "source_url": "/posts/7a1d0a11.html",
+      "source_label": "域名建站教程",
+      "usage": "域名建站教程封面",
+      "note": "按博主提供的恶搞奶蛙参考图生成，为本站文章配图；角色与参考素材的权利归原权利人。",
+      "status": "generated"
+    },
+    {
+      "id": "fog-harbor",
+      "image": "/images/fog-harbor/og-fog-harbor.webp",
+      "title": "雾港档案项目封面",
+      "creator": "制作署名待确认",
+      "creator_short": "雾港档案项目配图",
+      "source_url": "https://github.com/luomo66ccff/fog-harbor-archive/blob/main/design-assets/marketing/og-fog-harbor.png",
+      "source_label": "项目素材库 · 原始 PNG",
+      "usage": "雾港档案文章封面",
+      "note": "源文件收录于雾港档案项目，目前未查到制作署名。",
+      "status": "source_identified"
+    }
+  ]
+}

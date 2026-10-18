@@ -27,6 +27,22 @@ assert.ok(read('index.html').includes('/js/luomo-ui.js'), 'interaction layer mus
 assert.ok(/id="user-map"[\s\S]*id="mmvst_globe"/.test(read('index.html')), 'visitor globe widget must render in the sidebar');
 assert.equal(fs.existsSync(path.join(root, 'status/config.js')), false, 'legacy public configuration must not be deployed');
 assert.equal(fs.existsSync(path.join(root, 'status/static')), false, 'legacy status bundles must not be deployed');
+// Every rendered banner must carry the credit for the image actually selected
+// by the theme, including tag/category/archive pages and post cover fallbacks.
+const imageCredits = require('../source/_data/image_credits.json').images;
+const creditPage = read('image-credits/index.html');
+const creditByImage = new Map();
+const creditIds = new Set();
+for (const credit of imageCredits) {
+  assert.ok(/^[a-z0-9-]+$/.test(credit.id) && !creditIds.has(credit.id), `invalid or duplicate image credit id: ${credit.id}`);
+  assert.ok(!creditByImage.has(credit.image), `duplicate image credit: ${credit.image}`);
+  assert.ok(fs.existsSync(path.join(root, credit.image)), `credited image missing: ${credit.image}`);
+  assert.ok(creditPage.includes(`id="${credit.id}"`), `credit detail anchor missing: ${credit.id}`);
+  creditIds.add(credit.id);
+  creditByImage.set(credit.image, credit);
+}
+assert.equal((creditPage.match(/<h1\b/g) || []).length, 1, 'image credits page must have one main heading');
+let creditedBanners = 0;
 let checked = 0;
 function inspect(directory) {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
@@ -37,9 +53,26 @@ function inspect(directory) {
       assert.equal(/\bm\d{5,}-[A-Za-z0-9]{12,}\b/.test(text), false, 'monitor credentials found in generated assets');
       assert.equal(text.includes('cors.status.org.cn'), false, 'legacy third-party credential forwarding must not ship');
       assert.equal(/yourname\.(?:js|css)/.test(text), false, 'placeholder status assets must not ship');
+      if (entry.name.endsWith('.html')) {
+        const header = text.match(/<header\b[^>]*\bid="page-header"[^>]*>[\s\S]*?<\/header>/);
+        if (header) {
+          const image = header[0].match(/background-image:\s*url\('([^']+)'\)/);
+          if (image) {
+            const credit = creditByImage.get(image[1]);
+            assert.ok(credit, `banner missing from image credits registry: ${image[1]} (${filename})`);
+            assert.ok(header[0].includes(`href="/image-credits/#${credit.id}"`), `wrong banner credit in ${filename}`);
+            creditedBanners++;
+          } else {
+            assert.equal(header[0].includes('class="banner-credit"'), false, `credit without a banner in ${filename}`);
+          }
+          if (path.relative(root, filename) !== '404.html') {
+            assert.ok(text.includes('class="footer-image-credits"'), `image credits footer link missing in ${filename}`);
+          }
+        }
+      }
       checked++;
     }
   }
 }
 inspect(root);
-console.log(`Build checks passed: ${index.length} articles, four page headings, ${partials.length} style partials, legacy status cleanup, ${checked} text assets.`);
+console.log(`Build checks passed: ${index.length} articles, four page headings, ${partials.length} style partials, ${creditedBanners} credited banners, legacy status cleanup, ${checked} text assets.`);
