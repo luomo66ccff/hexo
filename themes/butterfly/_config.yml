@@ -1036,7 +1036,7 @@ inject:
   bottom:
      - <script src="/js/luomo-theme.js?v=20261011-status"></script>
      - <script src="/js/luomo-navigation.js?v=20261011"></script>
-     - <script src="/js/luomo-ui.js?v=20261018-ui"></script>
+     - <script src="/js/luomo-ui.js?v=20261018-captcha"></script>
 
 # CDN Settings
 # Don't modify the following settings unless you know how they work
