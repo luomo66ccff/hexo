@@ -1,0 +1,30 @@
+extends includes/layout.pug
+
+block content
+  #page.image-credits-page
+    h1.page-title= page.title
+    p.image-credits-intro 本站使用的横幅与文章封面。喜欢哪张，可以从这里找到原作。
+    .image-credits-grid
+      each credit in site.data.image_credits.images
+        article.image-credit-card(id=credit.id)
+          .image-credit-preview
+            img(src=url_for(credit.image) alt=credit.title loading='lazy' decoding='async' width='640' height='360')
+          .image-credit-body
+            p.image-credit-usage= credit.usage
+            h2= credit.title
+            p.image-credit-creator
+              if credit.creator_url
+                a(href=credit.creator_url)= credit.creator
+              else
+                span= credit.creator
+            if credit.note
+              p.image-credit-note= credit.note
+            if credit.rights
+              p.image-credit-rights= credit.rights
+            if credit.source_url || credit.social_url
+              .image-credit-links
+                if credit.source_url
+                  a(href=credit.source_url)= credit.source_label
+                if credit.social_url
+                  a(href=credit.social_url)= credit.social_label
+    p.image-credits-footnote 署名用于说明图片出处，不代表原作者授予了转载许可。需要使用图片时，请以原作者或权利人的要求为准。
