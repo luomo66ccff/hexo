@@ -1,4 +1,4 @@
-/* 星港手帐 · small interaction layer (reading progress). Pjax-safe, no dependencies. */
+/* 星港手帐 · small interaction layer (reading progress, Waline captcha fix). Pjax-safe, no dependencies. */
 (function () {
   'use strict';
 
@@ -41,8 +41,52 @@
     update();
   }
 
+  /*
+   * Waline (3.1.2, unchanged through 3.16.1) renders a Turnstile widget into
+   * .wl-captcha-container on every submit and never removes it. The widget
+   * stays on screen, and Turnstile rejects the next render into the same
+   * container, so a second comment waits forever. Clear the container before
+   * each render and shortly after a token is issued.
+   */
+  var CAPTCHA = '.wl-captcha-container';
+
+  function clearCaptcha(ts) {
+    var box = document.querySelector(CAPTCHA);
+    if (box && box.children.length) {
+      try { ts.remove(CAPTCHA); } catch (error) { /* already gone */ }
+    }
+  }
+
+  function patchTurnstile() {
+    var ts = window.turnstile;
+    if (!ts || typeof ts.render !== 'function' || ts.luomoPatched) return;
+    var render = ts.render;
+    ts.render = function (container, options) {
+      if (container === CAPTCHA && options) {
+        clearCaptcha(ts);
+        var done = options.callback;
+        options = Object.assign({}, options, {
+          callback: function (token) {
+            if (typeof done === 'function') done(token);
+            setTimeout(function () { clearCaptcha(ts); }, 900);
+          }
+        });
+      }
+      return render.call(ts, container, options);
+    };
+    ts.luomoPatched = true;
+  }
+
+  // Waline injects the Turnstile script on first submit; a capturing load
+  // listener runs before Waline's own handler goes on to call render().
+  document.addEventListener('load', function (event) {
+    var src = event.target && event.target.src;
+    if (src && src.indexOf('challenges.cloudflare.com/turnstile') !== -1) patchTurnstile();
+  }, true);
+
   function init() {
     initProgress();
+    patchTurnstile();
   }
 
   window.addEventListener('scroll', schedule, { passive: true });
