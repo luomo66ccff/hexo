@@ -421,3 +421,15 @@ body {
   .timeline-item { flex-direction: column; gap: 4px; }
   .timeline-content { margin-left: 0; }
 }
+
+/* 404 page: show the whole illustration instead of cropping it. */
+.error404 #error-wrap .error-content .error-img img {
+  object-fit: contain;
+  background: #fff;
+}
+
+/* Banner focal points: keep the characters centred when the header band crops the art. */
+#page-header[style*="home-lantern"] { background-position: 66% 10%; }
+#page-header[style*="default-sky"] { background-position: 50% 15%; }
+#page-header[style*="archive-quartet"] { background-position: 53% 28%; }
+#page-header[style*="tags-angel"] { background-position: 40% 40%; }

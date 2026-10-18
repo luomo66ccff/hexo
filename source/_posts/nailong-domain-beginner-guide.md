@@ -13,7 +13,7 @@ tags:
   - 建站
 description: 从上海、苏州、甘肃奶龙大学的真实案例出发，手把手买域名、上传网页、设置 DNS、绑定 HTTPS，附可下载模板、跳转示例和排障清单。奶蛙负责整活，你负责拥有自己的互联网门牌。
 abbrlink: 7a1d0a11
-cover: /images/domain-beginner/naiwa-launch.png
+cover: /images/domain-beginner/naiwa-launch.webp
 ---
 
 刷到「XX奶龙大学.com」，随手一输，居然真能打开，有的还把你送到学校官网。
@@ -58,7 +58,7 @@ cover: /images/domain-beginner/naiwa-launch.png
 
 **域名购买成功，只代表门牌到手。网页还要制作和托管，门牌还要连到服务。**
 
-<img src="/images/domain-beginner/naiwa-dns.png" alt="奶蛙举着域名门牌：域名买了，网站呢？你给我变出来啊" width="560" loading="lazy" style="display:block;margin:24px auto;max-width:100%;height:auto">
+<img src="/images/domain-beginner/naiwa-dns.webp" alt="奶蛙举着域名门牌：域名买了，网站呢？你给我变出来啊" width="560" loading="lazy" style="display:block;margin:24px auto;max-width:100%;height:auto">
 
 再拆一个常见网址：
 
@@ -91,7 +91,7 @@ https://blog.example.com/about
 
 先确定能接受的**每年续费成本**。首年便宜，第二年未必还是这个价；中文域名也不一定和英文同后缀同价。
 
-<img src="/images/domain-beginner/naiwa-renewal.png" alt="奶蛙看续费单：首年真香，续费你怎么不去抢" width="560" loading="lazy" style="display:block;margin:24px auto;max-width:100%;height:auto">
+<img src="/images/domain-beginner/naiwa-renewal.webp" alt="奶蛙看续费单：首年真香，续费你怎么不去抢" width="560" loading="lazy" style="display:block;margin:24px auto;max-width:100%;height:auto">
 
 ### 第二步：在注册商官网查询完整域名
 
@@ -318,7 +318,7 @@ curl.exe -I https://www.example.com/
 
 网站搭好以后，慢慢把自己的介绍、作品和喜欢的链接放进去就行。今天先整点奶蛙，哪天有了新想法，再回来改这一页。
 
-<img src="/images/domain-beginner/naiwa-launch.png" alt="恶搞奶蛙竖起大拇指：网站上线了，现在我也是有站之人了" width="640" loading="lazy" style="display:block;margin:24px auto;max-width:100%;height:auto">
+<img src="/images/domain-beginner/naiwa-launch.webp" alt="恶搞奶蛙竖起大拇指：网站上线了，现在我也是有站之人了" width="640" loading="lazy" style="display:block;margin:24px auto;max-width:100%;height:auto">
 
 奶蛙：你现在也算是有站之人了。至于有人访问没——先把链接发给朋友，别让网站和你的早八出勤率一样安静。(¬‿¬)
 
