@@ -25,7 +25,7 @@
 | `70-motion.css` | 入场动画、滚动浮现、阅读进度条、"减少动态效果"处理 |
 | `90-banners.css` | 每张横幅的焦点位置 |
 | `scripts/luomo-styles.js` | 构建时按文件名顺序合并以上文件，输出 `/css/luomo-theme.css` |
-| `source/js/luomo-ui.js` | 阅读进度条（兼容 Pjax） |
+| `source/js/luomo-ui.js` | 阅读进度条（兼容 Pjax），以及 Waline 人机验证框的清理补丁（见 #15） |
 | `source/_data/home.yml` | 首页「星港入口」和「最新手帐」标题的文案与链接 |
 | `scripts/luomo-home.js` | 构建时把 `home.yml` 渲染进首页第一页的文章列表顶部，不改主题模板 |
 | `source/_data/widget.yml` | 侧栏自定义小组件（目前是 MapMyVisitors 访客地图） |
