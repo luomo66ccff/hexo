@@ -161,17 +161,10 @@
   color: var(--lm-violet);
 }
 
-/* ---------- Visitor globe (ClustrMaps, defined in source/_data/widget.yml) ---------- */
+/* ---------- Visitor globe (MapMyVisitors, defined in source/_data/widget.yml) ---------- */
+/* The globe sizes itself to its container when it loads; leave room so the
+   sphere and its glow are not cut at the card edges. */
 #aside-content #user-map .item-content {
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
   min-height: 120px;
-}
-
-#aside-content #user-map .item-content canvas,
-#aside-content #user-map .item-content img,
-#aside-content #user-map .item-content iframe {
-  max-width: 100%;
-  height: auto;
+  padding: 6px 7% 2px;
 }

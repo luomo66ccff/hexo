@@ -24,7 +24,7 @@ for (const name of partials) assert.ok(theme.includes(`==== ${name} ====`), `sty
 assert.equal(fs.existsSync(path.join(root, '_luomo')), false, 'style partials must not be published');
 assert.ok(read('index.html').includes('/js/luomo-ui.js'), 'interaction layer must be injected');
 // Sidebar widgets from source/_data/widget.yml render as-is (the visitor globe lives there).
-assert.ok(/id="user-map"[\s\S]*id="clstr_globe"/.test(read('index.html')), 'visitor globe widget must render in the sidebar');
+assert.ok(/id="user-map"[\s\S]*id="mmvst_globe"/.test(read('index.html')), 'visitor globe widget must render in the sidebar');
 assert.equal(fs.existsSync(path.join(root, 'status/config.js')), false, 'legacy public configuration must not be deployed');
 assert.equal(fs.existsSync(path.join(root, 'status/static')), false, 'legacy status bundles must not be deployed');
 let checked = 0;
