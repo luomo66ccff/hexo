@@ -1,0 +1,25 @@
+# 首页「星港入口」与文章列表标题，由 scripts/luomo-home.js 渲染到首页第一页的文章列表上方。
+# 增删入口只改 gates；把 gates 清空即可隐藏整块入口区。icon 使用 Font Awesome 6 类名。
+
+gates_eyebrow: Starport Gates
+gates_title: 星港入口
+gates:
+  - name: 项目档案
+    desc: 云服务、AI 智能体与开发项目
+    link: /projects/
+    icon: fas fa-rocket
+  - name: 云舰桥
+    desc: 各服务的公开入口与状态
+    link: /cloud/
+    icon: fas fa-cloud
+  - name: 航行日志
+    desc: 博客与项目的构建记录
+    link: /build-log/
+    icon: fas fa-stream
+  - name: 音乐星云
+    desc: 在星港里循环播放的旋律
+    link: /music/
+    icon: fas fa-music
+
+list_eyebrow: Latest Entries
+list_title: 最新手帐

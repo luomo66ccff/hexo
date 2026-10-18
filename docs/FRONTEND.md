@@ -26,12 +26,23 @@
 | `90-banners.css` | 每张横幅的焦点位置 |
 | `scripts/luomo-styles.js` | 构建时按文件名顺序合并以上文件，输出 `/css/luomo-theme.css` |
 | `source/js/luomo-ui.js` | 阅读进度条（兼容 Pjax） |
+| `source/_data/home.yml` | 首页「星港入口」和「最新手帐」标题的文案与链接 |
+| `scripts/luomo-home.js` | 构建时把 `home.yml` 渲染进首页第一页的文章列表顶部，不改主题模板 |
+| `source/_data/widget.yml` | 侧栏自定义小组件（目前是 MapMyVisitors 访客地图） |
 | `source/js/luomo-navigation.js` | 导航菜单与搜索的键盘操作和无障碍属性 |
 | `source/js/luomo-theme.js` | 项目筛选和状态页检查 |
 | `themes/butterfly/_config.yml` → `theme_color` | 主题源码里写死的主色，要和令牌保持一致 |
 | `themes/butterfly/_config.yml` → `inject` | 挂载样式和脚本，`?v=` 是缓存版本号 |
 
 `source/_luomo/` 以下划线开头，Hexo 不会把它当作页面发布。`tools/check-site.cjs` 会检查每个样式文件都已合并进 bundle，并且没有被单独发布出去。
+
+## 首页与侧栏布局
+
+- **首页**：横幅下面依次是「星港入口」（4 个现有页面的入口卡片）、「最新手帐」标题和文章列表。入口卡片的数据在 `source/_data/home.yml`，删掉 `gates` 下的内容即可隐藏整块入口区。
+- **侧栏**：顺序依次是作者卡、公告，然后是会跟随滚动的一组卡片：最新文章、最新评论、标签、分类、归档、网站资讯、访客地图。这组卡片的顺序由主题配置里各卡片的 `sort_order`（1–6）和 `widget.yml` 的 `order: 7` 决定。
+- **最新评论**：Butterfly 4.13 读取的是**顶层**的 `newest_comments` 配置，不是 `aside` 下面的；数据来自 Waline。
+- **公告**：在主题配置的 `aside.card_announcement.content` 里写，支持 HTML。
+- `sort_order` 会被编译进主题的 Stylus 样式。本地修改后要先 `pnpm run clean` 再构建，否则会继续用缓存的旧样式；Vercel 每次都是全新构建，不受影响。
 
 ## 常见修改
 
@@ -41,6 +52,8 @@
 1. 把图片压成 WebP（大横幅宽 1920–2560px），放进 `source/img/banner/`。
 2. 在主题配置里指向它（`index_img`、`default_top_img` 等），或者写在页面的 front matter `top_img` 里。
 3. 在 `90-banners.css` 加一行焦点位置。`background-position` 的百分比越大，看到的越偏右（越偏下）；先用手机竖屏校准横向，再用桌面校准纵向。
+
+**加或改首页入口**：编辑 `source/_data/home.yml`，图标用 Font Awesome 6 的类名。
 
 **加一种卡片动效**：把选择器加进 `70-motion.css` 的两个列表（入场动画、滚动浮现）。动画的填充模式要保持 `backwards`，否则动画结束后残留的 `transform` 会让里面的 fixed/sticky 元素（比如手机端目录）定位错乱。
 

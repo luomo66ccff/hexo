@@ -18,7 +18,7 @@
   transition: transform var(--lm-dur) var(--lm-ease), box-shadow var(--lm-dur) var(--lm-ease), border-color var(--lm-dur);
 }
 
-#recent-posts > .recent-post-item:first-child { margin-top: 0; }
+#recent-posts > .recent-post-item:first-of-type { margin-top: 0; }
 
 /* Accent hairline that draws in on hover. */
 #recent-posts > .recent-post-item::before {
@@ -187,4 +187,152 @@
   }
 
   .luomo-entry-card:hover { transform: none; }
+}
+
+/* ---------- Section headings (rendered by scripts/luomo-home.js) ---------- */
+.lm-section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0 4px 14px;
+}
+
+.lm-section-head h2 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--lm-ink);
+  font-size: 1.22rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+
+.lm-section-head .lm-eyebrow {
+  order: 1;
+  color: var(--lm-violet);
+  font-family: var(--lm-font-serif);
+  font-size: 0.92rem;
+  font-style: italic;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+}
+
+.lm-section-head::after {
+  flex: 1;
+  order: 2;
+  align-self: center;
+  height: 1px;
+  background: linear-gradient(90deg, var(--lm-line-strong), transparent);
+  content: "";
+}
+
+.lm-list-head {
+  margin-top: 30px;
+}
+
+/* ---------- 星港入口 gates (data: source/_data/home.yml) ---------- */
+.lm-gates-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.lm-gate {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 78px;
+  padding: 14px 16px;
+  overflow: hidden;
+  border: 1px solid var(--lm-line);
+  border-radius: 16px;
+  background: var(--lm-surface);
+  box-shadow: var(--lm-shadow-1);
+  color: var(--lm-ink);
+  text-decoration: none;
+  transition: transform var(--lm-dur) var(--lm-ease), box-shadow var(--lm-dur), border-color var(--lm-dur);
+}
+
+.lm-gate::before {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--lm-violet-soft), transparent 60%);
+  content: "";
+  opacity: 0;
+  transition: opacity var(--lm-dur);
+}
+
+.lm-gate:hover {
+  border-color: var(--lm-line-strong);
+  box-shadow: var(--lm-shadow-2);
+  color: var(--lm-ink);
+  transform: translateY(-3px);
+}
+
+.lm-gate:hover::before { opacity: 1; }
+
+.lm-gate > * { position: relative; }
+
+.lm-gate-icon {
+  display: inline-flex;
+  flex: none;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: var(--lm-grad);
+  box-shadow: 0 8px 18px -10px rgba(102, 86, 216, 0.8);
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.lm-gate-text {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.lm-gate-text strong {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.lm-gate-text small {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--lm-ink-3);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.lm-gate-go {
+  color: var(--lm-ink-3);
+  font-size: 0.8rem;
+  transition: transform 0.3s var(--lm-ease), color 0.3s;
+}
+
+.lm-gate:hover .lm-gate-go {
+  color: var(--lm-violet);
+  transform: translateX(3px);
+}
+
+@media (max-width: 1100px) {
+  .lm-gates-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 768px) {
+  .lm-gates-grid { gap: 10px; }
+  .lm-gate { min-height: 0; padding: 12px; gap: 10px; }
+  .lm-gate:hover { transform: none; }
+  .lm-gate-icon { width: 36px; height: 36px; border-radius: 10px; font-size: 0.95rem; }
+  .lm-gate-go { display: none; }
+  .lm-list-head { margin-top: 24px; }
 }

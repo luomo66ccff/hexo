@@ -3,7 +3,7 @@ bottom:
       id_name: user-map
       name: 访客地图
       icon: fas fa-heartbeat
-      order:
+      order: 7
       html: '<script type="text/javascript" id="mmvst_globe" src="https://mapmyvisitors.com/globe.js?d=8WhzISmCe3gGNTU2OBjMPQRkwO7wre-zRN07XJ4OH6c"></script>'
 
 
