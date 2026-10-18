@@ -30,15 +30,22 @@ assert.equal((read('index.html').match(/class="lm-gates"/g) || []).length, 1, 'h
 assert.equal(read('archives/index.html').includes('class="lm-gates"'), false, 'gates belong to the home page only');
 assert.equal(fs.existsSync(path.join(root, 'status/config.js')), false, 'legacy public configuration must not be deployed');
 assert.equal(fs.existsSync(path.join(root, 'status/static')), false, 'legacy status bundles must not be deployed');
-// Every rendered banner must carry the credit for the image actually selected
-// by the theme, including tag/category/archive pages and post cover fallbacks.
-const imageCredits = require('../source/_data/image_credits.json').images;
+// Third-party banners carry a credit; the owner's own images stay unlabelled.
+// Check the actual theme selection, including post cover fallbacks.
+const imageCreditData = require('../source/_data/image_credits.json');
+const imageCredits = imageCreditData.images;
+const ownedImages = new Set(imageCreditData.owned_images);
 const creditPage = read('image-credits/index.html');
 const creditByImage = new Map();
 const creditIds = new Set();
+for (const image of ownedImages) {
+  assert.ok(fs.existsSync(path.join(root, image)), `owned image missing: ${image}`);
+  assert.equal(creditPage.includes(image), false, `owned image must not appear on the credits page: ${image}`);
+}
 for (const credit of imageCredits) {
   assert.ok(/^[a-z0-9-]+$/.test(credit.id) && !creditIds.has(credit.id), `invalid or duplicate image credit id: ${credit.id}`);
   assert.ok(!creditByImage.has(credit.image), `duplicate image credit: ${credit.image}`);
+  assert.equal(ownedImages.has(credit.image), false, `image cannot be both owned and third-party: ${credit.image}`);
   assert.ok(fs.existsSync(path.join(root, credit.image)), `credited image missing: ${credit.image}`);
   assert.ok(creditPage.includes(`id="${credit.id}"`), `credit detail anchor missing: ${credit.id}`);
   creditIds.add(credit.id);
@@ -46,6 +53,7 @@ for (const credit of imageCredits) {
 }
 assert.equal((creditPage.match(/<h1\b/g) || []).length, 1, 'image credits page must have one main heading');
 let creditedBanners = 0;
+let ownedBanners = 0;
 let checked = 0;
 function inspect(directory) {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
@@ -61,10 +69,15 @@ function inspect(directory) {
         if (header) {
           const image = header[0].match(/background-image:\s*url\('([^']+)'\)/);
           if (image) {
-            const credit = creditByImage.get(image[1]);
-            assert.ok(credit, `banner missing from image credits registry: ${image[1]} (${filename})`);
-            assert.ok(header[0].includes(`href="/image-credits/#${credit.id}"`), `wrong banner credit in ${filename}`);
-            creditedBanners++;
+            if (ownedImages.has(image[1])) {
+              assert.equal(header[0].includes('class="banner-credit"'), false, `owned image must not have a banner credit in ${filename}`);
+              ownedBanners++;
+            } else {
+              const credit = creditByImage.get(image[1]);
+              assert.ok(credit, `banner missing from image credits registry: ${image[1]} (${filename})`);
+              assert.ok(header[0].includes(`href="/image-credits/#${credit.id}"`), `wrong banner credit in ${filename}`);
+              creditedBanners++;
+            }
           } else {
             assert.equal(header[0].includes('class="banner-credit"'), false, `credit without a banner in ${filename}`);
           }
@@ -78,4 +91,4 @@ function inspect(directory) {
   }
 }
 inspect(root);
-console.log(`Build checks passed: ${index.length} articles, four page headings, ${partials.length} style partials, ${creditedBanners} credited banners, legacy status cleanup, ${checked} text assets.`);
+console.log(`Build checks passed: ${index.length} articles, four page headings, ${partials.length} style partials, ${creditedBanners} credited banners, ${ownedBanners} unlabelled owned banners, legacy status cleanup, ${checked} text assets.`);

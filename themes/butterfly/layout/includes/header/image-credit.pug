@@ -1,11 +1,9 @@
 - var imageCredits = site.data.image_credits && site.data.image_credits.images || []
 - var imageCredit = imageCredits.find(credit => credit.image === top_img)
-- var creditDetails = url_for('/image-credits/' + (imageCredit ? '#' + imageCredit.id : ''))
-.banner-credit(aria-label='横幅图片署名')
-  span 图：
-  if imageCredit
+if imageCredit
+  - var creditDetails = url_for('/image-credits/#' + imageCredit.id)
+  .banner-credit(aria-label='横幅图片署名')
+    span 图：
     a.banner-credit-author(href=imageCredit.source_url || creditDetails title=imageCredit.title)= imageCredit.creator_short
-  else
-    span 作者待确认
-  span.banner-credit-separator(aria-hidden='true') ·
-  a.banner-credit-details(href=creditDetails) 来源
+    span.banner-credit-separator(aria-hidden='true') ·
+    a.banner-credit-details(href=creditDetails) 来源

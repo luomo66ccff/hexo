@@ -1,4 +1,8 @@
 {
+  "owned_images": [
+    "/images/domain-beginner/naiwa-launch.webp",
+    "/images/fog-harbor/og-fog-harbor.webp"
+  ],
   "images": [
     {
       "id": "home-lantern",
@@ -50,30 +54,6 @@
       "usage": "标签索引与各标签页横幅",
       "note": "这是动画画面，未找到这一帧的单独原画署名；所用截图的最初上传页尚未确认。",
       "rights": "© 白石定規・SBクリエイティブ／魔女の旅々製作委員会",
-      "status": "source_identified"
-    },
-    {
-      "id": "naiwa-launch",
-      "image": "/images/domain-beginner/naiwa-launch.webp",
-      "title": "网站上线了，现在我也是有站之人了",
-      "creator": "本站制作 · AI 生成（OpenAI image_gen）",
-      "creator_short": "本站制作 · AI 生成",
-      "source_url": "/posts/7a1d0a11.html",
-      "source_label": "域名建站教程",
-      "usage": "域名建站教程封面",
-      "note": "按博主提供的恶搞奶蛙参考图生成，为本站文章配图；角色与参考素材的权利归原权利人。",
-      "status": "generated"
-    },
-    {
-      "id": "fog-harbor",
-      "image": "/images/fog-harbor/og-fog-harbor.webp",
-      "title": "雾港档案项目封面",
-      "creator": "制作署名待确认",
-      "creator_short": "雾港档案项目配图",
-      "source_url": "https://github.com/luomo66ccff/fog-harbor-archive/blob/main/design-assets/marketing/og-fog-harbor.png",
-      "source_label": "项目素材库 · 原始 PNG",
-      "usage": "雾港档案文章封面",
-      "note": "源文件收录于雾港档案项目，目前未查到制作署名。",
       "status": "source_identified"
     }
   ]
