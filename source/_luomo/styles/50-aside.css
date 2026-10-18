@@ -160,3 +160,11 @@
   background: var(--lm-violet-soft);
   color: var(--lm-violet);
 }
+
+/* ---------- Visitor globe (MapMyVisitors, defined in source/_data/widget.yml) ---------- */
+/* The globe sizes itself to its container when it loads; leave room so the
+   sphere and its glow are not cut at the card edges. */
+#aside-content #user-map .item-content {
+  min-height: 120px;
+  padding: 6px 7% 2px;
+}

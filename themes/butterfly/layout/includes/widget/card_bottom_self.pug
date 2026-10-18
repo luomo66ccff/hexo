@@ -1,11 +1,9 @@
 if site.data.widget && site.data.widget.bottom
   each item in site.data.widget.bottom
-    //- Keep the source widget data for rollback, but do not request the retired visitor map.
-    if item.id_name !== 'user-map' && item.class_name !== 'user-map' && !/clustrmaps\.com/i.test(item.html || '')
-      .card-widget(class=item.class_name id=item.id_name style=item.order ? `order: ${item.order}` : '')
-        .item-headline
-          i(class=item.icon)
-          span=item.name
-        .item-content
-          !=item.html
+    .card-widget(class=item.class_name id=item.id_name style=item.order ? `order: ${item.order}` : '')
+      .item-headline
+        i(class=item.icon)
+        span=item.name
+      .item-content
+        !=item.html
 

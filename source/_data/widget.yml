@@ -4,6 +4,6 @@ bottom:
       name: 访客地图
       icon: fas fa-heartbeat
       order:
-      html: '<script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=Bd4PlREeI68-hRyrFpZXd2Iosz3hbiUg5uykWF7N4yY"></script>'
+      html: '<script type="text/javascript" id="mmvst_globe" src="https://mapmyvisitors.com/globe.js?d=8WhzISmCe3gGNTU2OBjMPQRkwO7wre-zRN07XJ4OH6c"></script>'
 
 
