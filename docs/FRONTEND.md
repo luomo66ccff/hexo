@@ -106,6 +106,10 @@
 
 侧栏的「访客星图」是自己画的地球：经纬网、从星港（`widget.yml` 里的 `data-home`，默认辽宁）出发到各访客国家的航线弧光、按访客数缩放的光点；可以拖动旋转，悬停光点显示国家和人数，下方是前五名的排行。开启"减少动态效果"时停止自转和光点闪烁；卡片不在视口内或页面隐藏时暂停绘制。
 
+世界大陆底图来自 Natural Earth 110m，经 `world-atlas` 转为 GeoJSON，使用 D3 正射投影绘制陆地填色与海岸线；地平线裁剪保证背面陆地不会穿透球体。地图与投影代码打包为本站 `/js/vendor/luomo-geo.min.js`，首次出现地球时才加载，PJAX 换页共用同一份资源。陆地离屏图层约每 64 毫秒更新一次，拖动、尺寸和主题变化会重绘，访客光点与航线仍独立绘制。
+
+更新地图资源时运行 `pnpm run build:globe-map`，再运行正常构建。生成结果随源码提交；生产构建不联网拉取地图，也不需要重新打包。数据与依赖的完整许可在 `/js/vendor/luomo-geo.LICENSE.txt`；Natural Earth 为公有领域数据，底图只绘制自然海岸线。
+
 数据流：浏览器请求 `/api/visitors` → 函数用服务器端令牌查询 Vercel 的 `GET /v1/query/web-analytics/visits/aggregate?by=country`（先查近 90 天，遇 HTTP 400 再依次尝试 30 天、7 天）→ 只把国家代码和访客数返回给浏览器。接口拒绝任何查询参数和 GET/HEAD 以外的方法，令牌和上游错误正文都不会出现在响应里。
 
 `since`、`until` 使用完整 UTC ISO 时间，范围截止到请求时刻，包含当天已发生的访问；响应也返回相同时间范围和实际 `windowDays`。Vercel 的[官方接口说明](https://vercel.com/docs/rest-api/web-analytics/aggregates-page-views)将这两个参数定义为包含边界的日期时间，不能把 `until` 截成当天零点。有数据时 CDN 缓存 1 小时并允许后台刷新；空数据只缓存 60 秒，不启用过期内容复用。

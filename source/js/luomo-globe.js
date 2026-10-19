@@ -1,10 +1,10 @@
 /*
  * 星港手帐 · visitor star-map globe (sidebar "访客星图").
- * Draws an orthographic star chart on <canvas>: graticule, voyage arcs from the
- * home port to each visiting country, and glowing points sized by visitors.
+ * Draws an orthographic globe on <canvas>: Natural Earth land, graticule, voyage
+ * arcs from the home port, and glowing points sized by visitors.
  * Data: /api/visitors (Vercel Web Analytics, aggregated server-side).
  * Markup: <div class="lm-globe" data-endpoint="/api/visitors" data-home="41.8,123.4">
- * (source/_data/widget.yml). Pjax-safe, no dependencies, honours reduced motion.
+ * (source/_data/widget.yml). Pjax-safe; loads its map bundle locally on demand.
  */
 (function () {
   'use strict';
@@ -18,6 +18,34 @@
   var RAD = Math.PI / 180;
   var calm = window.matchMedia('(prefers-reduced-motion: reduce)');
   var instance = null;
+  var geoPromise = null;
+
+  function geoReady() {
+    var geo = window.LuomoGeo;
+    return geo && typeof geo.geoOrthographic === 'function' && typeof geo.geoPath === 'function' && geo.land;
+  }
+
+  // Shared across PJAX instances, including a failed request: never fetch twice.
+  function loadGeo() {
+    if (geoReady()) return Promise.resolve(window.LuomoGeo);
+    if (!geoPromise) {
+      geoPromise = new Promise(function (resolve, reject) {
+        var script = document.createElement('script');
+        script.src = '/js/vendor/luomo-geo.min.js';
+        script.async = true;
+        script.onload = function () {
+          script.onload = script.onerror = null;
+          geoReady() ? resolve(window.LuomoGeo) : reject(new Error('Globe map unavailable'));
+        };
+        script.onerror = function () {
+          script.onload = script.onerror = null;
+          reject(new Error('Globe map unavailable'));
+        };
+        document.head.appendChild(script);
+      });
+    }
+    return geoPromise;
+  }
 
   // Short forms for names Intl renders long (e.g. 中国香港特别行政区).
   var SHORT_NAMES = { HK: '香港', MO: '澳门', TW: '台湾', US: '美国', GB: '英国', KR: '韩国', RU: '俄罗斯', AE: '阿联酋' };
@@ -93,8 +121,12 @@
     this.frame = 0;
     this.last = 0;
     this.hover = null;
+    this.destroyed = false;
+    this.landDirty = true;
+    this.landLast = 0;
     this.build();
     this.observe();
+    this.loadLand();
     this.load();
   }
 
@@ -106,6 +138,9 @@
     stage.className = 'lm-globe-stage';
     this.canvas = document.createElement('canvas');
     this.canvas.setAttribute('aria-hidden', 'true');
+    this.canvas.title = '陆地数据：Natural Earth 110m';
+    this.landCanvas = document.createElement('canvas');
+    this.landCtx = this.landCanvas.getContext('2d');
     this.tip = document.createElement('div');
     this.tip.className = 'lm-globe-tip';
     this.tip.hidden = true;
@@ -127,24 +162,46 @@
     var self = this;
     this.onResize = function () { self.resize(); self.draw(); };
     window.addEventListener('resize', this.onResize, { passive: true });
+    if ('ResizeObserver' in window) {
+      this.ro = new ResizeObserver(this.onResize);
+      this.ro.observe(this.root);
+    }
     if ('IntersectionObserver' in window) {
       this.io = new IntersectionObserver(function (entries) {
+        if (self.destroyed) return;
         self.visible = entries[0].isIntersecting;
         if (self.visible) self.start();
       });
       this.io.observe(this.root);
     }
-    this.themeObserver = new MutationObserver(function () { self.colors = palette(); self.draw(); });
+    this.themeObserver = new MutationObserver(function () {
+      if (self.destroyed) return;
+      self.colors = palette();
+      self.landDirty = true;
+      self.draw();
+    });
     this.themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    this.onMotionChange = function () {
+      if (self.destroyed) return;
+      if (calm.matches) {
+        if (self.frame) cancelAnimationFrame(self.frame);
+        self.frame = 0;
+        self.draw();
+      } else self.start();
+    };
+    if (calm.addEventListener) calm.addEventListener('change', this.onMotionChange);
+    else if (calm.addListener) calm.addListener(this.onMotionChange);
 
     // Drag to turn the globe; hover a point for its country.
     var drag = null;
     this.canvas.addEventListener('pointerdown', function (event) {
+      if (self.destroyed) return;
       drag = { x: event.clientX, y: event.clientY, lon: self.view.lon, tilt: self.view.tilt };
       self.canvas.setPointerCapture(event.pointerId);
       self.root.classList.add('is-dragging');
     });
     this.canvas.addEventListener('pointermove', function (event) {
+      if (self.destroyed) return;
       if (drag) {
         var k = 180 / self.radius / Math.PI;
         self.view.lon = drag.lon - (event.clientX - drag.x) * k;
@@ -154,22 +211,92 @@
       }
       self.pick(event);
     });
-    var release = function () { drag = null; self.root.classList.remove('is-dragging'); };
+    var release = function () {
+      if (self.destroyed || !drag) return;
+      drag = null;
+      self.root.classList.remove('is-dragging');
+      self.landDirty = true;
+      self.draw();
+    };
     this.canvas.addEventListener('pointerup', release);
     this.canvas.addEventListener('pointercancel', release);
-    this.canvas.addEventListener('pointerleave', function () { self.hover = null; self.tip.hidden = true; });
+    this.canvas.addEventListener('lostpointercapture', release);
+    this.canvas.addEventListener('pointerleave', function () {
+      if (self.destroyed) return;
+      self.hover = null;
+      self.tip.hidden = true;
+    });
   };
 
   Globe.prototype.resize = function () {
+    if (this.destroyed) return;
     var size = Math.max(160, Math.round(this.root.clientWidth || 240));
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    if (this.size === size && this.dpr === dpr) return;
     this.size = size;
+    this.dpr = dpr;
     this.radius = size * 0.4;
     this.canvas.width = size * dpr;
     this.canvas.height = size * dpr;
     this.canvas.style.width = size + 'px';
     this.canvas.style.height = size + 'px';
     this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    this.landCanvas.width = this.canvas.width;
+    this.landCanvas.height = this.canvas.height;
+    this.landCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    this.landDirty = true;
+  };
+
+  Globe.prototype.loadLand = function () {
+    var self = this;
+    loadGeo().then(function (geo) {
+      if (self.destroyed || !document.contains(self.root)) return;
+      self.landProjection = geo.geoOrthographic().clipAngle(90).precision(0.3);
+      self.landPath = geo.geoPath().projection(self.landProjection).context(self.landCtx);
+      self.land = geo.land;
+      self.landDirty = true;
+      self.draw();
+    }).catch(function () { /* The visitor globe remains usable without its map. */ });
+  };
+
+  Globe.prototype.drawLand = function () {
+    if (!this.land || !this.landPath) return;
+    var now = performance.now();
+    var previous = this.landView;
+    // Longitude can keep increasing during rotation; compare across the dateline.
+    var longitude = previous ? Math.abs(((this.view.lon - previous.lon) % 360 + 540) % 360 - 180) : 360;
+    var angle = previous ? Math.max(longitude, Math.abs(this.view.tilt - previous.tilt)) : 360;
+    if (this.landDirty || (angle > 0.001 && (now - this.landLast >= 64 || angle >= 1.5))) {
+      var ctx = this.landCtx;
+      var c = this.size / 2;
+      var r = this.radius;
+      ctx.clearRect(0, 0, this.size, this.size);
+      ctx.save();
+      try {
+        // geoPath clips spherical polygons at the horizon before drawing them.
+        // Canvas clipping also keeps the antialiased coast inside the sphere.
+        ctx.beginPath(); ctx.arc(c, c, r, 0, TAU); ctx.clip();
+        this.landProjection.rotate([-this.view.lon, -this.view.tilt]).translate([c, c]).scale(r);
+        ctx.beginPath();
+        this.landPath(this.land);
+        ctx.fillStyle = this.colors.dark ? 'rgba(130,137,183,0.38)' : 'rgba(158,154,202,0.48)';
+        ctx.strokeStyle = this.colors.dark ? 'rgba(186,193,234,0.5)' : 'rgba(101,94,158,0.52)';
+        ctx.lineWidth = 0.7;
+        ctx.lineJoin = 'round';
+        ctx.fill();
+        ctx.stroke();
+        this.landView = { lon: this.view.lon, tilt: this.view.tilt };
+        this.landLast = now;
+        this.landDirty = false;
+      } catch (_) {
+        // A bad optional bundle must not interrupt visitor points or animation.
+        this.land = null;
+      } finally {
+        ctx.restore();
+      }
+      if (!this.land) { ctx.clearRect(0, 0, this.size, this.size); return; }
+    }
+    this.ctx.drawImage(this.landCanvas, 0, 0, this.size, this.size);
   };
 
   Globe.prototype.load = function () {
@@ -178,10 +305,13 @@
     fetch(endpoint, { headers: { Accept: 'application/json' } })
       .then(function (response) { return response.ok ? response.json() : { status: 'unavailable' }; })
       .catch(function () { return { status: 'unavailable' }; })
-      .then(function (data) { self.apply(data || {}); });
+      .then(function (data) {
+        if (!self.destroyed && document.contains(self.root)) self.apply(data || {});
+      });
   };
 
   Globe.prototype.apply = function (data) {
+    if (this.destroyed) return;
     var self = this;
     var countries = data.status === 'ok' && Array.isArray(data.countries) ? data.countries : [];
     var max = countries.reduce(function (m, c) { return Math.max(m, c.visitors); }, 1);
@@ -231,11 +361,12 @@
 
   Globe.prototype.start = function () {
     var self = this;
-    if (this.frame || !this.visible) return;
+    if (this.destroyed || this.frame || !this.visible) return;
     if (calm.matches || document.hidden) { this.draw(); return; }
     var tick = function (time) {
       self.frame = 0;
-      if (!self.visible || document.hidden || !document.contains(self.root)) return;
+      if (self.destroyed || !self.visible || document.hidden || !document.contains(self.root)) return;
+      if (calm.matches) { self.draw(); return; }
       var dt = self.last ? Math.min(64, time - self.last) : 16;
       self.last = time;
       if (!self.root.classList.contains('is-dragging')) self.view.lon += dt * 0.006;
@@ -255,6 +386,7 @@
   };
 
   Globe.prototype.draw = function () {
+    if (this.destroyed) return;
     var ctx = this.ctx;
     var s = this.size;
     var c = s / 2;
@@ -277,6 +409,7 @@
     }
     ctx.fillStyle = sea;
     ctx.beginPath(); ctx.arc(c, c, r, 0, TAU); ctx.fill();
+    this.drawLand();
 
     // Graticule (front hemisphere only).
     ctx.lineWidth = 0.7;
@@ -370,6 +503,7 @@
   };
 
   Globe.prototype.pick = function (event) {
+    if (this.destroyed) return;
     var rect = this.canvas.getBoundingClientRect();
     var x = event.clientX - rect.left;
     var y = event.clientY - rect.top;
@@ -393,11 +527,15 @@
   };
 
   Globe.prototype.destroy = function () {
+    this.destroyed = true;
     if (this.frame) cancelAnimationFrame(this.frame);
     this.frame = 0;
     window.removeEventListener('resize', this.onResize);
     if (this.io) this.io.disconnect();
+    if (this.ro) this.ro.disconnect();
     if (this.themeObserver) this.themeObserver.disconnect();
+    if (calm.removeEventListener) calm.removeEventListener('change', this.onMotionChange);
+    else if (calm.removeListener) calm.removeListener(this.onMotionChange);
   };
 
   function init() {

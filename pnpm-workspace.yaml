@@ -5,5 +5,6 @@ allowBuilds:
   '@parcel/watcher': false
   core-js: true
   ejs: true
+  esbuild: false
   hexo-util: true
   highlight.js: true

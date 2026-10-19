@@ -34,6 +34,8 @@ assert.equal(read('posts/3d61fa8b.html').includes('lm-own-number'), false, 'unnu
 // Sidebar widgets from source/_data/widget.yml render as-is (the visitor globe lives there).
 assert.ok(/id="user-map"[\s\S]*class="lm-globe" data-endpoint="\/api\/visitors"/.test(read('index.html')), 'visitor star-map globe must render in the sidebar');
 assert.ok(read('index.html').includes('/js/luomo-globe.js'), 'globe script must be injected');
+assert.ok(fs.existsSync(path.join(root, 'js/vendor/luomo-geo.min.js')), 'local world-map bundle must be published');
+assert.ok(read('js/vendor/luomo-geo.LICENSE.txt').includes('Natural Earth'), 'map data and projection licenses must be published');
 // The analytics script is opt-in (VERCEL_WEB_ANALYTICS_SCRIPT) and must stay same-site.
 assert.equal(/<script[^>]+src="https?:\/\/[^"]*insights/.test(read('index.html')), false, 'analytics script must be same-site');
 // Home sections from source/_data/home.yml render once, on the first home page only.
