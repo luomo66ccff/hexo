@@ -95,6 +95,9 @@ function inspect(directory) {
       if (entry.name.endsWith('.html')) {
         // Third-party assets are served locally (hexo-butterfly-extjs + luomo-local-assets.js).
         assert.equal(text.includes('cdn.jsdelivr.net'), false, `jsDelivr reference in ${filename}`);
+        // Analytics goes before the real </body>, not one inside an inline script (the Mermaid viewer has one).
+        const analytics = text.indexOf('window.va=window.va');
+        if (analytics !== -1) assert.equal(text.indexOf('</body>', analytics), text.lastIndexOf('</body>'), `analytics injected inside an inline script in ${filename}`);
         for (const [, asset] of text.matchAll(/["'(](\/pluginsSrc\/[^"'?)\s]+)/g)) {
           assert.ok(fs.existsSync(path.join(root, asset)), `missing local asset ${asset} (${filename})`);
         }
