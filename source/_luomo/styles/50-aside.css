@@ -161,13 +161,130 @@
   color: var(--lm-violet);
 }
 
-/* ---------- Visitor globe (MapMyVisitors, defined in source/_data/widget.yml) ---------- */
-/* The globe sizes itself to its container when it loads; leave room so the
-   sphere and its glow are not cut at the card edges. */
-#aside-content #user-map .item-content {
-  min-height: 120px;
-  padding: 6px 7% 2px;
+/* ---------- Visitor star-map globe (source/js/luomo-globe.js) ---------- */
+#aside-content #user-map .item-content { padding: 4px 0 0; }
+
+.lm-globe { position: relative; }
+
+.lm-globe-stage {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  touch-action: pan-y;
 }
+
+.lm-globe canvas {
+  display: block;
+  cursor: grab;
+}
+
+.lm-globe.is-dragging canvas { cursor: grabbing; }
+
+.lm-globe.is-loading canvas { opacity: 0.5; }
+
+/* Unavailable: the chart stays as a quiet ornament under a frosted label. */
+.lm-globe.is-unavailable canvas { opacity: 0.55; filter: saturate(0.6); }
+
+.lm-globe-status {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin: 0;
+  padding: 10px 16px;
+  border: 1px solid var(--lm-line);
+  border-radius: 14px;
+  background: var(--lm-glass);
+  box-shadow: var(--lm-shadow-1);
+  color: var(--lm-ink-3);
+  font-size: 0.78rem;
+  text-align: center;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.lm-globe-status:empty { display: none; }
+
+.lm-globe-status b {
+  color: var(--lm-ink);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+}
+
+.lm-globe-tip {
+  position: absolute;
+  z-index: 3;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--lm-ink);
+  color: var(--lm-paper);
+  font-size: 0.76rem;
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 12px));
+}
+
+.lm-globe-list {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lm-globe-list li {
+  display: grid;
+  grid-template-columns: 5.5em 1fr auto;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 4px 2px;
+  color: var(--lm-ink-2);
+  font-size: 0.84rem;
+}
+
+.lm-globe-list li::before { display: none; }
+
+.lm-globe-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lm-globe-bar {
+  height: 4px;
+  border-radius: 4px;
+  background: var(--lm-line);
+  overflow: hidden;
+}
+
+.lm-globe-bar::after {
+  display: block;
+  width: calc(var(--lm-share, 0) * 100%);
+  height: 100%;
+  border-radius: inherit;
+  background: var(--lm-grad);
+  content: "";
+}
+
+.lm-globe-list b {
+  color: var(--lm-ink);
+  font-family: var(--lm-font-serif);
+  font-variant-numeric: tabular-nums;
+}
+
+.lm-globe-meta {
+  margin: 8px 0 0;
+  color: var(--lm-ink-3);
+  font-size: 0.74rem;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+.lm-globe-meta:empty { display: none; }
 
 /* ---------- Announcement ---------- */
 #aside-content .card-announcement .announcement_content {

@@ -1,9 +1,10 @@
 bottom:
     - class_name: user-map
       id_name: user-map
-      name: 访客地图
-      icon: fas fa-heartbeat
+      name: 访客星图
+      icon: fas fa-globe-asia
       order: 7
-      html: '<script type="text/javascript" id="mmvst_globe" src="https://mapmyvisitors.com/globe.js?d=8WhzISmCe3gGNTU2OBjMPQRkwO7wre-zRN07XJ4OH6c"></script>'
+      # Drawn by source/js/luomo-globe.js from /api/visitors (Vercel Web Analytics). home = 星港 lat,lon
+      html: '<div class="lm-globe" data-endpoint="/api/visitors" data-home="41.8,123.4"></div>'
 
 

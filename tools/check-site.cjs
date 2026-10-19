@@ -24,7 +24,10 @@ for (const name of partials) assert.ok(theme.includes(`==== ${name} ====`), `sty
 assert.equal(fs.existsSync(path.join(root, '_luomo')), false, 'style partials must not be published');
 assert.ok(read('index.html').includes('/js/luomo-ui.js'), 'interaction layer must be injected');
 // Sidebar widgets from source/_data/widget.yml render as-is (the visitor globe lives there).
-assert.ok(/id="user-map"[\s\S]*id="mmvst_globe"/.test(read('index.html')), 'visitor globe widget must render in the sidebar');
+assert.ok(/id="user-map"[\s\S]*class="lm-globe" data-endpoint="\/api\/visitors"/.test(read('index.html')), 'visitor star-map globe must render in the sidebar');
+assert.ok(read('index.html').includes('/js/luomo-globe.js'), 'globe script must be injected');
+// The analytics script is opt-in (VERCEL_WEB_ANALYTICS_SCRIPT) and must stay same-site.
+assert.equal(/<script[^>]+src="https?:\/\/[^"]*insights/.test(read('index.html')), false, 'analytics script must be same-site');
 // Home sections from source/_data/home.yml render once, on the first home page only.
 assert.equal((read('index.html').match(/class="lm-gates"/g) || []).length, 1, 'home must render the starport gates once');
 assert.equal(read('archives/index.html').includes('class="lm-gates"'), false, 'gates belong to the home page only');
