@@ -61,18 +61,41 @@ test('queries a fixed 90-day country breakdown with the server-side token', asyn
   assert.equal(response.headers['Cache-Control'], 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400');
 });
 
-test('upstream errors and timeouts degrade to "unavailable" without leaking details', async () => {
-  for (const fetchImpl of [
-    async () => new Response('{"error":{"message":"forbidden tok_secret_value"}}', { status: 403 }),
-    async () => { throw Object.assign(new Error('timeout'), { name: 'TimeoutError' }); },
-    async () => { throw new Error('network down'); }
+test('upstream errors degrade to "unavailable" with a safe reason code only', async () => {
+  for (const [fetchImpl, reason] of [
+    [async () => new Response('{"error":{"message":"forbidden tok_secret_value"}}', { status: 403 }), 'upstream_403'],
+    [async () => new Response('not found', { status: 404 }), 'upstream_404'],
+    [async () => { throw Object.assign(new Error('timeout'), { name: 'TimeoutError' }); }, 'upstream_timeout'],
+    [async () => { throw new Error('network down tok_secret_value'); }, 'upstream_error'],
+    [async () => new Response('<html>', { status: 200 }), 'upstream_invalid']
   ]) {
     const response = await invoke(fetchImpl);
     assert.equal(response.code, 200);
-    assert.deepEqual(response.body, { schemaVersion: 1, status: 'unavailable' });
+    assert.deepEqual(response.body, { schemaVersion: 1, status: 'unavailable', reason });
     assert.equal(response.raw.includes('tok_secret_value'), false);
     assert.equal(response.headers['Cache-Control'], 'public, max-age=0, s-maxage=60');
   }
+});
+
+test('a rejected 90-day range falls back to 30 then 7 days', async () => {
+  const windows = [];
+  const response = await invoke(async url => {
+    const u = new URL(url);
+    windows.push(u.searchParams.get('since'));
+    if (windows.length < 3) return new Response('{"error":"range"}', { status: 400 });
+    return Response.json({ data: [{ country: 'CN', visitors: 3 }] });
+  });
+  assert.deepEqual(windows, ['2026-07-21', '2026-09-19', '2026-10-12']);
+  assert.equal(response.body.status, 'ok');
+  assert.equal(response.body.windowDays, 7);
+  assert.equal(response.body.total, 3);
+});
+
+test('400 on every window reports upstream_400', async () => {
+  let calls = 0;
+  const response = await invoke(async () => { calls++; return new Response('bad', { status: 400 }); });
+  assert.equal(calls, 3);
+  assert.deepEqual(response.body, { schemaVersion: 1, status: 'unavailable', reason: 'upstream_400' });
 });
 
 test('rows are validated, merged and sorted; junk is dropped', () => {
