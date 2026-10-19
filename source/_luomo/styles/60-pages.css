@@ -13,7 +13,7 @@
 /* Shared card recipe */
 .project-card,
 .cloud-card,
-.timeline-content {
+.timeline:has(.timeline-dot) .timeline-content {
   border: 1px solid var(--lm-line);
   border-radius: 14px;
   background: var(--lm-surface);
@@ -23,7 +23,7 @@
 
 .project-card:hover,
 .cloud-card:hover,
-.timeline-content:hover {
+.timeline:has(.timeline-dot) .timeline-content:hover {
   border-color: var(--lm-line-strong);
   box-shadow: var(--lm-shadow-2);
   transform: translateY(-3px);
@@ -81,18 +81,16 @@
 .cloud-card[data-service-id] .time-value { font: inherit; font-variant-numeric: tabular-nums; }
 
 /* ---------- Build-log timeline ---------- */
-/* Shares the .timeline class with Butterfly's {% timeline %} tag; reset the
-   tag's border and spacing only for this page's dotted variant. */
-#article-container .timeline:has(.timeline-dot) { margin: 0 auto; padding: 16px 0; border-left: 0; }
-#article-container .timeline:has(.timeline-dot) .timeline-item { margin: 0; }
-.timeline { position: relative; max-width: 680px; margin: 0 auto; padding: 16px 0; }
-.timeline::before { position: absolute; top: 0; bottom: 0; left: 100px; width: 2px; background: linear-gradient(180deg, var(--lm-coral), var(--lm-violet), var(--lm-sky)); content: ""; opacity: 0.45; }
-.timeline-item { position: relative; display: flex; align-items: flex-start; gap: 16px; padding: 14px 0; }
+/* Shares the .timeline class with Butterfly's {% timeline %} tag, so every
+   rule is scoped to this page's dotted variant; posts keep the tag's look. */
+#article-container .timeline:has(.timeline-dot) { position: relative; max-width: 680px; margin: 0 auto; padding: 16px 0; border-left: 0; }
+.timeline:has(.timeline-dot)::before { position: absolute; top: 0; bottom: 0; left: 100px; width: 2px; background: linear-gradient(180deg, var(--lm-coral), var(--lm-violet), var(--lm-sky)); content: ""; opacity: 0.45; }
+#article-container .timeline:has(.timeline-dot) .timeline-item { position: relative; display: flex; align-items: flex-start; gap: 16px; margin: 0; padding: 14px 0; }
 .timeline-dot { position: absolute; top: 20px; left: 94px; z-index: 1; width: 10px; height: 10px; border: 2px solid var(--lm-surface); border-radius: 50%; background: var(--lm-violet); box-shadow: 0 0 0 3px var(--lm-violet-soft); }
 .timeline-date { flex-shrink: 0; width: 80px; padding-top: 2px; color: var(--lm-violet); font-family: var(--lm-font-serif); font-size: 0.9rem; font-style: italic; font-weight: 600; text-align: right; }
-.timeline-content { flex: 1; margin-left: 16px; padding: 12px 16px; }
-.timeline-content h3 { margin: 0 0 4px; border: none; color: var(--lm-ink); font-size: 0.98rem; }
-.timeline-content p { margin: 0; color: var(--lm-ink-3); font-size: 0.86rem; line-height: 1.6; }
+.timeline:has(.timeline-dot) .timeline-content { flex: 1; margin-left: 16px; padding: 12px 16px; }
+.timeline:has(.timeline-dot) .timeline-content h3 { margin: 0 0 4px; border: none; color: var(--lm-ink); font-size: 0.98rem; }
+.timeline:has(.timeline-dot) .timeline-content p { margin: 0; color: var(--lm-ink-3); font-size: 0.86rem; line-height: 1.6; }
 
 /* ---------- Friend links ---------- */
 .flink .flink-list > .flink-list-item {

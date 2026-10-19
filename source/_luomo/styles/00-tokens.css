@@ -25,6 +25,10 @@
   --lm-violet-soft: rgba(102, 86, 216, 0.1);
   --lm-coral-soft: rgba(232, 102, 91, 0.1);
   --lm-grad: linear-gradient(90deg, var(--lm-coral), var(--lm-violet) 55%, var(--lm-sky));
+  --lm-grad-v: linear-gradient(180deg, var(--lm-coral), var(--lm-violet) 55%, var(--lm-sky));
+  /* Supporting inks for theme tags (labels, buttons) that ask for green/orange */
+  --lm-moss: #3f9573;
+  --lm-amber: #c98226;
 
   /* Depth */
   --lm-shadow-1: 0 1px 2px rgba(31, 36, 64, 0.05), 0 10px 28px -16px rgba(31, 36, 64, 0.22);
@@ -61,6 +65,8 @@
   --lm-sky: #6ccbec;
   --lm-violet-soft: rgba(165, 150, 255, 0.14);
   --lm-coral-soft: rgba(255, 141, 126, 0.12);
+  --lm-moss: #6fcfa5;
+  --lm-amber: #f0b45e;
 
   --lm-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 30px -18px rgba(0, 0, 0, 0.7);
   --lm-shadow-2: 0 2px 8px rgba(0, 0, 0, 0.45), 0 24px 48px -22px rgba(120, 100, 255, 0.35);
