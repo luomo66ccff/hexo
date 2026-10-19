@@ -17,6 +17,10 @@ for (const route of ['projects', 'cloud', 'build-log', 'status']) {
   assert.ok(html.includes('name="description"'), `${route} needs a search description`);
 }
 assert.ok(/<link\b[^>]*rel="canonical"[^>]*href="https:\/\/blog\.luomo\.moe\/"/.test(read('index.html')), 'canonical homepage should use the directory URL');
+// Structured data (structured_data in _config.butterfly.yml): BlogPosting on posts, WebSite on the home page.
+const jsonLd = file => [...read(file).matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(match => JSON.parse(match[1]));
+assert.ok(jsonLd('posts/3d61fa8b.html').some(item => item['@type'] === 'BlogPosting' && item.headline), 'posts need BlogPosting structured data');
+assert.ok(jsonLd('index.html').some(item => item['@type'] === 'WebSite'), 'home needs WebSite structured data');
 // Visual layer: every partial is bundled, none is published on its own.
 const theme = read('css/luomo-theme.css');
 const partials = fs.readdirSync(path.resolve(__dirname, '../source/_luomo/styles')).filter(name => name.endsWith('.css'));
