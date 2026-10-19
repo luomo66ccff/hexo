@@ -40,6 +40,20 @@ assert.ok(home.indexOf('class="lm-starmap"') < home.indexOf('id="aside-content"'
 assert.equal(/class="lm-(feature|starmap|issue)"/.test(read('archives/index.html')), false, 'home sections belong to the home page only');
 assert.equal(fs.existsSync(path.join(root, 'status/config.js')), false, 'legacy public configuration must not be deployed');
 assert.equal(fs.existsSync(path.join(root, 'status/static')), false, 'legacy status bundles must not be deployed');
+// Post tags keep front-matter order; the first tag is the main topic (scripts/luomo-tag-order.js).
+const postsDir = path.resolve(__dirname, '../source/_posts');
+let taggedPosts = 0;
+for (const name of fs.readdirSync(postsDir).filter(file => file.endsWith('.md'))) {
+  const front = fs.readFileSync(path.join(postsDir, name), 'utf8').split(/^---\s*$/m)[1] || '';
+  const id = (front.match(/^abbrlink:\s*['"]?([0-9a-f]+)/m) || [])[1];
+  const block = front.match(/^tags:\s*\n((?:[ \t]+-[^\n]*\n?)+)/m);
+  if (!id || !block || /^published:\s*false/m.test(front)) continue;
+  const expected = block[1].split('\n').map(line => line.replace(/^\s*-\s*/, '').trim().replace(/^(['"])(.*)\1$/, '$2')).filter(Boolean);
+  const actual = [...read(`posts/${id}.html`).matchAll(/class="post-meta__tags" href="[^"]*">([^<]*)</g)].map(match => match[1]);
+  assert.deepEqual(actual, expected, `posts/${id}.html tags must keep front-matter order`);
+  taggedPosts++;
+}
+assert.ok(taggedPosts >= 5, 'tag order check found too few posts');
 // Third-party banners carry a credit; the owner's own images stay unlabelled.
 // Check the actual theme selection, including post cover fallbacks.
 const imageCreditData = require('../source/_data/image_credits.json');
@@ -108,4 +122,4 @@ function inspect(directory) {
   }
 }
 inspect(root);
-console.log(`Build checks passed: ${index.length} articles, four page headings, ${partials.length} style partials, ${creditedBanners} credited banners, ${ownedBanners} unlabelled owned banners, legacy status cleanup, ${checked} text assets.`);
+console.log(`Build checks passed: ${index.length} articles, four page headings, ${partials.length} style partials, ${creditedBanners} credited banners, ${ownedBanners} unlabelled owned banners, legacy status cleanup, ${taggedPosts} posts in tag order, ${checked} text assets.`);
