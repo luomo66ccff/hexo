@@ -207,7 +207,7 @@ inject:
     - <script src="/js/luomo-ui.js?v=20261019-voyage"></script>
     - <script src="/js/luomo-reading.js?v=20261019-voyage"></script>
     - <script src="/js/luomo-command.js?v=20261019-voyage"></script>
-    - <script src="/js/luomo-globe.js?v=20261019-diag" defer></script>
+    - <script src="/js/luomo-globe.js?v=20261019-world-map" defer></script>
 math:
   use: katex
   per_page: true
