@@ -41,6 +41,7 @@
 | `scripts/luomo-styles.js` | 构建时按文件名顺序合并以上文件，输出 `/css/luomo-theme.css` |
 | `scripts/luomo-home.js` | 构建时组装首页第一页：刊号条、封面故事、星港入口、「最新手帐」标题、星港索引，不改主题模板 |
 | `scripts/luomo-local-assets.js` | 把 `hexo-tag-hint` 的样式改成从本站加载 |
+| `scripts/luomo-tag-order.js` | 让每篇文章的标签保持 front matter 里写的顺序（第一个是主话题）；Hexo 本身按全站标签的入库顺序返回，换 Hexo 版本后顺序会变 |
 | `source/_data/home.yml` | 首页各区块的文案、入口链接、标签配色和航行起始日 |
 | `source/_data/widget.yml` | 侧栏自定义小组件（访客星图的挂载点） |
 | `source/js/luomo-globe.js` | 侧栏「访客星图」：Canvas 绘制的星图地球，数据来自 `/api/visitors` |
@@ -117,6 +118,16 @@
 - 404：4.13 是 `.error404 #error-wrap`，5.x 是 `.type-404`。
 - 上一篇/下一篇：5.x 是 `a.pagination-related`。
 - 横幅地址：5.x 写成不带引号的 `url(...)`。
+
+## 升级 Hexo
+
+当前是 **Hexo 8.1**，需要 Node.js 20.19 以上（Vercel 的 20/22/24 都满足；Node 18 已不能用）。
+
+1. `pnpm add hexo@^新版本`，同时看一眼 `hexo-generator-*`、`hexo-renderer-*` 有没有对应的新大版本。
+2. 升级前后各构建一次（先 `pnpm run clean`），逐个对比 `public/` 里的文件。版本号、`orderby: random` 的侧栏标签云、音乐播放器的随机 id 会变，这些是正常的；文章正文、注音（`{文字|注音}`）、标签顺序不应该变。
+3. 运行下面的"验证"。`tools/check-site.cjs` 会核对每篇文章的标签顺序和 front matter 一致。
+
+Hexo 8 的两处输出变化：Open Graph 的 `article:tag` 改为按字母排序（Hexo 自己的改动，不影响页面显示）；文章列表、搜索索引、站点地图里标签和文章的先后取决于处理顺序，本来就不固定。
 
 ## 首页与侧栏布局
 
