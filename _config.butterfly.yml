@@ -200,11 +200,12 @@ lazyload:
   enable: true
 inject:
   head:
-    - <link rel="stylesheet" href="/css/luomo-theme.css?v=20261019-artwork">
+    - <link rel="stylesheet" href="/css/luomo-theme.css?v=20261019-globe">
   bottom:
     - <script src="/js/luomo-theme.js?v=20261011-status"></script>
     - <script src="/js/luomo-navigation.js?v=20261011"></script>
     - <script src="/js/luomo-ui.js?v=20261019-counters"></script>
+    - <script src="/js/luomo-globe.js?v=20261019-globe" defer></script>
 math:
   use: katex
   per_page: true

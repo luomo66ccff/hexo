@@ -5,7 +5,8 @@
   "outputDirectory": "public",
   "framework": "hexo",
   "functions": {
-    "api/status.js": { "maxDuration": 10 }
+    "api/status.js": { "maxDuration": 10 },
+    "api/visitors.js": { "maxDuration": 10 }
   },
   "redirects": [
     { "source": "/index.html", "destination": "/", "permanent": true }

@@ -42,7 +42,10 @@
 | `scripts/luomo-home.js` | 构建时组装首页第一页：刊号条、封面故事、星港入口、「最新手帐」标题、星港索引，不改主题模板 |
 | `scripts/luomo-local-assets.js` | 把 `hexo-tag-hint` 的样式改成从本站加载 |
 | `source/_data/home.yml` | 首页各区块的文案、入口链接、标签配色和航行起始日 |
-| `source/_data/widget.yml` | 侧栏自定义小组件（目前是 MapMyVisitors 访客地图） |
+| `source/_data/widget.yml` | 侧栏自定义小组件（访客星图的挂载点） |
+| `source/js/luomo-globe.js` | 侧栏「访客星图」：Canvas 绘制的星图地球，数据来自 `/api/visitors` |
+| `api/visitors.js`、`lib/visitor-countries.cjs` | 读取 Vercel Web Analytics 的各国访客数，只返回国家代码和人数 |
+| `scripts/luomo-analytics.js` | 构建时按环境变量注入 Vercel Web Analytics 的统计脚本 |
 | `source/_data/image_credits.json` | 第三方横幅图片的署名信息 |
 | `source/js/luomo-ui.js` | 阅读进度条、卡片柔光、`/` 快捷搜索、航行天数实时计算、Pjax 换页柔化、本地预览时的访客统计标注，以及 Waline 人机验证框的清理补丁 |
 | `source/js/luomo-navigation.js` | 导航菜单与搜索的键盘操作和无障碍属性 |
@@ -64,6 +67,24 @@
 | `layout/includes/footer.pug` | 末尾加"图片来源"链接；页脚导航只有站外链接才新开标签页 | 链接到 `/image-credits/`；原版把站内链接也设成了新标签页 |
 | `layout/image-credits.pug` | 新增 | 图片来源页的布局 |
 | `source/img/wechat.jpg`、`alipay.jpg` | 新增 | 打赏二维码 |
+
+## 访客星图（Vercel Web Analytics）
+
+侧栏的「访客星图」是自己画的地球：经纬网、从星港（`widget.yml` 里的 `data-home`，默认辽宁）出发到各访客国家的航线弧光、按访客数缩放的光点；可以拖动旋转，悬停光点显示国家和人数，下方是前五名的排行。开启"减少动态效果"时停止自转和光点闪烁；卡片不在视口内或页面隐藏时暂停绘制。
+
+数据流：浏览器请求 `/api/visitors` → 函数用服务器端令牌查询 Vercel 的 `GET /v1/query/web-analytics/visits/aggregate?by=country`（固定近 90 天）→ 只把国家代码和访客数返回给浏览器，CDN 缓存 1 小时。接口拒绝任何查询参数和 GET/HEAD 以外的方法，令牌和上游错误信息都不会出现在响应里。
+
+**需要在 Vercel 里完成的配置**（都在 `hexo-nqq9` 项目里）：
+
+1. **开启 Web Analytics**：项目页 → Analytics → Enable。开启后页面会给出一个本项目专用的脚本路径，形如 `/<一串字符>/script.js`。
+2. **添加环境变量**（Settings → Environment Variables，环境选 Production）：
+   - `VERCEL_WEB_ANALYTICS_SCRIPT`：上一步的脚本路径（以 `/` 开头、以 `.js` 结尾），构建时会注入到每个页面，开始收集访问数据。
+   - `VERCEL_ANALYTICS_TOKEN`：在 Account Settings → Tokens 新建的访问令牌，Scope 选 `luomo66ccff's projects`，建议设置有效期并标记为 Sensitive。
+   - `VERCEL_ANALYTICS_PROJECT`：`hexo-nqq9`（或项目 ID）。
+   - `VERCEL_ANALYTICS_TEAM`：团队 ID（`team_` 开头，在团队 Settings → General 可以看到）。
+3. **重新部署**一次。之后每有访客，数据会在 Vercel 里累计；地球在下一次缓存过期（最多 1 小时）后显示出来。
+
+状态：没有配置令牌时，接口返回 `unconfigured`，地球显示"访客星图 · 暂不可用"；配置了但查询失败（令牌过期、权限不对、超时）时返回 `unavailable`，同样显示暂不可用，错误码只写进函数日志；配置正常但还没有数据时显示"近期还没有访客数据"。
 
 ## 访客统计（不蒜子）
 
