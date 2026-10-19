@@ -50,6 +50,6 @@ for (const name of ['world-atlas', 'topojson-client', 'd3-geo', 'd3-array', 'int
   }
   notices.push(`\n===== ${name} =====\n${fs.readFileSync(path.join(directory, 'LICENSE'), 'utf8')}`);
 }
-fs.writeFileSync(path.join(path.dirname(output), 'luomo-geo.LICENSE.txt'), notices.join('\n') + '\n');
+fs.writeFileSync(path.join(path.dirname(output), 'luomo-geo.LICENSE.txt'), notices.join('\n').trimEnd() + '\n');
 const bytes = fs.readFileSync(output);
 console.log(`World map bundle: ${bytes.length} bytes (${zlib.gzipSync(bytes).length} gzip), ${land.features.length} land feature(s).`);
