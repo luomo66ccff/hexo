@@ -33,14 +33,17 @@
 | `30-home.css` | 首页文章卡片、分页、星港入口、栏目标题 |
 | `35-home-artwork.css` | 首页「夜航书」版式：刊号条、封面故事、星港索引，以及首页专用的版面平衡规则 |
 | `40-article.css` | 文章、页面、归档的纸面容器和正文排版，标签胶囊 |
+| `45-post.css` | 文章页：横幅小标与信息胶囊、小节编号、标签插件（label、btn、hideToggle、timeline、代码块）、结尾标记、目录航线 |
 | `50-aside.css` | 侧栏卡片、作者卡、公告、最新评论、目录、访客地图 |
 | `60-pages.css` | 项目档案、云服务面板/状态页、建站日志、友链、404。这些类名在 `source/*/index.md` 里直接使用 |
 | `70-motion.css` | 入场动画、滚动浮现、阅读进度条、卡片柔光、Pjax 换页柔化、标题随滚动淡出、"减少动态效果"处理 |
+| `80-command.css` | 命令面板、快捷键表、`G` 键提示、轻提示、导航栏触发按钮，以及深色切换和换页的 View Transitions |
 | `90-banners.css` | 每张横幅的焦点位置 |
 | `95-image-credits.css` | 横幅署名标签和图片来源页 |
 | `scripts/luomo-styles.js` | 构建时按文件名顺序合并以上文件，输出 `/css/luomo-theme.css` |
 | `scripts/luomo-home.js` | 构建时组装首页第一页：刊号条、封面故事、星港入口、「最新手帐」标题、星港索引，不改主题模板 |
 | `scripts/luomo-local-assets.js` | 把 `hexo-tag-hint` 的样式改成从本站加载 |
+| `scripts/luomo-headings.js` | 给作者自己编了号的文章二级标题加 `lm-own-number`，避免和自动编号重复 |
 | `scripts/luomo-tag-order.js` | 让每篇文章的标签保持 front matter 里写的顺序（第一个是主话题）；Hexo 本身按全站标签的入库顺序返回，换 Hexo 版本后顺序会变 |
 | `source/_data/home.yml` | 首页各区块的文案、入口链接、标签配色和航行起始日 |
 | `source/_data/widget.yml` | 侧栏自定义小组件（访客星图的挂载点） |
@@ -48,7 +51,9 @@
 | `api/visitors.js`、`lib/visitor-countries.cjs` | 读取 Vercel Web Analytics 的各国访客数，只返回国家代码和人数 |
 | `scripts/luomo-analytics.js` | 构建时按环境变量注入 Vercel Web Analytics 的统计脚本 |
 | `source/_data/image_credits.json` | 第三方横幅图片的署名信息 |
-| `source/js/luomo-ui.js` | 阅读进度条、卡片柔光、`/` 快捷搜索、航行天数实时计算、Pjax 换页柔化、本地预览时的访客统计标注，以及 Waline 人机验证框的清理补丁 |
+| `source/js/luomo-ui.js` | 阅读进度条、卡片柔光、`/` 快捷搜索、航行天数实时计算、Pjax 换页柔化与转场、深色模式圆形扩散、轻提示、本地预览时的访客统计标注，以及 Waline 人机验证框的清理补丁 |
+| `source/js/luomo-reading.js` | 文章页：目录高亮纠正、航线填充、剩余阅读时间、小节链接、`J`/`K` 跳节 |
+| `source/js/luomo-command.js` | 命令面板（`Ctrl/⌘ K`）、快捷键和 `?` 快捷键表 |
 | `source/js/luomo-navigation.js` | 导航菜单与搜索的键盘操作和无障碍属性 |
 | `source/js/luomo-theme.js` | 项目筛选和状态页检查 |
 
@@ -68,6 +73,30 @@
 | `layout/includes/footer.pug` | 末尾加"图片来源"链接；页脚导航只有站外链接才新开标签页 | 链接到 `/image-credits/`；原版把站内链接也设成了新标签页 |
 | `layout/image-credits.pug` | 新增 | 图片来源页的布局 |
 | `source/img/wechat.jpg`、`alipay.jpg` | 新增 | 打赏二维码 |
+
+## 文章页、命令面板与转场
+
+**文章页（航海日志）**：横幅标题上方有「✦ 航海日志 · VOYAGE LOG」小标，日期、分类、字数、阅读时长、浏览量是一排玻璃胶囊。正文的二级标题前自动加衬线编号（01、02……）；作者已经自己写了编号的标题（如「1. 先吃个瓜」）由 `scripts/luomo-headings.js` 标记，不再重复编号，目录里也不再显示两遍。鼠标移到二级、三级标题上会出现 `#`，点一下复制本节链接。正文结尾有「✦ 本篇完 ✦」。
+
+主题标签插件统一换成配色里的样式：`{% label %}` 是荧光笔划线，`{% btn %}` 是浅色票根按钮，`{% hideToggle %}` 是折页卡片，`{% timeline %}` 是渐变航线，代码块左上角是珊瑚/暮紫/天青三个圆点。颜色名（blue、green、orange……）映射到 `--lm-sky`、`--lm-moss`、`--lm-amber` 等令牌。
+
+**目录**：画成一条航线，当前小节是发光的节点，渐变线填到当前位置，标题下显示「约 N 分钟读完」。主题原本用 IntersectionObserver 判断当前小节，只在标题穿过屏幕顶部一条窄带时更新，往回滚、拖滚动条或从目录跳转后高亮会停在错误的小节；`luomo-reading.js` 按位置重新计算并纠正。
+
+**命令面板**：`Ctrl K`（Mac 上 `⌘ K`）或导航栏的指南针按钮打开。可以搜文章（标题、标签、分类和正文，数据来自 `/search.json`，第一次打开时才加载）、跳到页面（直接读导航菜单，改菜单不用改脚本）、跳到本文小节，或执行指令：切换深色、回到顶部、前往评论区、随机读一篇、复制链接、订阅 RSS。`↑` `↓` 选择，`Enter` 打开，`Esc` 关闭。
+
+**快捷键**（在输入框里不会触发，按 `?` 查看）：
+
+| 按键 | 作用 |
+|---|---|
+| `Ctrl/⌘ K` | 命令面板 |
+| `/` | 站内全文搜索 |
+| `G` 然后 `H` / `A` / `T` / `C` | 首页 / 归档 / 标签 / 分类 |
+| `J` / `K` | 下一节 / 上一节（文章页） |
+| `T` | 回到顶部 |
+| `C` | 前往评论区 |
+| `D` | 切换深色模式 |
+
+**转场**（View Transitions，Chrome/Edge 和 Safari 18 以上；其他浏览器和"减少动态效果"时照常工作，只是没有动画）：切换深色模式时新配色从按钮处圆形扩散；Pjax 换页时旧页面淡出、新页面上浮，导航栏和右下角按钮保持不动；从首页卡片、侧栏、上一篇/下一篇点进文章时，标题会飞到文章横幅的位置。实现方式是把 Pjax 的 `switchSelectors()` 放进 `document.startViewTransition()`，出错时退回整页跳转。动画进行的约半秒里点击不会生效，这是浏览器 View Transitions 的行为。
 
 ## 访客星图（Vercel Web Analytics）
 

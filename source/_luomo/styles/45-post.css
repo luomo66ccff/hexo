@@ -1,0 +1,380 @@
+/*
+ * 航海日志 · the post page. Hero chips, numbered sections, the theme's tag
+ * plugins (labels, buttons, toggles, timelines, code blocks) in the journal
+ * palette, the closing mark, and the TOC drawn as a route.
+ * luomo-reading.js adds the section links, the TOC route fill and the
+ * remaining reading time.
+ */
+
+/* ---------- Hero: kicker, meta as glass chips ---------- */
+/* The theme sizes every child of #post-info (max-width, centring, padding);
+   a pseudo-element is not matched by "> *", so mirror it here. */
+#page-header.post-bg #post-info::before {
+  display: block;
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto 10px;
+  padding: 0 15px;
+  color: rgba(255, 255, 255, 0.78);
+  font-family: var(--lm-font-serif);
+  font-size: 13px;
+  font-style: italic;
+  letter-spacing: 0.28em;
+  content: "✦ 航海日志 · VOYAGE LOG";
+  text-shadow: 0 1px 6px rgba(10, 10, 30, 0.5);
+}
+
+@media (min-width: 768px) and (max-width: 1300px) {
+  #page-header.post-bg #post-info::before { padding: 0 30px; }
+}
+
+@media (min-width: 2000px) {
+  #page-header.post-bg #post-info::before { max-width: 70%; }
+}
+
+#page-header #post-info #post-meta {
+  margin-top: 14px;
+  font-size: 13px;
+}
+
+#page-header #post-info #post-meta > div {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 8px 8px 0;
+  vertical-align: top;
+}
+
+#page-header #post-info #post-meta .post-meta-separator { display: none; }
+
+#page-header #post-info #post-meta > div > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  padding: 4px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(14, 16, 34, 0.32);
+  line-height: 1.6;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+#page-header #post-info #post-meta .post-meta-label { opacity: 0.72; }
+#page-header #post-info #post-meta .post-meta-icon { margin-right: 0; opacity: 0.85; }
+#page-header #post-info #post-meta .post-meta-date .fa-history { margin-left: 0.7em; }
+
+#page-header #post-info #post-meta span.post-meta-categories {
+  border-color: transparent;
+  background: linear-gradient(120deg, rgba(232, 102, 91, 0.82), rgba(102, 86, 216, 0.82));
+}
+
+/* ---------- Numbered sections ---------- */
+#post #article-container { counter-reset: lm-section; }
+#post #article-container > h2 { counter-increment: lm-section; }
+
+/* Headings the author numbered (scripts/luomo-headings.js) keep their own. */
+#post #article-container > h2:not(.lm-own-number)::before {
+  display: inline-block;
+  margin-right: 0.5em;
+  color: var(--lm-coral);
+  font-family: var(--lm-font-serif);
+  font-size: 0.72em;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  content: counter(lm-section, decimal-leading-zero);
+  vertical-align: 0.16em;
+}
+
+/* Section link (luomo-reading.js): appears on hover or keyboard focus. */
+.lm-anchor {
+  display: inline-grid;
+  place-items: center;
+  width: 1.5em;
+  height: 1.5em;
+  margin-left: 0.35em;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--lm-ink-3);
+  font-family: var(--lm-font-serif);
+  font-size: 0.7em;
+  font-weight: 400;
+  vertical-align: 0.18em;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s, background-color 0.2s, color 0.2s;
+}
+
+#article-container h2:hover .lm-anchor,
+#article-container h3:hover .lm-anchor,
+.lm-anchor:focus-visible {
+  opacity: 1;
+}
+
+.lm-anchor:hover {
+  background: var(--lm-violet-soft);
+  color: var(--lm-violet);
+}
+
+@media (hover: none) {
+  .lm-anchor { opacity: 0.55; }
+}
+
+/* ---------- Labels: a highlighter stroke instead of a solid sticker ---------- */
+#article-container mark.hl-label {
+  --lm-mark: var(--lm-violet);
+  margin: 0 0.12em;
+  padding: 0 0.28em;
+  border-radius: 0.3em;
+  background: var(--lm-violet-soft);
+  background: linear-gradient(transparent 50%, color-mix(in srgb, var(--lm-mark) 26%, transparent) 50%);
+  color: var(--lm-ink);
+  font-weight: 650;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+#article-container .hl-label.blue { --lm-mark: var(--lm-sky); }
+#article-container .hl-label.pink,
+#article-container .hl-label.red { --lm-mark: var(--lm-coral); }
+#article-container .hl-label.orange { --lm-mark: var(--lm-amber); }
+#article-container .hl-label.green { --lm-mark: var(--lm-moss); }
+
+/* ---------- Buttons: paper tickets tinted by their colour ---------- */
+#article-container .btn-beautify {
+  --lm-btn: var(--lm-violet);
+  border: 1px solid color-mix(in srgb, var(--lm-btn) 38%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--lm-btn) 10%, var(--lm-surface));
+  color: color-mix(in srgb, var(--lm-btn) 80%, var(--lm-ink));
+  font-weight: 600;
+  transition: background-color 0.25s, color 0.25s, border-color 0.25s, transform 0.25s var(--lm-ease), box-shadow 0.25s;
+}
+
+#article-container .btn-beautify.blue { --lm-btn: var(--lm-sky); }
+#article-container .btn-beautify.pink,
+#article-container .btn-beautify.red { --lm-btn: var(--lm-coral); }
+#article-container .btn-beautify.orange { --lm-btn: var(--lm-amber); }
+#article-container .btn-beautify.green { --lm-btn: var(--lm-moss); }
+
+#article-container .btn-beautify:hover,
+#article-container .btn-beautify:focus-visible {
+  border-color: var(--lm-btn);
+  background: var(--lm-btn);
+  color: #fff !important;
+  box-shadow: 0 10px 22px -14px var(--lm-btn);
+  transform: translateY(-2px);
+}
+
+[data-theme="dark"] #article-container .btn-beautify:hover,
+[data-theme="dark"] #article-container .btn-beautify:focus-visible {
+  color: #14151f !important;
+}
+
+/* ---------- Toggles: a folded page, not a coloured bar ----------
+   The tag writes its colours inline, hence !important. */
+#article-container details.toggle {
+  overflow: hidden;
+  border: 1px solid var(--lm-line) !important;
+  border-radius: 14px;
+  background: var(--lm-surface-2);
+}
+
+#article-container details.toggle > summary.toggle-button {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.75em 1.1em;
+  background: transparent !important;
+  color: var(--lm-ink) !important;
+  font-weight: 650;
+  transition: background-color 0.2s;
+}
+
+#article-container details.toggle > summary.toggle-button::before {
+  display: inline-grid;
+  place-items: center;
+  width: 1.6em;
+  height: 1.6em;
+  margin: 0;
+  border-radius: 50%;
+  background: var(--lm-violet-soft);
+  color: var(--lm-violet);
+  font-size: 0.8em;
+}
+
+#article-container details.toggle > summary.toggle-button:hover { background: var(--lm-violet-soft) !important; }
+#article-container details.toggle[open] > summary.toggle-button { border-bottom: 1px dashed var(--lm-line-strong); }
+#article-container details.toggle > .toggle-content { margin: 1.1em 1.3em; }
+
+/* ---------- Timeline tag: a route with stops ---------- */
+#article-container .timeline:not(:has(.timeline-dot)) {
+  --timeline-color: var(--lm-violet);
+  --timeline-bg: var(--lm-surface-2);
+  border-left: 2px solid transparent;
+  border-image: var(--lm-grad-v) 1;
+}
+
+#article-container .timeline:not(:has(.timeline-dot)) .item-circle::before {
+  border-color: var(--lm-violet);
+  background: var(--lm-surface);
+}
+
+#article-container .timeline:not(:has(.timeline-dot)) .timeline-item:hover .item-circle::before {
+  border-color: var(--lm-coral);
+  box-shadow: 0 0 0 4px var(--lm-coral-soft);
+}
+
+#article-container .timeline:not(:has(.timeline-dot)) .headline .item-circle > p {
+  color: var(--lm-ink);
+  font-family: var(--lm-font-serif);
+  font-style: italic;
+}
+
+#article-container .timeline:not(:has(.timeline-dot)) .timeline-item-content {
+  border: 1px solid var(--lm-line);
+  border-radius: 12px;
+  background: var(--lm-surface-2);
+  color: var(--lm-ink-2);
+}
+
+/* ---------- Code blocks: three palette dots and a quiet language tag ---------- */
+#article-container figure.highlight .highlight-tools {
+  gap: 2px;
+  padding: 0 10px;
+  background: var(--lm-surface);
+}
+
+#article-container figure.highlight .highlight-tools::before {
+  flex: 0 0 auto;
+  order: -1;
+  width: 40px;
+  height: 10px;
+  margin-right: 6px;
+  background:
+    radial-gradient(circle at 5px 5px, var(--lm-coral) 4px, transparent 4.5px),
+    radial-gradient(circle at 20px 5px, var(--lm-violet) 4px, transparent 4.5px),
+    radial-gradient(circle at 35px 5px, var(--lm-sky) 4px, transparent 4.5px);
+  content: "";
+  opacity: 0.85;
+}
+
+#article-container figure.highlight .highlight-tools .code-lang {
+  color: var(--lm-ink-3);
+  font-family: var(--lm-font-mono);
+  font-size: 0.78em;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+/* ---------- Closing mark ---------- */
+#post #article-container::after {
+  display: block;
+  margin: 3em 0 0.5em;
+  color: var(--lm-ink-3);
+  font-family: var(--lm-font-serif);
+  font-size: 14px;
+  font-style: italic;
+  letter-spacing: 0.4em;
+  text-align: center;
+  content: "✦  本篇完  ✦";
+}
+
+/* ---------- TOC: a route; luomo-reading.js fills it up to the active stop ---------- */
+#aside-content #card-toc .toc-content .toc {
+  position: relative;
+}
+
+#aside-content #card-toc .toc-content .toc::before,
+#aside-content #card-toc .toc-content .toc::after {
+  position: absolute;
+  top: 8px;
+  left: 7px;
+  width: 2px;
+  border-radius: 2px;
+  content: "";
+}
+
+#aside-content #card-toc .toc-content .toc::before {
+  bottom: 8px;
+  background: var(--lm-line-strong);
+}
+
+#aside-content #card-toc .toc-content .toc::after {
+  height: var(--lm-toc-fill, 0px);
+  background: var(--lm-grad-v);
+  transition: height 0.35s var(--lm-ease);
+}
+
+#aside-content #card-toc .toc-content .toc > .toc-item > .toc-child,
+#aside-content #card-toc .toc-content .toc-child {
+  margin-left: 0;
+  padding-left: 0;
+  border-left: 0;
+}
+
+#aside-content #card-toc .toc-content .toc-link {
+  position: relative;
+  padding-left: 24px;
+  border-left: 0 !important;
+}
+
+#aside-content #card-toc .toc-content .toc-child .toc-link { padding-left: 38px; }
+
+#aside-content #card-toc .toc-content .toc-link::before {
+  position: absolute;
+  top: calc(0.85em - 1px);
+  left: 3px;
+  z-index: 1;
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--lm-line-strong);
+  border-radius: 50%;
+  background: var(--lm-surface);
+  content: "";
+  transition: border-color 0.25s, background 0.25s, box-shadow 0.25s, transform 0.25s var(--lm-ease);
+}
+
+#aside-content #card-toc .toc-content .toc-child .toc-link::before {
+  left: 4px;
+  width: 8px;
+  height: 8px;
+  margin-top: 1px;
+}
+
+#aside-content #card-toc .toc-content .toc-link.active::before {
+  border-color: var(--lm-surface);
+  background: var(--lm-violet);
+  box-shadow: 0 0 0 3px var(--lm-violet-soft), 0 0 12px rgba(102, 86, 216, 0.45);
+  transform: scale(1.15);
+}
+
+#aside-content #card-toc .toc-content .toc-number {
+  color: var(--lm-ink-3);
+  font-family: var(--lm-font-serif);
+  font-style: italic;
+}
+
+#aside-content #card-toc .toc-content .toc-link.active .toc-number { color: inherit; }
+#aside-content #card-toc .lm-toc-own-numbers > .toc-item > .toc-link > .toc-number { display: none; }
+
+.lm-toc-remaining {
+  display: block;
+  margin: -4px 0 8px;
+  color: var(--lm-ink-3);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 768px) {
+  #page-header #post-info #post-meta { font-size: 12px; }
+  #page-header #post-info #post-meta > div { gap: 6px; }
+  #page-header #post-info #post-meta > div > span { padding: 3px 10px; }
+  #page-header.post-bg #post-info::before { display: none; }
+  #page-header #post-info #post-meta .post-meta-label { display: none; }
+  #page-header #post-info #post-meta > div { display: flex; margin: 0 0 6px; }
+}

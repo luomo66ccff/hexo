@@ -23,6 +23,10 @@ const partials = fs.readdirSync(path.resolve(__dirname, '../source/_luomo/styles
 for (const name of partials) assert.ok(theme.includes(`==== ${name} ====`), `style partial ${name} missing from css/luomo-theme.css`);
 assert.equal(fs.existsSync(path.join(root, '_luomo')), false, 'style partials must not be published');
 assert.ok(read('index.html').includes('/js/luomo-ui.js'), 'interaction layer must be injected');
+for (const script of ['luomo-reading.js', 'luomo-command.js']) assert.ok(read('index.html').includes(`/js/${script}`), `${script} must be injected`);
+// Self-numbered post headings skip the automatic section number (scripts/luomo-headings.js).
+assert.ok(read('posts/7a1d0a11.html').includes('class="lm-own-number"'), 'numbered headings must be marked');
+assert.equal(read('posts/3d61fa8b.html').includes('lm-own-number'), false, 'unnumbered headings keep the automatic number');
 // Sidebar widgets from source/_data/widget.yml render as-is (the visitor globe lives there).
 assert.ok(/id="user-map"[\s\S]*class="lm-globe" data-endpoint="\/api\/visitors"/.test(read('index.html')), 'visitor star-map globe must render in the sidebar');
 assert.ok(read('index.html').includes('/js/luomo-globe.js'), 'globe script must be injected');
