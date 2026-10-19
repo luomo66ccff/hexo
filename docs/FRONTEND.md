@@ -106,7 +106,9 @@
 
 侧栏的「访客星图」是自己画的地球：经纬网、从星港（`widget.yml` 里的 `data-home`，默认辽宁）出发到各访客国家的航线弧光、按访客数缩放的光点；可以拖动旋转，悬停光点显示国家和人数，下方是前五名的排行。开启"减少动态效果"时停止自转和光点闪烁；卡片不在视口内或页面隐藏时暂停绘制。
 
-数据流：浏览器请求 `/api/visitors` → 函数用服务器端令牌查询 Vercel 的 `GET /v1/query/web-analytics/visits/aggregate?by=country`（固定近 90 天）→ 只把国家代码和访客数返回给浏览器，CDN 缓存 1 小时。接口拒绝任何查询参数和 GET/HEAD 以外的方法，令牌和上游错误信息都不会出现在响应里。
+数据流：浏览器请求 `/api/visitors` → 函数用服务器端令牌查询 Vercel 的 `GET /v1/query/web-analytics/visits/aggregate?by=country`（先查近 90 天，遇 HTTP 400 再依次尝试 30 天、7 天）→ 只把国家代码和访客数返回给浏览器。接口拒绝任何查询参数和 GET/HEAD 以外的方法，令牌和上游错误正文都不会出现在响应里。
+
+`since`、`until` 使用完整 UTC ISO 时间，范围截止到请求时刻，包含当天已发生的访问；响应也返回相同时间范围和实际 `windowDays`。Vercel 的[官方接口说明](https://vercel.com/docs/rest-api/web-analytics/aggregates-page-views)将这两个参数定义为包含边界的日期时间，不能把 `until` 截成当天零点。有数据时 CDN 缓存 1 小时并允许后台刷新；空数据只缓存 60 秒，不启用过期内容复用。
 
 **需要在 Vercel 里完成的配置**（都在 `hexo-nqq9` 项目里）：
 
@@ -116,9 +118,9 @@
    - `VERCEL_ANALYTICS_TOKEN`：在 Account Settings → Tokens 新建的访问令牌，Scope 选 `luomo66ccff's projects`，建议设置有效期并标记为 Sensitive。
    - `VERCEL_ANALYTICS_PROJECT`：`hexo-nqq9`（或项目 ID）。
    - `VERCEL_ANALYTICS_TEAM`：团队 ID（`team_` 开头，在团队 Settings → General 可以看到）。
-3. **重新部署**一次。之后每有访客，数据会在 Vercel 里累计；地球在下一次缓存过期（最多 1 小时）后显示出来。
+3. **重新部署**一次。之后每有访客，数据会在 Vercel 里累计；首次数据可在空结果的 60 秒缓存过期、上游统计可查后显示，有数据后的更新按 1 小时缓存刷新。
 
-状态：没有配置令牌时，接口返回 `unconfigured`，地球显示"访客星图 · 暂不可用"；配置了但查询失败（令牌过期、权限不对、超时）时返回 `unavailable`，同样显示暂不可用，错误码只写进函数日志；配置正常但还没有数据时显示"近期还没有访客数据"。
+状态：令牌或项目标识缺失时，接口返回 `unconfigured`，地球显示"访客星图 · 暂不可用"；配置了但查询失败（令牌过期、权限不对、超时）时返回 `unavailable`，地球显示"统计数据暂时取不到"，安全的 `reason` 错误码会返回浏览器并记录到函数日志。缺失或非数组的 `data`、带有错误信封的上游 JSON 返回 `upstream_invalid`，读取响应体超时保留 `upstream_timeout`，不会冒充正常零数据；合法空数组正常返回 `ok`。未知国家或缺失国家的行仍按现有归一化规则处理，不据此把整个响应判为错误。配置正常但还没有可展示的数据时显示"近期还没有访客数据"。
 
 ## 访客统计（不蒜子）
 
