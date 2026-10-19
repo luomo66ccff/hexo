@@ -213,9 +213,16 @@
       this.list.querySelectorAll('.lm-globe-name').forEach(function (node, i) { node.textContent = self.points[i].name; });
       this.meta.textContent = '近 ' + (data.windowDays || 90) + ' 天 · ' + this.points.length + ' 个国家和地区 · ' + data.total + ' 位访客';
     } else {
-      this.status.innerHTML = this.state === 'empty'
-        ? '<b>访客星图</b><span>近期还没有访客数据</span>'
-        : '<b>访客星图 · 暂不可用</b><span>等待接入 Vercel Web Analytics</span>';
+      var lines = {
+        empty: ['访客星图', '近期还没有访客数据'],
+        unconfigured: ['访客星图 · 暂不可用', '等待接入 Vercel Web Analytics'],
+        unavailable: ['访客星图 · 暂不可用', '统计数据暂时取不到']
+      }[this.state === 'empty' ? 'empty' : (data.status === 'unconfigured' ? 'unconfigured' : 'unavailable')];
+      this.status.innerHTML = '<b></b><span></span>';
+      this.status.firstChild.textContent = lines[0];
+      this.status.lastChild.textContent = lines[1];
+      // Safe upstream status (e.g. upstream_403) for whoever is debugging.
+      this.status.title = data.reason ? '诊断码：' + data.reason : '';
       this.list.innerHTML = '';
       this.meta.textContent = '';
     }
