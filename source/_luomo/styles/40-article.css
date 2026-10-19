@@ -298,31 +298,136 @@
   border-radius: 10px;
 }
 
-/* ---------- Archives / tag / category lists ---------- */
-.article-sort-item::before {
-  border-color: var(--lm-violet);
+/* ---------- Archives / tag / category lists: 航线日志 ----------
+   One route (gradient line) with a stop per post; years are large serif
+   numerals, posts are paper rows. Theme positions the stops with ::before
+   at a fixed offset from each row, so rows keep the theme's left margin. */
+.article-sort {
+  border-left: 2px solid transparent;
+  border-image: var(--lm-grad-v) 1;
 }
 
-.article-sort-item .article-sort-item-title {
+.article-sort-title {
   color: var(--lm-ink);
+  font-weight: 750;
+  letter-spacing: 0.02em;
+}
+
+.article-sort-title::before,
+.article-sort-item::before {
+  box-sizing: border-box;
+  border: 2px solid var(--lm-violet) !important;
+  background: var(--lm-surface) !important;
+  transition: background-color 0.25s, box-shadow 0.25s, transform 0.25s var(--lm-ease);
+}
+
+.article-sort-title::before {
+  left: -8px;
+  width: 18px;
+  height: 18px;
+  border-width: 4px !important;
+  background: var(--lm-surface) !important;
+}
+
+.article-sort-title::after { background: var(--lm-coral); opacity: 0.5; }
+
+.article-sort-item.year {
+  width: fit-content;
+  margin: 18px 0 14px 10px;
+  padding-right: 0.15em;
+  color: transparent;
+  background: var(--lm-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-family: var(--lm-font-serif);
+  font-size: 2.1em;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+.article-sort-item.year::before {
+  left: -38px;
+  width: 14px;
+  height: 14px;
+  border-color: var(--lm-coral) !important;
+  background: var(--lm-coral) !important;
+  box-shadow: 0 0 0 4px var(--lm-coral-soft);
+}
+
+.article-sort-item:not(.year) {
+  min-height: 0;
+  height: auto;
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--lm-line);
+  border-radius: 14px;
+  background: var(--lm-surface-2);
+  transition: border-color 0.25s, box-shadow 0.3s, transform 0.3s var(--lm-ease), background-color 0.25s;
+}
+
+.article-sort-item:not(.year)::before {
+  width: 12px;
+  height: 12px;
+  /* Centred on the route: the theme offset plus this row's 1px border. */
+  left: -38px;
+}
+
+.article-sort-item:not(.year):hover {
+  border-color: color-mix(in srgb, var(--lm-violet) 40%, transparent);
+  background: var(--lm-surface);
+  box-shadow: var(--lm-shadow-2);
+  transform: translateX(4px);
+}
+
+.article-sort-item:not(.year):hover::before {
+  background: var(--lm-violet) !important;
+  box-shadow: 0 0 0 4px var(--lm-violet-soft), 0 0 12px rgba(102, 86, 216, 0.45);
+  transform: translateX(-4px) scale(1.15);
+}
+
+.article-sort-item.no-article-cover { height: auto; min-height: 76px; }
+.article-sort-item.no-article-cover .article-sort-item-info { padding: 0 2px; }
+
+.article-sort-item-info { padding: 0 4px 0 16px; }
+
+.article-sort-item-time {
+  color: var(--lm-violet);
+  font-family: var(--lm-font-serif);
+  font-size: 0.86em;
+  font-style: italic;
+  letter-spacing: 0.06em;
+}
+
+.article-sort-item-time i { display: none; }
+.article-sort-item-time time { padding-left: 0; }
+
+.article-sort-item .article-sort-item-title {
+  margin-top: 2px;
+  color: var(--lm-ink);
+  font-weight: 600;
+  line-height: 1.55;
 }
 
 .article-sort-item .article-sort-item-title:hover {
   color: var(--lm-violet);
-}
-
-.article-sort::before {
-  border-left-color: var(--lm-line-strong);
-}
-
-.article-sort-item.year {
-  color: var(--lm-ink);
-  font-family: var(--lm-font-serif);
-  font-style: italic;
+  transform: none;
 }
 
 .article-sort-item-img {
+  flex: 0 0 auto;
+  width: 112px;
+  height: 76px;
   border-radius: 10px;
+  box-shadow: 0 0 0 1px var(--lm-line), 0 6px 14px -8px rgba(31, 36, 64, 0.45);
+}
+
+@media (max-width: 768px) {
+  .article-sort-item:not(.year) { padding: 10px; }
+  .article-sort-item-img { width: 76px; height: 64px; }
+  .article-sort-item-info { padding-left: 12px; }
+  .article-sort-item.year { font-size: 1.8em; }
 }
 
 /* Tag cloud & category list pages */

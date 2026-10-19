@@ -200,7 +200,7 @@ lazyload:
   enable: true
 inject:
   head:
-    - <link rel="stylesheet" href="/css/luomo-theme.css?v=20261019-voyage">
+    - <link rel="stylesheet" href="/css/luomo-theme.css?v=20261019-archive">
   bottom:
     - <script src="/js/luomo-theme.js?v=20261011-status"></script>
     - <script src="/js/luomo-navigation.js?v=20261011"></script>
@@ -224,3 +224,6 @@ darkmode:
   enable: true
   button: true
   autoChangeMode: false
+# Structured data (JSON-LD) for search engines: BlogPosting on posts, WebSite elsewhere.
+structured_data:
+  enable: true
