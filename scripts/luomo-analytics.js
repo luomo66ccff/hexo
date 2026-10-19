@@ -8,16 +8,25 @@
  * build environment variable VERCEL_WEB_ANALYTICS_SCRIPT, e.g.
  * "/<unique-path>/script.js". Without it nothing is injected, so local and
  * preview builds stay clean.
+ *
+ * Not a body_end injector: Hexo inserts those before the FIRST "</body>",
+ * and the theme's Mermaid script carries "</body></html>" inside a template
+ * string, so the snippet landed in that script, closed it early and printed
+ * the rest of the code on every page. Insert before the last "</body>".
  */
 const SCRIPT = (process.env.VERCEL_WEB_ANALYTICS_SCRIPT || '').trim();
 const SAFE_PATH = /^\/[A-Za-z0-9._~\-/]+\.js$/;
 
-hexo.extend.injector.register('body_end', () => {
-  if (!SCRIPT) return '';
-  if (!SAFE_PATH.test(SCRIPT)) {
-    hexo.log.warn('[luomo-analytics] VERCEL_WEB_ANALYTICS_SCRIPT must be a same-site path ending in .js; skipped');
-    return '';
-  }
-  return '<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>' +
+let snippet = '';
+if (SCRIPT && !SAFE_PATH.test(SCRIPT)) {
+  hexo.log.warn('[luomo-analytics] VERCEL_WEB_ANALYTICS_SCRIPT must be a same-site path ending in .js; skipped');
+} else if (SCRIPT) {
+  snippet = '<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>' +
     `<script defer src="${SCRIPT}"></script>`;
+}
+
+hexo.extend.filter.register('after_render:html', html => {
+  if (!snippet || typeof html !== 'string') return html;
+  const end = html.lastIndexOf('</body>');
+  return end === -1 ? html : html.slice(0, end) + snippet + html.slice(end);
 });
