@@ -9,7 +9,7 @@ date: 2024-08-05 15:22:26
   class_desc: 那些人，那些事
   link_list:
     - name: 阳的小站
-      link: https://yang-qwq.top/
+      link: https://yang-qwq.dev/
       avatar: https://yang-qwq.top/static/img/head.webp
       descr: QAQ！
     - name: Joseph's Blog
