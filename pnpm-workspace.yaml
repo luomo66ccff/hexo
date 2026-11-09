@@ -6,5 +6,6 @@ allowBuilds:
   core-js: true
   ejs: true
   esbuild: false
+  fsevents: false
   hexo-util: true
   highlight.js: true

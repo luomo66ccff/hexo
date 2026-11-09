@@ -9,7 +9,7 @@
         "clean": "hexo clean",
         "deploy": "hexo deploy",
         "server": "hexo server",
-        "test": "node --test test/status.test.cjs test/visitors.test.cjs",
+        "test": "node --test test/status.test.cjs test/visitors.test.cjs test/seo.test.cjs",
         "preview:local": "node tools/preview-local.cjs"
     },
     "hexo": {
@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "@renbaoshuo/markdown-it-katex": "^2.0.2",
+        "@vercel/functions": "3.10.3",
         "hexo": "^8.1.2",
         "hexo-abbrlink": "^2.2.1",
         "hexo-baidu-url-submit": "^0.0.6",
@@ -50,6 +51,7 @@
     "devDependencies": {
         "d3-geo": "3.1.1",
         "esbuild": "0.25.12",
+        "path-to-regexp": "6.1.0",
         "topojson-client": "3.1.0",
         "world-atlas": "2.0.2"
     }

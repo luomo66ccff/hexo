@@ -1,0 +1,50 @@
+# 三月七工具站 · March7th
+
+> 由洛墨 / Luomo 维护的非官方玩家工具与社区服务合集，汇集星穹铁道、原神、绝区零工具，以及 AI API、Misskey 社区和实用工具。
+
+站点入口 https://march7th.cn/。维护者主页 https://luomo.moe/，团队 https://github.com/March7thTeam。
+本站为玩家自制的非官方工具合集，与米哈游（HoYoverse）无关；游戏名称及相关商标归其权利人所有。
+
+## 平台服务
+
+- [AI API 换乘枢纽](https://api.march7th.cn/): OpenAI 兼容的 AI API 服务入口。
+- [三月第七站社区](https://misskey.march7th.cn/): 基于 Misskey 的社区，交流日常与灵感。
+- [March7th Paste](https://paste.march7th.cn/): 代码与 Markdown 内容分享。
+- [EarthOL 玩家档案](https://profile.march7th.cn/): 生成 EarthOL 风格的玩家档案。
+
+## 崩坏：星穹铁道
+
+- [跃迁模拟器](https://hsrwarp.march7th.cn/): 模拟星穹铁道跃迁过程。
+- [流光忆庭](https://light-cone.march7th.cn/): 生成自定义星穹铁道风格光锥。
+- [星穹短信](https://msg.march7th.cn/): 生成星穹铁道风格的短信对话。
+- [罗浮杂俎](https://sr-ghostly-grove.march7th.cn/): 浏览星穹铁道风格的罗浮杂俎。
+
+## 原神
+
+- [祈愿模拟器](https://yswish.march7th.cn/): 模拟原神祈愿过程。
+- [伤害计算与可视化](https://gsdmg.march7th.cn/): 计算并可视化原神伤害。
+- [琴谱练习与录制](https://gsmusic.march7th.cn/): 练习原神琴谱并录制演奏。
+- [原神钢琴](https://gs-piano.march7th.cn/): 在网页中演奏原神钢琴。
+- [随机组队](https://genshin-team.march7th.cn/): 随机生成原神角色队伍。
+- [原神，启动！](https://start.march7th.cn/): 原神启动主题趣味页面。
+
+## 绝区零
+
+- [绳网](https://interknot.march7th.cn/): 绝区零风格的绳网页面。
+
+## 实用工具
+
+- [IT Tools](https://ittool.march7th.cn/): 开发者常用工具箱。
+- [今日热榜](https://hot.march7th.cn/): 聚合浏览热门话题。
+- [临时邮箱](https://email.march7th.cn/): 临时邮箱工具入口。
+
+## 关于与友站
+
+- [洛墨的博客](https://blog.luomo.moe/): AI、开发、运维与日常记录。
+- [洛墨站主页](https://luomo.moe/): 洛墨的个人主页与站点入口。
+- [Luomo Now 此刻状态](https://status.luomo.moe/): 了解洛墨此刻的状态。
+- [阳的小站](https://yang.march7th.cn/): 友站，阳的个人小站。
+
+## Feeds
+
+- [Sitemap](https://march7th.cn/sitemap.xml): 工具站入口页的站点地图。

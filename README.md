@@ -41,11 +41,18 @@
  | 域名 | 说明 |
  |------|------|
  | https://blog.luomo.moe | 博客正式主域名 |
+ | https://march7th.cn | 三月七工具站独立入口，其他博客路径 301 至博客主域名 |
  | https://luomo.march7th.cn | 旧入口（历史兼容） |
  | https://hexo-nqq9.vercel.app | Vercel 默认域名 |
 
  > 注意：luomo.moe 不用于本博客跳转，未来可用于个人主页或导航站。
  > 修改域名后需要在 Vercel Domains 页面添加域名并等待 SSL 证书签发完成。
+
+ ## SEO / IndexNow
+
+ 博客与三月七工具站分别提供 canonical、robots.txt、sitemap.xml 和 llms.txt。robots 允许搜索、AI 输入与训练用途，博客的 `/api/` 路径禁止抓取。博客 llms.txt 在构建时从已发布文章与现存独立页面生成。march7th.cn 的四个入口通过 Routing Middleware 分流，其他博客路径使用 301 消除重复内容。
+
+ 构建后运行 `node tools/indexnow-submit.cjs` 可按主机预览 IndexNow 的完整请求与 URL 数量。显式添加 `--submit` 才会发送请求并打印 HTTP 状态码，构建流程仅生成文件。公开验证密钥位于各主机根路径的 `75a69cf4a84876a314f8d3108ab52655.txt`，luomo.moe 的密钥文件由其独立项目发布。
 
  ## 注意事项
 

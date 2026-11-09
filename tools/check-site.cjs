@@ -136,3 +136,37 @@ function inspect(directory) {
 }
 inspect(root);
 console.log(`Build checks passed: ${index.length} articles, four page headings, ${partials.length} style partials, ${creditedBanners} credited banners, ${ownedBanners} unlabelled owned banners, legacy status cleanup, ${taggedPosts} posts in tag order, ${checked} text assets.`);
+
+// SEO additions preserve the checks above and verify both host-specific entrypoints.
+const llms = read('llms.txt');
+assert.ok(llms.startsWith('# '), 'blog llms.txt must start with an H1');
+assert.ok(llms.includes('https://blog.luomo.moe/posts/3d61fa8b.html'), 'llms.txt must use the existing article URLs');
+const robots = read('robots.txt');
+for (const sitemap of ['sitemap.xml', 'baidusitemap.xml']) {
+  assert.ok(robots.includes(`Sitemap: https://blog.luomo.moe/${sitemap}`), `blog robots needs ${sitemap}`);
+}
+assert.equal(/^Disallow:\s*\/\s*$/m.test(robots), false, 'blog robots must allow the site');
+assert.equal((robots.match(/^User-agent:/gm) || []).length, 1, 'blog robots must use a single wildcard group');
+assert.ok(/^User-agent: \*$/m.test(robots), 'blog robots must allow all crawlers');
+assert.ok(robots.includes('Disallow: /api/'), 'API routes must be excluded from crawling');
+assert.ok(robots.includes('Content-Signal: search=yes, ai-input=yes, ai-train=yes'), 'content permissions must be explicit');
+const march7th = read('march7th/index.html');
+assert.equal((march7th.match(/<h1\b/gi) || []).length, 1, 'March7th needs exactly one main heading');
+assert.ok(/<link\b[^>]*rel="canonical"[^>]*href="https:\/\/march7th\.cn\/"/.test(march7th), 'March7th canonical must use its own host');
+const marchGraph = jsonLd('march7th/index.html');
+assert.equal(marchGraph.length, 1, 'March7th needs one JSON-LD graph');
+for (const type of ['WebSite', 'Organization', 'Person', 'CollectionPage', 'ItemList']) {
+  assert.ok(marchGraph[0]['@graph'].some(item => item['@type'] === type), `March7th JSON-LD needs ${type}`);
+}
+assert.ok(Buffer.byteLength(march7th, 'utf8') < 40 * 1024, 'March7th HTML must be smaller than 40 KB');
+assert.equal(/\b(?:src|href)\s*=\s*["']http:\/\//i.test(march7th), false, 'March7th must not link insecure resources');
+assert.equal(/<script\b[^>]*\bsrc\s*=/i.test(march7th), false, 'March7th must not load scripts');
+for (const file of ['index.html', 'robots.txt', 'sitemap.xml', 'llms.txt', 'favicon.svg']) {
+  const relative = `march7th/${file}`;
+  assert.ok(fs.existsSync(path.join(root, relative)), `missing March7th resource ${file}`);
+  assert.deepEqual(fs.readFileSync(path.join(root, relative)), fs.readFileSync(path.resolve(__dirname, '../source', relative)), `${relative} must be copied without rendering`);
+}
+assert.ok(fs.statSync(path.join(root, 'march7th/favicon.svg')).size < 2 * 1024, 'March7th favicon must be smaller than 2 KB');
+const indexNowKey = '75a69cf4a84876a314f8d3108ab52655';
+assert.equal(read(`${indexNowKey}.txt`).trim(), indexNowKey, 'IndexNow verification file must contain the public key');
+console.log('SEO checks passed: blog llms/robots, March7th canonical/JSON-LD, five byte-identical static files, IndexNow key.');

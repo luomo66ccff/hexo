@@ -1,6 +1,8 @@
-# hexo robots.txt
+# 欢迎 GPTBot、OAI-SearchBot、ChatGPT-User、ClaudeBot、Claude-SearchBot、PerplexityBot、Google-Extended、Applebot-Extended、Bytespider、Baiduspider、PetalBot 等。
 User-agent: *
 Allow: /
+Disallow: /api/
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 
 Sitemap: https://blog.luomo.moe/sitemap.xml
 Sitemap: https://blog.luomo.moe/baidusitemap.xml

@@ -10,7 +10,26 @@
     "api/visitors.js": { "maxDuration": 10 }
   },
   "redirects": [
-    { "source": "/index.html", "destination": "/", "permanent": true }
+    {
+      "source": "/:path((?!march7th/|robots\\.txt$|sitemap\\.xml$|llms\\.txt$|75a69cf4a84876a314f8d3108ab52655\\.txt$).+)",
+      "has": [{ "type": "host", "value": { "eq": "march7th.cn" } }],
+      "destination": "https://blog.luomo.moe/:path",
+      "statusCode": 301
+    },
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    {
+      "source": "/march7th",
+      "missing": [{ "type": "host", "value": { "eq": "march7th.cn" } }],
+      "destination": "https://march7th.cn/",
+      "statusCode": 301
+    },
+    {
+      "source": "/march7th/:path(.*)",
+      "missing": [{ "type": "host", "value": { "eq": "march7th.cn" } }],
+      "destination": "https://march7th.cn/",
+      "statusCode": 301
+    },
+    { "source": "/favicon.ico", "destination": "/img/logo-192.png", "statusCode": 302 }
   ],
   "rewrites": [
     {
